@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://cgm6kbjfs75h7"]
+
+[ext_resource type="PackedScene" uid="uid://bqgrls7swt3um" path="res://scenes/levels/main.tscn" id="1_3h8l6"]
+[ext_resource type="PackedScene" uid="uid://d1ocl5xac5s48" path="res://scenes/backgrounds/trees.tscn" id="2_gkbmu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g8d4o"]
+size = Vector2(513, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hkgcc"]
+size = Vector2(10, 203.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_37oyf"]
+size = Vector2(14, 191.5)
+
+[node name="Forest" instance=ExtResource("1_3h8l6")]
+
+[node name="Trees" parent="." index="0" instance=ExtResource("2_gkbmu")]
+
+[node name="Floor" type="StaticBody2D" parent="." index="1"]
+collision_layer = 4
+collision_mask = 11
+
+[node name="FloorCollision" type="CollisionShape2D" parent="Floor" index="0"]
+position = Vector2(256, 283)
+shape = SubResource("RectangleShape2D_g8d4o")
+
+[node name="WallLeft" type="CollisionShape2D" parent="Floor" index="1"]
+position = Vector2(-5, 186.75)
+shape = SubResource("RectangleShape2D_hkgcc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor" index="2"]
+position = Vector2(518, 192.75)
+shape = SubResource("RectangleShape2D_37oyf")

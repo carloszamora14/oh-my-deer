@@ -1,0 +1,58 @@
+[gd_scene load_steps=8 format=3 uid="uid://7e00atqabf7a"]
+
+[ext_resource type="Texture2D" uid="uid://sum5en7qbf10" path="res://graphics/deer/deer.png" id="1_aahd8"]
+[ext_resource type="Script" path="res://scenes/player/deer.gd" id="1_nyqxi"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qisam"]
+atlas = ExtResource("1_aahd8")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8jxwp"]
+atlas = ExtResource("1_aahd8")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_71qto"]
+atlas = ExtResource("1_aahd8")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yrxgn"]
+atlas = ExtResource("1_aahd8")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_taydq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qisam")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8jxwp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_71qto")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yrxgn")
+}],
+"loop": true,
+"name": &"run",
+"speed": 5.0
+}]
+
+[node name="Deer" type="CharacterBody2D"]
+collision_mask = 31
+script = ExtResource("1_nyqxi")
+
+[node name="DeerSprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_taydq")
+animation = &"run"
+frame = 1
+frame_progress = 0.96174
+
+[node name="DeerCollision" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-14, -2, -11, -2, -10, -1, 0, -1, 0, -2, 4, -2, 4, -3, 6, -3, 6, -4, 7, -4, 7, -7, 6, -7, 5, -10, 8, -9, 10, -9, 12, -10, 12, -6, 14, -6, 14, -4, 12, -4, 12, -3, 11, -3, 11, -2, 10, -2, 10, -1, 9, -1, 9, 1, 8, 1, 8, 4, 9, 4, 9, 5, 10, 5, 10, 6, 11, 6, 11, 7, 12, 7, 12, 9, 13, 9, 13, 10, 14, 10, 14, 11, 13, 11, 10, 8, 10, 7, 8, 7, 8, 6, 7, 6, 7, 8, 8, 8, 9, 9, 9, 11, 10, 11, 10, 12, 9, 12, 8, 11, 6, 9, 5, 8, 5, 7, 0, 7, 0, 6, -8, 6, -8, 7, -9, 7, -9, 8, -11, 10, -12, 10, -12, 9, -11, 9, -11, 7, -12, 7, -12, 9, -13, 9, -13, 10, -14, 10, -14, 11, -15, 11, -15, 10, -14, 8, -13, 8, -13, 4, -12, 4, -12, 2, -11, 2, -11, 1, -12, 1, -14, -1)

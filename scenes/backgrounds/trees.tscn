@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://d1ocl5xac5s48"]
+
+[ext_resource type="Texture2D" uid="uid://vlojuwdu3jse" path="res://graphics/background/layers/parallax-forest-back-trees.png" id="1_0q4xw"]
+[ext_resource type="Texture2D" uid="uid://bnm4pog4rqhdg" path="res://graphics/background/layers/parallax-forest-lights.png" id="2_4r8fe"]
+[ext_resource type="Texture2D" uid="uid://d0rlgw3koar28" path="res://graphics/background/layers/parallax-forest-middle-trees.png" id="3_j16h3"]
+[ext_resource type="Texture2D" uid="uid://c2tw11ju0sg40" path="res://graphics/background/layers/parallax-forest-front-trees.png" id="4_jlycd"]
+
+[node name="Trees" type="Node2D"]
+
+[node name="BackTreesSprite" type="Sprite2D" parent="."]
+position = Vector2(256, 144)
+scale = Vector2(1.882, 1.8)
+texture = ExtResource("1_0q4xw")
+
+[node name="LightsSprite" type="Sprite2D" parent="."]
+position = Vector2(256, 144)
+scale = Vector2(1.882, 1.8)
+texture = ExtResource("2_4r8fe")
+
+[node name="MiddleTreesSprite" type="Sprite2D" parent="."]
+position = Vector2(256, 144)
+scale = Vector2(1.882, 1.8)
+texture = ExtResource("3_j16h3")
+
+[node name="FrontTreesSprite" type="Sprite2D" parent="."]
+position = Vector2(255, 144)
+scale = Vector2(1.882, 1.8)
+texture = ExtResource("4_jlycd")
