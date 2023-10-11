@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://cgm6kbjfs75h7"]
+[gd_scene load_steps=10 format=3 uid="uid://cgm6kbjfs75h7"]
 
 [ext_resource type="PackedScene" uid="uid://bqgrls7swt3um" path="res://scenes/levels/main.tscn" id="1_3h8l6"]
 [ext_resource type="PackedScene" uid="uid://d1ocl5xac5s48" path="res://scenes/backgrounds/trees.tscn" id="2_gkbmu"]
 [ext_resource type="PackedScene" uid="uid://c2mueic1naa0x" path="res://scenes/backgrounds/cave_entrance.tscn" id="3_se7jh"]
 [ext_resource type="PackedScene" uid="uid://cixabelh6r7cu" path="res://scenes/interface/bush_2.tscn" id="4_q87vq"]
 [ext_resource type="PackedScene" uid="uid://cmmva1bo44cir" path="res://scenes/interface/bush1.tscn" id="5_rweap"]
+[ext_resource type="PackedScene" uid="uid://rt6w5s3xw0if" path="res://scenes/enemies/fox.tscn" id="6_avii5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g8d4o"]
 size = Vector2(513, 10)
@@ -38,12 +39,15 @@ shape = SubResource("RectangleShape2D_37oyf")
 [node name="CaveEntrance" parent="." index="2" instance=ExtResource("3_se7jh")]
 position = Vector2(462, 251)
 
-[node name="Bush2" parent="." index="5" instance=ExtResource("4_q87vq")]
-modulate = Color(0.682353, 0.376471, 0.239216, 1)
-position = Vector2(331, 274)
-scale = Vector2(0.7, 0.7)
-
-[node name="Sprite2D" parent="." index="6" instance=ExtResource("5_rweap")]
+[node name="Sprite2D" parent="." index="5" instance=ExtResource("5_rweap")]
 modulate = Color(0.607843, 0.321569, 0.215686, 1)
 position = Vector2(93, 278)
 scale = Vector2(0.5, 0.5)
+
+[node name="Fox" parent="." index="7" instance=ExtResource("6_avii5")]
+position = Vector2(232, 268)
+
+[node name="Bush2" parent="." index="8" instance=ExtResource("4_q87vq")]
+modulate = Color(0.682353, 0.376471, 0.239216, 1)
+position = Vector2(331, 274)
+scale = Vector2(0.7, 0.7)
