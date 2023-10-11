@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://bqgrls7swt3um"]
+[gd_scene load_steps=4 format=3 uid="uid://bqgrls7swt3um"]
 
 [ext_resource type="Script" path="res://scenes/levels/main.gd" id="1_teyda"]
 [ext_resource type="PackedScene" uid="uid://7e00atqabf7a" path="res://scenes/player/deer.tscn" id="1_u4p0i"]
+[ext_resource type="PackedScene" uid="uid://n5a4m5dg4ht0" path="res://scenes/interface/ui.tscn" id="3_e1cat"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_teyda")
@@ -16,3 +17,5 @@ limit_top = 0
 limit_right = 512
 limit_bottom = 288
 position_smoothing_enabled = true
+
+[node name="UI" parent="." instance=ExtResource("3_e1cat")]

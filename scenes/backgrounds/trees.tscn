@@ -1,9 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://d1ocl5xac5s48"]
+[gd_scene load_steps=8 format=3 uid="uid://d1ocl5xac5s48"]
 
 [ext_resource type="Texture2D" uid="uid://vlojuwdu3jse" path="res://graphics/background/layers/parallax-forest-back-trees.png" id="1_0q4xw"]
 [ext_resource type="Texture2D" uid="uid://bnm4pog4rqhdg" path="res://graphics/background/layers/parallax-forest-lights.png" id="2_4r8fe"]
 [ext_resource type="Texture2D" uid="uid://d0rlgw3koar28" path="res://graphics/background/layers/parallax-forest-middle-trees.png" id="3_j16h3"]
+[ext_resource type="PackedScene" uid="uid://ddkc72jw54sdo" path="res://scenes/interface/tree.tscn" id="3_vh0jm"]
 [ext_resource type="Texture2D" uid="uid://c2tw11ju0sg40" path="res://graphics/background/layers/parallax-forest-front-trees.png" id="4_jlycd"]
+[ext_resource type="PackedScene" uid="uid://cmmva1bo44cir" path="res://scenes/interface/bush1.tscn" id="5_stdpq"]
+[ext_resource type="PackedScene" uid="uid://cixabelh6r7cu" path="res://scenes/interface/bush_2.tscn" id="6_6jg04"]
 
 [node name="Trees" type="Node2D"]
 
@@ -17,10 +20,31 @@ position = Vector2(256, 144)
 scale = Vector2(1.882, 1.8)
 texture = ExtResource("2_4r8fe")
 
+[node name="Sprite2D3" parent="." instance=ExtResource("3_vh0jm")]
+position = Vector2(32, 184)
+scale = Vector2(0.1, 0.1)
+
 [node name="MiddleTreesSprite" type="Sprite2D" parent="."]
 position = Vector2(256, 144)
 scale = Vector2(1.882, 1.8)
 texture = ExtResource("3_j16h3")
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="Sprite2D3" parent="Node2D" instance=ExtResource("5_stdpq")]
+modulate = Color(0.54902, 0.215686, 0.223529, 1)
+position = Vector2(368, 224)
+
+[node name="Sprite2D" parent="Node2D" instance=ExtResource("3_vh0jm")]
+position = Vector2(416, 208)
+
+[node name="Sprite2D2" parent="Node2D" instance=ExtResource("3_vh0jm")]
+position = Vector2(232, 208)
+scale = Vector2(0.1, 0.1)
+
+[node name="Bush2" parent="Node2D" instance=ExtResource("6_6jg04")]
+modulate = Color(0.47451, 0.247059, 0.156863, 1)
+position = Vector2(72, 224)
 
 [node name="FrontTreesSprite" type="Sprite2D" parent="."]
 position = Vector2(255, 144)

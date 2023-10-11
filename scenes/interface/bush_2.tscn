@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cixabelh6r7cu"]
+
+[ext_resource type="Texture2D" uid="uid://bmaygxh2371km" path="res://graphics/background/bushes.png" id="1_ru7qh"]
+
+[node name="Bush2" type="Sprite2D"]
+texture = ExtResource("1_ru7qh")
+region_enabled = true
+region_rect = Rect2(111.022, 203.273, 142.751, 60.3349)

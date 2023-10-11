@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://ddkc72jw54sdo"]
+
+[ext_resource type="Texture2D" uid="uid://biqccx4kv2ghp" path="res://graphics/background/b2j5es3l9a171.webp" id="1_bnrxn"]
+
+[node name="Sprite2D" type="Sprite2D"]
+modulate = Color(0.341176, 0.407843, 0, 1)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("1_bnrxn")

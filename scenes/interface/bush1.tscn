@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://cmmva1bo44cir"]
+
+[ext_resource type="Texture2D" uid="uid://bmaygxh2371km" path="res://graphics/background/bushes.png" id="1_80myd"]
+
+[node name="Sprite2D" type="Sprite2D"]
+modulate = Color(0.788235, 0.466667, 0.113725, 1)
+texture = ExtResource("1_80myd")
+region_enabled = true
+region_rect = Rect2(145.224, 278.333, 294.776, 73.6671)
