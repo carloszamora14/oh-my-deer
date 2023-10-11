@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://ybg5x81b76br"]
+[gd_scene load_steps=7 format=3 uid="uid://ybg5x81b76br"]
 
 [ext_resource type="PackedScene" uid="uid://bqgrls7swt3um" path="res://scenes/levels/main.tscn" id="1_sgl6o"]
 [ext_resource type="Texture2D" uid="uid://thuxedfmr2ht" path="res://graphics/background/cave.jpg" id="2_knnyw"]
+[ext_resource type="PackedScene" uid="uid://dddutcjjycgmg" path="res://scenes/enemies/bear.tscn" id="3_v01d3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sw473"]
 size = Vector2(16, 120)
@@ -21,6 +22,8 @@ texture = ExtResource("2_knnyw")
 metadata/_edit_group_ = true
 
 [node name="Floor" type="StaticBody2D" parent="." index="2"]
+collision_layer = 4
+collision_mask = 15
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Floor" index="0"]
 position = Vector2(-8, 240)
@@ -33,3 +36,7 @@ shape = SubResource("RectangleShape2D_up7g6")
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="Floor" index="2"]
 position = Vector2(520, 243)
 shape = SubResource("RectangleShape2D_8wk6u")
+
+[node name="Bear" parent="." index="5" instance=ExtResource("3_v01d3")]
+position = Vector2(160, 232)
+scale = Vector2(2, 2)

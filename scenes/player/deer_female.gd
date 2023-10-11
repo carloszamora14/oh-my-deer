@@ -34,8 +34,8 @@ func hit(damage, enemy):
 
 
 func respawn():
-	if Globals.female_deer_lives >= 0:
+	if Globals.female_deer_lives > 0:
 		global_position = Vector2(40, 240)
 		Globals.female_deer_health = 100
 	else:
-		queue_free()
+		hide()

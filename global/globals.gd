@@ -20,7 +20,8 @@ func update_male_deer_health(value, enemy):
 		male_deer_health = max(0, value)
 		male_deer_invulnerable_timer()
 	if (male_deer_health <= 0):
-		enemy.reset_target()
+		if "reset_target" in enemy:
+			enemy.reset_target()
 		male_deer_lives -= 1
 		male_deer_death.emit()
 	stats_change.emit()
@@ -38,8 +39,9 @@ func update_female_deer_health(value, enemy):
 		female_deer_vulnerable = false
 		female_deer_health = max(0, value)
 		female_deer_invulnerable_timer()
-	if (female_deer_health <= 0): 
-		enemy.reset_target()
+	if (female_deer_health <= 0):
+		if "reset_target" in enemy:
+			enemy.reset_target()
 		female_deer_lives -= 1
 		female_deer_death.emit()
 	stats_change.emit()

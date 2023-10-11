@@ -10,4 +10,7 @@ func _ready():
 func update_stats():
 	health_bar.value = Globals.male_deer_health
 	$NinePatchRect/Label.text = str(Globals.male_deer_health) + "/100"
-	$LivesContainer/LivesLabel.text = str(Globals.male_deer_lives) + " lives"
+	if (Globals.female_deer_lives > 0):
+		$LivesContainer/LivesLabel.text = str(Globals.male_deer_lives) + " lives"
+	else:
+		$LivesContainer/LivesLabel.text = "Death"
