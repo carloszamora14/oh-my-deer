@@ -1,7 +1,15 @@
-[gd_scene load_steps=19 format=3 uid="uid://7e00atqabf7a"]
+[gd_scene load_steps=22 format=3 uid="uid://7e00atqabf7a"]
 
 [ext_resource type="Script" path="res://scenes/player/deer.gd" id="1_nyqxi"]
+[ext_resource type="Shader" path="res://scenes/player/deer.gdshader" id="2_bhanu"]
 [ext_resource type="Texture2D" uid="uid://di0a8deye6gb7" path="res://graphics/deer/deer_male.png" id="2_gd7v3"]
+[ext_resource type="AudioStream" uid="uid://bgctxfd4xsuhb" path="res://sounds/deer-roar.mp3" id="3_pxx0p"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_owkoo"]
+resource_local_to_scene = true
+shader = ExtResource("2_bhanu")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/progress = 0.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_u0wnb"]
 atlas = ExtResource("2_gd7v3")
@@ -131,6 +139,7 @@ collision_mask = 30
 script = ExtResource("1_nyqxi")
 
 [node name="DeerSprite" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_owkoo")
 sprite_frames = SubResource("SpriteFrames_jddvd")
 animation = &"eat"
 frame = 4
@@ -138,3 +147,6 @@ frame_progress = 1.0
 
 [node name="DeerCollision" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(5, -5, 5, -8, 13, -8, 14, -7, 14, -5, 13, -4, 13, 0, 8, 6, 7, 15, 1, 16, 1, 8, -6, 8, -8, 16, -13, 16, -15, -1, 5, -3)
+
+[node name="DeathSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_pxx0p")

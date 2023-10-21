@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://c56ud0ulm4w70"]
+
+[ext_resource type="PackedScene" uid="uid://dejacx4ob57x5" path="res://scenes/interface/health_bar.tscn" id="1_rwdjx"]
+[ext_resource type="PackedScene" uid="uid://cqffj67m0bdy5" path="res://scenes/interface/hunger_bar.tscn" id="2_w56bu"]
+[ext_resource type="PackedScene" uid="uid://dqrjmmxeo0dle" path="res://scenes/interface/score.tscn" id="3_sw65l"]
+
+[node name="UI" type="CanvasLayer"]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+offset_left = 12.0
+offset_top = 12.0
+offset_right = 512.0
+offset_bottom = 109.0
+scale = Vector2(0.3, 0.3)
+
+[node name="HealthBar" parent="VBoxContainer" instance=ExtResource("1_rwdjx")]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="HungerBar" parent="VBoxContainer" instance=ExtResource("2_w56bu")]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="Score" parent="." instance=ExtResource("3_sw65l")]
+offset_left = 12.0
+offset_top = 46.0
+offset_right = 12.0
+offset_bottom = 46.0
+scale = Vector2(0.35, 0.35)

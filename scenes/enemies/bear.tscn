@@ -1,7 +1,8 @@
-[gd_scene load_steps=22 format=3 uid="uid://dddutcjjycgmg"]
+[gd_scene load_steps=23 format=3 uid="uid://dddutcjjycgmg"]
 
 [ext_resource type="Script" path="res://scenes/enemies/bear.gd" id="1_cechf"]
 [ext_resource type="Texture2D" uid="uid://co2nu063x80cb" path="res://graphics/animals/bear.png" id="1_sccqv"]
+[ext_resource type="AudioStream" uid="uid://dsh3uv8yboc74" path="res://sounds/bear-roar.mp3" id="3_gsr10"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sjqrd"]
 atlas = ExtResource("1_sccqv")
@@ -176,7 +177,11 @@ position = Vector2(7, 8)
 shape = SubResource("CircleShape2D_ov6t3")
 
 [node name="AttackCooldown" type="Timer" parent="."]
+wait_time = 2.0
 one_shot = true
+
+[node name="BearSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_gsr10")
 
 [connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]
 [connection signal="body_exited" from="AttackArea" to="." method="_on_attack_area_body_exited"]

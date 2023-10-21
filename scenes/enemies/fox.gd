@@ -34,9 +34,9 @@ func _physics_process(delta):
 	
 	if abs(initial_pos.x - position.x) > patrol_distance:
 		is_going_right = !is_going_right
-		velocity.x = sign(scale.x) * SPEED
 		scale.x = -scale.x
 		
+	velocity.x = SPEED if is_going_right else -SPEED
 #	$FoxSprite.flip_h = !is_going_right
 #	$FoxCollision.scale = Vector2(1 if is_going_right else -1, 1)
 #	$NoticeArea/CollisionPolygon2D.scale = Vector2(1 if is_going_right else -1, 1)

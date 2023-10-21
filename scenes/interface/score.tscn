@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://dqrjmmxeo0dle"]
+
+[ext_resource type="Script" path="res://scenes/interface/score.gd" id="1_e1fif"]
+[ext_resource type="Texture2D" uid="uid://bcr8polnrei4q" path="res://graphics/interface/health_bar/label_bg.png" id="2_dwuxa"]
+
+[node name="Score" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_e1fif")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_dwuxa")
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="Label" type="Label" parent="NinePatchRect"]
+layout_mode = 0
+offset_right = 99.0
+offset_bottom = 40.0
+text = "Score: 0"
+horizontal_alignment = 1
+vertical_alignment = 1

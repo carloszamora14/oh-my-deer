@@ -27,16 +27,17 @@ func _physics_process(delta):
 		
 	if player_being_tracked != null and is_player_near and can_attack:
 		var current_target = player_being_tracked
+		$BearSound.play()
 		can_attack = false;
 		$BearSprite.play("attack")
 		$AttackCooldown.start()
-		await get_tree().create_timer(0.5).timeout
+		await get_tree().create_timer(0.8).timeout
 		current_target.hit(DAMAGE, self)
 		$BearSprite.play("run")
 	if abs(initial_pos.x - position.x) > patrol_distance:
-		velocity.x = sign(scale.x) * SPEED
 		is_going_right = !is_going_right
 		scale.x = -scale.x
+	velocity.x = SPEED if is_going_right else -SPEED
 		
 #	$BearSprite.flip_h = !is_going_right
 #	$BearCollision.scale = Vector2(1 if is_going_right else -1, 1)

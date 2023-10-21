@@ -7,6 +7,10 @@ signal female_deer_death()
 var male_deer_lives: int = 3
 var male_deer_vulnerable: bool = true
 var male_deer_health: int = 100
+var male_deer_score: int = 0:
+	set(value):
+		male_deer_score = value
+		stats_change.emit()
 
 var female_deer_lives: int = 3
 var female_deer_vulnerable: bool = true
