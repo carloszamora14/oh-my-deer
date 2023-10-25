@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://bfn2vj6cacaoq"]
+
+[ext_resource type="Texture2D" uid="uid://w1072ivc6c36" path="res://graphics/platforms/374773d86547de2.png" id="1_j6vah"]
+
+[node name="StaticBody2D" type="StaticBody2D"]
+collision_layer = 4
+collision_mask = 15
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(180, 312)
+polygon = PackedVector2Array(-65, 64, 63, -65, 64, 64)
+
+[node name="Sprite2D8" type="Sprite2D" parent="."]
+position = Vector2(180, 312)
+texture = ExtResource("1_j6vah")
+region_enabled = true
+region_rect = Rect2(991.261, 38.9881, 129.223, 129.223)

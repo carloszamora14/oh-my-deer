@@ -1,22 +1,27 @@
 extends Node
 
 signal stats_change()
+signal score_change()
 signal male_deer_death()
 signal female_deer_death()
 
+var male_deer_falling: bool = false
+var male_deer_position: Vector2
 var male_deer_lives: int = 3
 var male_deer_vulnerable: bool = true
 var male_deer_health: int = 100
 var male_deer_score: int = 0:
 	set(value):
 		male_deer_score = value
-		stats_change.emit()
+		score_change.emit()
 
 var female_deer_lives: int = 3
 var female_deer_vulnerable: bool = true
 var female_deer_health: int = 100
 
 func update_male_deer_health(value, enemy):
+	if !male_deer_vulnerable:
+		pass
 	if value > male_deer_health:
 		male_deer_health = min(100, value)
 	elif male_deer_vulnerable:
@@ -24,7 +29,7 @@ func update_male_deer_health(value, enemy):
 		male_deer_health = max(0, value)
 		male_deer_invulnerable_timer()
 	if (male_deer_health <= 0):
-		if "reset_target" in enemy:
+		if enemy and ("reset_target" in enemy):
 			enemy.reset_target()
 		male_deer_lives -= 1
 		male_deer_death.emit()

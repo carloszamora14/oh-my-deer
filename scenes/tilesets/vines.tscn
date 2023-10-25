@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://cfmjufmhrodmn"]
+
+[ext_resource type="Texture2D" uid="uid://b4r1k42jmba31" path="res://graphics/platforms/Terrain_and_Props.png" id="1_6rdjh"]
+
+[node name="Vines" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_6rdjh")
+region_enabled = true
+region_rect = Rect2(80.7831, 144.432, 78.646, 15.2693)

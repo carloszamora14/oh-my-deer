@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://1e4bb6l4gs3y"]
+
+[ext_resource type="Texture2D" uid="uid://b4r1k42jmba31" path="res://graphics/platforms/Terrain_and_Props.png" id="1_q6lmy"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gai2f"]
+size = Vector2(78, 10)
+
+[node name="Swing" type="StaticBody2D"]
+collision_layer = 4
+collision_mask = 15
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, 1)
+texture = ExtResource("1_q6lmy")
+region_enabled = true
+region_rect = Rect2(80.9715, 159.675, 77.5649, 13.1077)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_gai2f")

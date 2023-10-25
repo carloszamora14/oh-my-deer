@@ -136,6 +136,7 @@ animations = [{
 
 [node name="Deer" type="CharacterBody2D"]
 collision_mask = 30
+floor_max_angle = 1.03847
 script = ExtResource("1_nyqxi")
 
 [node name="DeerSprite" type="AnimatedSprite2D" parent="."]
@@ -150,3 +151,9 @@ polygon = PackedVector2Array(5, -5, 5, -8, 13, -8, 14, -7, 14, -5, 13, -4, 13, 0
 
 [node name="DeathSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_pxx0p")
+
+[node name="IdleTimer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[connection signal="timeout" from="IdleTimer" to="." method="_on_idle_timer_timeout"]

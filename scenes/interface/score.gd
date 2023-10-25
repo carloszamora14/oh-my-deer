@@ -3,7 +3,7 @@ extends Control
 @onready var label: Label = $NinePatchRect/Label
 
 func _ready():
-	Globals.connect("stats_change", update_stats)
+	Globals.connect("score_change", update_stats)
 	update_stats()
 
 

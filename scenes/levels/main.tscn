@@ -19,6 +19,8 @@ limit_right = 512
 limit_bottom = 288
 position_smoothing_enabled = true
 
+[node name="Tilesets" type="Node2D" parent="."]
+
 [node name="Collectibles" type="Node2D" parent="."]
 position = Vector2(32, 245)
 

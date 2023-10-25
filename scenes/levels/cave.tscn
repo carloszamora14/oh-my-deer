@@ -1,8 +1,16 @@
-[gd_scene load_steps=7 format=3 uid="uid://ybg5x81b76br"]
+[gd_scene load_steps=15 format=3 uid="uid://ybg5x81b76br"]
 
 [ext_resource type="PackedScene" uid="uid://bqgrls7swt3um" path="res://scenes/levels/main.tscn" id="1_sgl6o"]
 [ext_resource type="Texture2D" uid="uid://thuxedfmr2ht" path="res://graphics/background/cave.jpg" id="2_knnyw"]
+[ext_resource type="PackedScene" uid="uid://v5p3q385p3xb" path="res://scenes/tilesets/sprite_2d_2.tscn" id="3_83vvm"]
 [ext_resource type="PackedScene" uid="uid://dddutcjjycgmg" path="res://scenes/enemies/bear.tscn" id="3_v01d3"]
+[ext_resource type="PackedScene" uid="uid://bfn2vj6cacaoq" path="res://scenes/tilesets/sprite_2d_8.tscn" id="4_stnpd"]
+[ext_resource type="PackedScene" uid="uid://brnus3qac8v1l" path="res://scenes/tilesets/sprite_2d_7.tscn" id="5_2iljd"]
+[ext_resource type="PackedScene" uid="uid://bag2ik7a6kcn7" path="res://scenes/tilesets/sprite_2d_6.tscn" id="6_vfw7y"]
+[ext_resource type="PackedScene" uid="uid://b200bfuuw6v8d" path="res://scenes/tilesets/sprite_2d_5.tscn" id="7_d0fvk"]
+[ext_resource type="PackedScene" uid="uid://degdroncyko3f" path="res://scenes/tilesets/sprite_2d_4.tscn" id="8_xhvxw"]
+[ext_resource type="PackedScene" uid="uid://dv7t85durca68" path="res://scenes/collectibles/item.tscn" id="10_61aaf"]
+[ext_resource type="PackedScene" uid="uid://ci8dt5pws2w11" path="res://scenes/tilesets/cave_exit.tscn" id="11_m72n4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sw473"]
 size = Vector2(16, 120)
@@ -37,6 +45,121 @@ shape = SubResource("RectangleShape2D_up7g6")
 position = Vector2(520, 243)
 shape = SubResource("RectangleShape2D_8wk6u")
 
+[node name="StaticBody2D2" parent="Tilesets" index="0" instance=ExtResource("3_83vvm")]
+position = Vector2(248, 272)
+scale = Vector2(0.1, 0.1)
+
+[node name="StaticBody2D3" parent="Tilesets" index="1" instance=ExtResource("3_83vvm")]
+position = Vector2(260, 272)
+scale = Vector2(0.1, 0.1)
+
+[node name="StaticBody2D4" parent="Tilesets" index="2" instance=ExtResource("3_83vvm")]
+position = Vector2(285, 272)
+scale = Vector2(0.1, 0.1)
+
+[node name="StaticBody2D5" parent="Tilesets" index="3" instance=ExtResource("3_83vvm")]
+position = Vector2(273, 272)
+scale = Vector2(0.1, 0.1)
+
+[node name="StaticBody2D" parent="Tilesets" index="4" instance=ExtResource("4_stnpd")]
+position = Vector2(236, 241)
+scale = Vector2(0.1, 0.1)
+
+[node name="StaticBody2D6" parent="Tilesets" index="5" instance=ExtResource("5_2iljd")]
+position = Vector2(316, 241)
+scale = Vector2(0.1, 0.1)
+
+[node name="StaticBody2D7" parent="Tilesets" index="6" instance=ExtResource("6_vfw7y")]
+position = Vector2(241, 172)
+scale = Vector2(0.1, 0.1)
+
+[node name="StaticBody2D12" parent="Tilesets" index="7" instance=ExtResource("6_vfw7y")]
+position = Vector2(305, 229)
+scale = Vector2(0.1, 0.1)
+
+[node name="StaticBody2D8" parent="Tilesets" index="8" instance=ExtResource("7_d0fvk")]
+position = Vector2(248, 172)
+scale = Vector2(0.1, 0.1)
+
+[node name="StaticBody2D9" parent="Tilesets" index="9" instance=ExtResource("8_xhvxw")]
+position = Vector2(255, 172)
+scale = Vector2(0.1, 0.1)
+
+[node name="StaticBody2D19" parent="Tilesets" index="10" instance=ExtResource("6_vfw7y")]
+position = Vector2(186, 165)
+scale = Vector2(0.1, 0.1)
+
+[node name="StaticBody2D20" parent="Tilesets" index="11" instance=ExtResource("7_d0fvk")]
+position = Vector2(192, 165)
+scale = Vector2(0.1, 0.1)
+
+[node name="StaticBody2D25" parent="Tilesets" index="12" instance=ExtResource("7_d0fvk")]
+position = Vector2(179, 165)
+scale = Vector2(0.1, 0.1)
+
+[node name="StaticBody2D26" parent="Tilesets" index="13" instance=ExtResource("7_d0fvk")]
+position = Vector2(167, 165)
+scale = Vector2(0.1, 0.1)
+
+[node name="StaticBody2D21" parent="Tilesets" index="14" instance=ExtResource("8_xhvxw")]
+position = Vector2(174, 165)
+scale = Vector2(0.1, 0.1)
+
+[node name="StaticBody2D22" parent="Tilesets" index="15" instance=ExtResource("6_vfw7y")]
+position = Vector2(114, 143)
+scale = Vector2(0.1, 0.1)
+
+[node name="StaticBody2D23" parent="Tilesets" index="16" instance=ExtResource("7_d0fvk")]
+position = Vector2(121, 143)
+scale = Vector2(0.1, 0.1)
+
+[node name="StaticBody2D24" parent="Tilesets" index="17" instance=ExtResource("8_xhvxw")]
+position = Vector2(128, 143)
+scale = Vector2(0.1, 0.1)
+
+[node name="StaticBody2D15" parent="Tilesets" index="18" instance=ExtResource("6_vfw7y")]
+position = Vector2(293, 185)
+scale = Vector2(0.1, 0.1)
+
+[node name="StaticBody2D16" parent="Tilesets" index="19" instance=ExtResource("7_d0fvk")]
+position = Vector2(300, 185)
+scale = Vector2(0.1, 0.1)
+
+[node name="StaticBody2D18" parent="Tilesets" index="20" instance=ExtResource("8_xhvxw")]
+position = Vector2(307, 185)
+scale = Vector2(0.1, 0.1)
+
+[node name="StaticBody2D10" parent="Tilesets" index="21" instance=ExtResource("7_d0fvk")]
+position = Vector2(298, 229)
+scale = Vector2(0.1, 0.1)
+
+[node name="StaticBody2D13" parent="Tilesets" index="22" instance=ExtResource("7_d0fvk")]
+position = Vector2(311, 229)
+scale = Vector2(0.1, 0.1)
+
+[node name="StaticBody2D11" parent="Tilesets" index="23" instance=ExtResource("8_xhvxw")]
+position = Vector2(305, 229)
+scale = Vector2(0.1, 0.1)
+
+[node name="StaticBody2D14" parent="Tilesets" index="24" instance=ExtResource("6_vfw7y")]
+position = Vector2(347, 210)
+scale = Vector2(0.1, 0.1)
+
+[node name="StaticBody2D17" parent="Tilesets" index="25" instance=ExtResource("8_xhvxw")]
+position = Vector2(372, 210)
+scale = Vector2(0.1, 0.1)
+
 [node name="Bear" parent="." index="4" instance=ExtResource("3_v01d3")]
 position = Vector2(160, 232)
 scale = Vector2(2, 2)
+
+[node name="Item" parent="Collectibles" index="0" instance=ExtResource("10_61aaf")]
+position = Vector2(251, 10)
+scale = Vector2(0.5, 0.5)
+
+[node name="Item2" parent="Collectibles" index="1" instance=ExtResource("10_61aaf")]
+position = Vector2(108, -104)
+scale = Vector2(0.5, 0.5)
+
+[node name="CaveExit" parent="." index="8" instance=ExtResource("11_m72n4")]
+position = Vector2(480, 258)

@@ -1,0 +1,48 @@
+[gd_scene load_steps=5 format=3 uid="uid://dngv15n0o7o5t"]
+
+[ext_resource type="PackedScene" uid="uid://bqgrls7swt3um" path="res://scenes/levels/main.tscn" id="1_gow1q"]
+[ext_resource type="Texture2D" uid="uid://cmsud1u2crike" path="res://graphics/background/background forest dark.png" id="2_yifuh"]
+[ext_resource type="PackedScene" uid="uid://1e4bb6l4gs3y" path="res://scenes/tilesets/swing.tscn" id="3_snrbo"]
+[ext_resource type="PackedScene" uid="uid://cfmjufmhrodmn" path="res://scenes/tilesets/vines.tscn" id="4_buqgf"]
+
+[node name="Main" instance=ExtResource("1_gow1q")]
+
+[node name="Sprite2D" type="Sprite2D" parent="." index="0"]
+position = Vector2(258, 172)
+scale = Vector2(0.86, 0.86)
+texture = ExtResource("2_yifuh")
+
+[node name="Swing" parent="Tilesets" index="0" instance=ExtResource("3_snrbo")]
+position = Vector2(40, 272)
+
+[node name="Vines" parent="Tilesets" index="1" instance=ExtResource("4_buqgf")]
+position = Vector2(40.3, 114)
+scale = Vector2(1, 20)
+
+[node name="Swing2" parent="Tilesets" index="2" instance=ExtResource("3_snrbo")]
+position = Vector2(149, 244)
+
+[node name="Vines2" parent="Tilesets" index="3" instance=ExtResource("4_buqgf")]
+position = Vector2(149.3, 86)
+scale = Vector2(1, 20)
+
+[node name="Swing3" parent="Tilesets" index="4" instance=ExtResource("3_snrbo")]
+position = Vector2(270, 222)
+
+[node name="Vines3" parent="Tilesets" index="5" instance=ExtResource("4_buqgf")]
+position = Vector2(270.3, 64)
+scale = Vector2(1, 20)
+
+[node name="Swing4" parent="Tilesets" index="6" instance=ExtResource("3_snrbo")]
+position = Vector2(357, 269)
+
+[node name="Vines4" parent="Tilesets" index="7" instance=ExtResource("4_buqgf")]
+position = Vector2(357.3, 111)
+scale = Vector2(1, 20)
+
+[node name="Swing5" parent="Tilesets" index="8" instance=ExtResource("3_snrbo")]
+position = Vector2(472, 256)
+
+[node name="Vines5" parent="Tilesets" index="9" instance=ExtResource("4_buqgf")]
+position = Vector2(472.3, 98)
+scale = Vector2(1, 20)
