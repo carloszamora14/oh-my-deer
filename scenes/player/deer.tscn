@@ -1,9 +1,9 @@
-[gd_scene load_steps=22 format=3 uid="uid://7e00atqabf7a"]
+[gd_scene load_steps=28 format=3 uid="uid://7e00atqabf7a"]
 
 [ext_resource type="Script" path="res://scenes/player/deer.gd" id="1_nyqxi"]
 [ext_resource type="Shader" path="res://scenes/player/deer.gdshader" id="2_bhanu"]
 [ext_resource type="Texture2D" uid="uid://di0a8deye6gb7" path="res://graphics/deer/deer_male.png" id="2_gd7v3"]
-[ext_resource type="AudioStream" uid="uid://bgctxfd4xsuhb" path="res://sounds/deer-roar.mp3" id="3_pxx0p"]
+[ext_resource type="AudioStream" uid="uid://dkmfg4tqeimfs" path="res://sounds/deer-scream4.mp3" id="5_bugqq"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_owkoo"]
 resource_local_to_scene = true
@@ -134,7 +134,95 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Deer" type="CharacterBody2D"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pw61s"]
+resource_local_to_scene = true
+shader = ExtResource("2_bhanu")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/progress = 0.0
+
+[sub_resource type="Animation" id="Animation_1fako"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [10]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:material")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [SubResource("ShaderMaterial_pw61s")]
+}
+
+[sub_resource type="Animation" id="Animation_8s53l"]
+resource_name = "death"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.9, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [SubResource("ShaderMaterial_pw61s"), SubResource("ShaderMaterial_pw61s"), SubResource("ShaderMaterial_pw61s"), SubResource("ShaderMaterial_pw61s")]
+}
+
+[sub_resource type="Animation" id="Animation_7a800"]
+resource_name = "eat"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [5, 9]
+}
+
+[sub_resource type="Animation" id="Animation_q6cih"]
+resource_name = "walk"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [10, 14]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2cxhr"]
+_data = {
+"RESET": SubResource("Animation_1fako"),
+"death": SubResource("Animation_8s53l"),
+"eat": SubResource("Animation_7a800"),
+"walk": SubResource("Animation_q6cih")
+}
+
+[node name="Deer" type="CharacterBody2D" groups=["Player"]]
 collision_mask = 30
 floor_max_angle = 1.03847
 script = ExtResource("1_nyqxi")
@@ -142,18 +230,37 @@ script = ExtResource("1_nyqxi")
 [node name="DeerSprite" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_owkoo")
 sprite_frames = SubResource("SpriteFrames_jddvd")
-animation = &"eat"
-frame = 4
-frame_progress = 1.0
+animation = &"run"
+
+[node name="Marker2D" type="Marker2D" parent="DeerSprite"]
+position = Vector2(15, -5)
 
 [node name="DeerCollision" type="CollisionPolygon2D" parent="."]
-polygon = PackedVector2Array(5, -5, 5, -8, 13, -8, 14, -7, 14, -5, 13, -4, 13, 0, 8, 6, 7, 15, 1, 16, 1, 8, -6, 8, -8, 16, -13, 16, -15, -1, 5, -3)
+polygon = PackedVector2Array(5, -5, 5, -8, 12, -8, 13, -6, 13, -4, 11, -2, 8, 6, 7, 15, 1, 16, 1, 8, -6, 8, -8, 16, -13, 16, -15, -1, 5, -3)
 
 [node name="DeathSound" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("3_pxx0p")
+stream = ExtResource("5_bugqq")
 
 [node name="IdleTimer" type="Timer" parent="."]
 wait_time = 2.0
 autostart = true
 
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+material = SubResource("ShaderMaterial_pw61s")
+texture = ExtResource("2_gd7v3")
+hframes = 5
+vframes = 5
+frame = 10
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Sprite2D")
+libraries = {
+"": SubResource("AnimationLibrary_2cxhr")
+}
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.4
+
 [connection signal="timeout" from="IdleTimer" to="." method="_on_idle_timer_timeout"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

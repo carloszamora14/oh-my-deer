@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://ponto7me82ge"
+path="res://.godot/imported/GunCockSingle PE1096303.mp3-def05ba55ffc93a4497976e93321cff3.mp3str"
+
+[deps]
+
+source_file="res://sounds/hunter/GunCockSingle PE1096303.mp3"
+dest_files=["res://.godot/imported/GunCockSingle PE1096303.mp3-def05ba55ffc93a4497976e93321cff3.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -173,7 +173,7 @@ position = Vector2(0, -10)
 collision_layer = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
-position = Vector2(7, 10)
+position = Vector2(7, 12)
 shape = SubResource("CircleShape2D_ov6t3")
 
 [node name="AttackCooldown" type="Timer" parent="."]

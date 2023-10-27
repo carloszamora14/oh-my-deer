@@ -1,0 +1,97 @@
+[gd_scene load_steps=10 format=3 uid="uid://cvj6tpwfd2s03"]
+
+[ext_resource type="PackedScene" uid="uid://bqgrls7swt3um" path="res://scenes/levels/main.tscn" id="1_cwp0h"]
+[ext_resource type="TileSet" uid="uid://d2c0ults38s76" path="res://scenes/tilesets/grass.tres" id="2_ewnjs"]
+[ext_resource type="Texture2D" uid="uid://vlojuwdu3jse" path="res://graphics/background/layers/parallax-forest-back-trees.png" id="2_x1j25"]
+[ext_resource type="PackedScene" uid="uid://dv7t85durca68" path="res://scenes/collectibles/item.tscn" id="3_mxjxx"]
+[ext_resource type="Texture2D" uid="uid://bnm4pog4rqhdg" path="res://graphics/background/layers/parallax-forest-lights.png" id="3_yu57h"]
+[ext_resource type="Texture2D" uid="uid://d0rlgw3koar28" path="res://graphics/background/layers/parallax-forest-middle-trees.png" id="4_0ftt7"]
+[ext_resource type="Texture2D" uid="uid://c2tw11ju0sg40" path="res://graphics/background/layers/parallax-forest-front-trees.png" id="5_4ih2m"]
+[ext_resource type="PackedScene" uid="uid://jrt5uqlggamv" path="res://scenes/enemies/hunter.tscn" id="6_idrj7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a5lft"]
+size = Vector2(1751, 20)
+
+[node name="Main" instance=ExtResource("1_cwp0h")]
+
+[node name="Camera2D" parent="Deer" index="7"]
+limit_right = 2000
+
+[node name="TileMap" type="TileMap" parent="Tilesets" index="0"]
+tile_set = ExtResource("2_ewnjs")
+format = 2
+layer_0/tile_data = PackedInt32Array(1114117, 0, 1, 1114118, 65536, 1, 1114119, 65536, 1, 1114120, 65536, 1, 1114121, 131072, 1, 1048581, 0, 0, 1048585, 131072, 0, 1048582, 65536, 0, 1048583, 65536, 0, 1048584, 65536, 0, 917520, 65536, 0, 917521, 65536, 0, 917519, 0, 0, 917522, 0, 0, 983056, 65536, 1, 983057, 65536, 1, 1048593, 65536, 1, 1048592, 65536, 1, 983055, 0, 1, 1048591, 0, 1, 983058, 131072, 1, 1048594, 131072, 1, 983060, 0, 0, 983061, 65536, 0, 983062, 65536, 0, 983063, 65536, 0, 983064, 65536, 0, 983065, 131072, 0, 1048596, 0, 2, 1048597, 65536, 2, 1048598, 65536, 2, 1048599, 65536, 2, 1048600, 65536, 2, 1048601, 131072, 1, 983052, 0, 0, 983053, 131072, 0, 1048588, 0, 1, 1114124, 0, 1, 1048589, 131072, 1, 1114125, 131072, 1, 786452, 65536, 0, 786453, 131072, 0, 786451, 0, 0, 655384, 0, 0, 1048604, 131072, 1, 983068, 131072, 1, 851996, 131072, 1, 917532, 131072, 1, 786460, 131072, 1, 1048603, 0, 1, 983067, 0, 1, 917531, 0, 1, 851995, 0, 1, 786459, 0, 1, 720924, 131072, 0, 720923, 0, 0, 655385, 131072, 0, 786463, 65536, 0, 786462, 0, 0, 786464, 131072, 0, 917541, 131072, 0, 917540, 65536, 0, 917539, 0, 0, 1048616, 0, 1, 983081, 65536, 0, 983080, 0, 0, 983085, 131072, 0, 983082, 65536, 0, 983083, 65536, 0, 983084, 65536, 0, 1048617, 65536, 1, 1048618, 65536, 1, 1048619, 65536, 1, 1048620, 65536, 1, 1048621, 131072, 1, 1114139, 0, 1, 1114140, 131072, 1, 1114157, 131072, 1, 1114152, 0, 1, 1114153, 65536, 1, 1114154, 65536, 1, 1114155, 65536, 1, 1114156, 65536, 1, 852016, 65536, 0, 917552, 65536, 1, 917553, 65536, 1, 852017, 65536, 0, 852015, 0, 0, 917551, 0, 1, 852018, 131072, 0, 917554, 131072, 1, 983087, 0, 2, 983088, 65536, 2, 983089, 65536, 2, 983090, 131072, 2, 720946, 0, 0, 720947, 131072, 0, 655413, 65536, 0, 589880, 65536, 0, 524347, 65536, 0, 458815, 65536, 0, 458816, 65536, 0, 458817, 65536, 0, 458814, 0, 0, 524350, 0, 1, 524351, 65536, 1, 524352, 65536, 1, 524353, 65536, 1, 524354, 65536, 1, 458818, 65536, 0, 458819, 131072, 0, 524355, 131072, 1, 589886, 0, 2, 589887, 65536, 2, 589888, 65536, 2, 589889, 65536, 2, 589890, 65536, 2, 589891, 131072, 2, 589881, 65536, 0, 917561, 0, 0, 917562, 131072, 0, 983097, 0, 1, 1048633, 0, 1, 1114169, 0, 1, 983098, 131072, 1, 1048634, 131072, 1, 1114170, 131072, 1)
+
+[node name="Item" parent="Collectibles" index="0" instance=ExtResource("3_mxjxx")]
+position = Vector2(175, -16)
+
+[node name="Item2" parent="Collectibles" index="1" instance=ExtResource("3_mxjxx")]
+position = Vector2(360, -21)
+
+[node name="Item3" parent="Collectibles" index="2" instance=ExtResource("3_mxjxx")]
+position = Vector2(518, 17)
+
+[node name="Item4" parent="Collectibles" index="3" instance=ExtResource("3_mxjxx")]
+position = Vector2(654, -16)
+
+[node name="Item5" parent="Collectibles" index="4" instance=ExtResource("3_mxjxx")]
+position = Vector2(895, -36)
+
+[node name="Item6" parent="Collectibles" index="5" instance=ExtResource("3_mxjxx")]
+position = Vector2(1034, -145)
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="." index="5"]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground" index="0"]
+motion_scale = Vector2(0.6, 0.6)
+motion_mirroring = Vector2(512, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer" index="0"]
+position = Vector2(256, 144)
+scale = Vector2(1.882, 1.8)
+texture = ExtResource("2_x1j25")
+
+[node name="Sprite2D2" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer" index="1"]
+position = Vector2(245, 80)
+scale = Vector2(1.8, 1)
+texture = ExtResource("3_yu57h")
+
+[node name="ParallaxBackground2" type="ParallaxBackground" parent="." index="6"]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground2" index="0"]
+motion_scale = Vector2(0.8, 0.8)
+motion_mirroring = Vector2(512, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground2/ParallaxLayer" index="0"]
+position = Vector2(256, 144)
+scale = Vector2(1.882, 1.8)
+texture = ExtResource("4_0ftt7")
+
+[node name="ParallaxBackground3" type="ParallaxBackground" parent="." index="7"]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground3" index="0"]
+motion_mirroring = Vector2(512, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground3/ParallaxLayer" index="0"]
+position = Vector2(256, 144)
+scale = Vector2(1.882, 1.8)
+texture = ExtResource("5_4ih2m")
+
+[node name="Node2D" type="Node2D" parent="." index="8"]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Node2D" index="0"]
+collision_layer = 4
+collision_mask = 15
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/StaticBody2D" index="0"]
+position = Vector2(873, 281)
+shape = SubResource("RectangleShape2D_a5lft")
+
+[node name="Hunter" parent="." index="9" instance=ExtResource("6_idrj7")]
+position = Vector2(264, 200)
+
+[node name="Hunter2" parent="." index="10" instance=ExtResource("6_idrj7")]
+position = Vector2(510, 257)
+
+[node name="Hunter3" parent="." index="11" instance=ExtResource("6_idrj7")]
+position = Vector2(1035, 97)

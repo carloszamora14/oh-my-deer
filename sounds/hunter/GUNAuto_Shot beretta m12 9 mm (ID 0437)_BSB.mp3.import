@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://clq1faoy6gac"
+path="res://.godot/imported/GUNAuto_Shot beretta m12 9 mm (ID 0437)_BSB.mp3-14a32f72e745bb3d4ff315208192d8a4.mp3str"
+
+[deps]
+
+source_file="res://sounds/hunter/GUNAuto_Shot beretta m12 9 mm (ID 0437)_BSB.mp3"
+dest_files=["res://.godot/imported/GUNAuto_Shot beretta m12 9 mm (ID 0437)_BSB.mp3-14a32f72e745bb3d4ff315208192d8a4.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://bqgrls7swt3um"]
+[gd_scene load_steps=6 format=3 uid="uid://bqgrls7swt3um"]
 
 [ext_resource type="Script" path="res://scenes/levels/main.gd" id="1_teyda"]
 [ext_resource type="PackedScene" uid="uid://7e00atqabf7a" path="res://scenes/player/deer.tscn" id="1_u4p0i"]
 [ext_resource type="PackedScene" uid="uid://c56ud0ulm4w70" path="res://scenes/interface/ui.singleplayer.tscn" id="3_duqth"]
 [ext_resource type="PackedScene" uid="uid://by3dppekchmgd" path="res://scenes/interface/game_over.tscn" id="4_qgytl"]
+[ext_resource type="PackedScene" uid="uid://ghofatkoy8my" path="res://scenes/projectiles/pause_menu.tscn" id="5_kquh5"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_teyda")
@@ -31,4 +32,14 @@ visible = false
 
 [node name="GameOver" parent="CanvasLayer" instance=ExtResource("4_qgytl")]
 
+[node name="Projectiles" type="Node2D" parent="."]
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="PauseMenu" parent="CanvasLayer2" instance=ExtResource("5_kquh5")]
+
 [connection signal="game_over" from="Deer" to="." method="_on_deer_game_over"]
+[connection signal="player_throw_candy" from="Deer" to="." method="_on_deer_player_throw_candy"]
+[connection signal="continue_game" from="CanvasLayer2/PauseMenu" to="." method="_on_pause_menu_continue_game"]
+[connection signal="exit_game" from="CanvasLayer2/PauseMenu" to="." method="_on_pause_menu_exit_game"]

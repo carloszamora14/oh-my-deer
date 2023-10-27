@@ -5,6 +5,7 @@ signal score_change()
 signal male_deer_death()
 signal female_deer_death()
 
+var game_loaded: bool = false
 var male_deer_falling: bool = false
 var male_deer_position: Vector2
 var male_deer_lives: int = 3
