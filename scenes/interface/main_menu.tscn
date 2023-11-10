@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://qrqfwamesqro"]
+[gd_scene load_steps=5 format=3 uid="uid://qrqfwamesqro"]
 
 [ext_resource type="Texture2D" uid="uid://btrt7f0fpkqsk" path="res://graphics/interface/menu.jpg" id="1_38bv6"]
 [ext_resource type="Script" path="res://scenes/interface/main_menu.gd" id="1_s0gcx"]
 [ext_resource type="Texture2D" uid="uid://bcr8polnrei4q" path="res://graphics/interface/health_bar/label_bg.png" id="2_iabhk"]
+[ext_resource type="Theme" uid="uid://b5f8lwa40ge5t" path="res://scenes/interface/themes/label_theme.tres" id="4_gmois"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -55,11 +56,13 @@ grow_vertical = 2
 
 [node name="StartButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
+theme = ExtResource("4_gmois")
 text = "New game
 "
 
 [node name="ContinueButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
+theme = ExtResource("4_gmois")
 disabled = true
 text = "Continue"
 

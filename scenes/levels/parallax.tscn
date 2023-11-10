@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cvj6tpwfd2s03"]
+[gd_scene load_steps=11 format=3 uid="uid://cvj6tpwfd2s03"]
 
 [ext_resource type="PackedScene" uid="uid://bqgrls7swt3um" path="res://scenes/levels/main.tscn" id="1_cwp0h"]
 [ext_resource type="TileSet" uid="uid://d2c0ults38s76" path="res://scenes/tilesets/grass.tres" id="2_ewnjs"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://d0rlgw3koar28" path="res://graphics/background/layers/parallax-forest-middle-trees.png" id="4_0ftt7"]
 [ext_resource type="Texture2D" uid="uid://c2tw11ju0sg40" path="res://graphics/background/layers/parallax-forest-front-trees.png" id="5_4ih2m"]
 [ext_resource type="PackedScene" uid="uid://jrt5uqlggamv" path="res://scenes/enemies/hunter.tscn" id="6_idrj7"]
+[ext_resource type="AudioStream" uid="uid://bmrctxn0qyhqb" path="res://sounds/wind-and-birds.mp3" id="9_iabkj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a5lft"]
 size = Vector2(1751, 20)
@@ -44,7 +45,7 @@ position = Vector2(1034, -145)
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground" index="0"]
 motion_scale = Vector2(0.6, 0.6)
-motion_mirroring = Vector2(512, 0)
+motion_mirroring = Vector2(510, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer" index="0"]
 position = Vector2(256, 144)
@@ -60,7 +61,7 @@ texture = ExtResource("3_yu57h")
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground2" index="0"]
 motion_scale = Vector2(0.8, 0.8)
-motion_mirroring = Vector2(512, 0)
+motion_mirroring = Vector2(510, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground2/ParallaxLayer" index="0"]
 position = Vector2(256, 144)
@@ -70,7 +71,7 @@ texture = ExtResource("4_0ftt7")
 [node name="ParallaxBackground3" type="ParallaxBackground" parent="." index="7"]
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground3" index="0"]
-motion_mirroring = Vector2(512, 0)
+motion_mirroring = Vector2(510, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground3/ParallaxLayer" index="0"]
 position = Vector2(256, 144)
@@ -95,3 +96,9 @@ position = Vector2(510, 257)
 
 [node name="Hunter3" parent="." index="11" instance=ExtResource("6_idrj7")]
 position = Vector2(1035, 97)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="14"]
+process_mode = 3
+stream = ExtResource("9_iabkj")
+volume_db = -22.0
+autoplay = true

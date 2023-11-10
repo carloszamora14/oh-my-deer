@@ -4,7 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://bmkcuc1raus2r" path="res://graphics/interface/acorn.png" id="2_oa6hl"]
 
 [node name="HungerBar" type="NinePatchRect"]
-custom_minimum_size = Vector2(180, 40)
+self_modulate = Color(0.192157, 0.192157, 0.192157, 0.67451)
+custom_minimum_size = Vector2(184, 40)
 offset_right = 160.0
 offset_bottom = 40.0
 scale = Vector2(2, 2)
