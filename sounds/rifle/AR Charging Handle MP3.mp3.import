@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cka101ih3jiul"
+path="res://.godot/imported/AR Charging Handle MP3.mp3-d626619e095f227fbe1e53d23b5882cf.mp3str"
+
+[deps]
+
+source_file="res://sounds/rifle/AR Charging Handle MP3.mp3"
+dest_files=["res://.godot/imported/AR Charging Handle MP3.mp3-d626619e095f227fbe1e53d23b5882cf.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
