@@ -26,7 +26,7 @@ alignment = 1
 
 [node name="NinePatchRect" type="NinePatchRect" parent="HBoxContainer"]
 self_modulate = Color(0.192157, 0.192157, 0.192157, 0.67451)
-custom_minimum_size = Vector2(100, 42)
+custom_minimum_size = Vector2(116, 42)
 layout_mode = 2
 texture = ExtResource("3_ojqke")
 patch_margin_left = 8
@@ -35,26 +35,28 @@ patch_margin_right = 8
 patch_margin_bottom = 8
 
 [node name="Label" type="Label" parent="HBoxContainer/NinePatchRect"]
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -31.0
+offset_left = -35.0
 offset_top = -13.0
-offset_right = 31.0
+offset_right = 35.0
 offset_bottom = 13.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("5_1wqna")
+theme_override_font_sizes/font_size = 9
 text = "100/100"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="LivesContainer" type="NinePatchRect" parent="HBoxContainer"]
 self_modulate = Color(0.192157, 0.192157, 0.192157, 0.67451)
-custom_minimum_size = Vector2(100, 42)
+custom_minimum_size = Vector2(116, 42)
 layout_mode = 2
 texture = ExtResource("3_ojqke")
 patch_margin_left = 8
@@ -63,19 +65,21 @@ patch_margin_right = 8
 patch_margin_bottom = 8
 
 [node name="LivesLabel" type="Label" parent="HBoxContainer/LivesContainer"]
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -31.0
+offset_left = -46.0
 offset_top = -13.0
-offset_right = 31.0
+offset_right = 46.0
 offset_bottom = 13.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("5_1wqna")
-text = "3 Lives"
+theme_override_font_sizes/font_size = 9
+text = "Death"
 horizontal_alignment = 1
 vertical_alignment = 1

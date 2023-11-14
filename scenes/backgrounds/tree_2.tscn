@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://ba5v1ujbuhrk7"]
+
+[ext_resource type="Texture2D" uid="uid://dj71qwdawbbs6" path="res://graphics/background/tree2.png" id="1_6ojyw"]
+
+[node name="Tree2" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.137255, 0.47451, 0.627451, 1)
+texture = ExtResource("1_6ojyw")
+region_enabled = true
+region_rect = Rect2(376.929, 106.854, 148.457, 172.165)

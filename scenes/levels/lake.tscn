@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://cqmtwkdr7yoxf"]
+
+[ext_resource type="PackedScene" uid="uid://bqgrls7swt3um" path="res://scenes/levels/main.tscn" id="1_4ce6b"]
+[ext_resource type="PackedScene" uid="uid://bicy8yoqkod3l" path="res://scenes/backgrounds/aqueduct.tscn" id="2_j7q0s"]
+[ext_resource type="PackedScene" uid="uid://cmge43qmo5lv1" path="res://scenes/objects/ruine.tscn" id="3_jifkx"]
+
+[node name="Main" instance=ExtResource("1_4ce6b")]
+
+[node name="Aqueduct" parent="." index="0" instance=ExtResource("2_j7q0s")]
+
+[node name="Deer" parent="." index="1"]
+position = Vector2(76, 96)
+
+[node name="Objects" type="Node2D" parent="." index="8"]
+
+[node name="Ruine" parent="Objects" index="0" instance=ExtResource("3_jifkx")]
+modulate = Color(0.65098, 0.592157, 0.556863, 1)
+position = Vector2(39, 315)

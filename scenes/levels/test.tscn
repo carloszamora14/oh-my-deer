@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://br0jtg363a7oy"]
+
+[ext_resource type="PackedScene" uid="uid://bqgrls7swt3um" path="res://scenes/levels/main.tscn" id="1_ji25o"]
+[ext_resource type="PackedScene" uid="uid://jrt5uqlggamv" path="res://scenes/enemies/hunter.tscn" id="2_3cut2"]
+
+[node name="Test" instance=ExtResource("1_ji25o")]
+
+[node name="Hunter" parent="." index="7" instance=ExtResource("2_3cut2")]
+scale = Vector2(1, 1)

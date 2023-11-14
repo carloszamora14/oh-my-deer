@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://dmihq4efu5oq"]
+
+[ext_resource type="Texture2D" uid="uid://bow40ga5cm22l" path="res://graphics/textures/circle.png" id="1_lw5c3"]
+[ext_resource type="Texture2D" uid="uid://1fmxjtvnnt5q" path="res://graphics/textures/white.png" id="2_veagk"]
+
+[node name="Firefly" type="Node2D"]
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+texture = ExtResource("1_lw5c3")
+texture_scale = 0.01
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_veagk")

@@ -39,6 +39,8 @@ visible = false
 
 [node name="PauseMenu" parent="CanvasLayer2" instance=ExtResource("5_kquh5")]
 
+[node name="TrailParticles" type="Node2D" parent="."]
+
 [connection signal="game_over" from="Deer" to="." method="_on_deer_game_over"]
 [connection signal="player_throw_candy" from="Deer" to="." method="_on_deer_player_throw_candy"]
 [connection signal="continue_game" from="CanvasLayer2/PauseMenu" to="." method="_on_pause_menu_continue_game"]

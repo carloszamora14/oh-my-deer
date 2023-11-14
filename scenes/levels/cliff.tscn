@@ -1,0 +1,105 @@
+[gd_scene load_steps=14 format=3 uid="uid://c2wh78x55wwe0"]
+
+[ext_resource type="Script" path="res://scenes/levels/cliff.gd" id="1_d3iem"]
+[ext_resource type="PackedScene" uid="uid://bqgrls7swt3um" path="res://scenes/levels/main.tscn" id="1_f1qu1"]
+[ext_resource type="Texture2D" uid="uid://cn1r3gn4rp2sb" path="res://graphics/background/mountains.png" id="1_m8apy"]
+[ext_resource type="PackedScene" uid="uid://b7s8lejjb26cm" path="res://scenes/backgrounds/mountain.tscn" id="3_dwykb"]
+[ext_resource type="PackedScene" uid="uid://dvk2duwfnqgji" path="res://scenes/backgrounds/tree_1.tscn" id="3_m8ogp"]
+[ext_resource type="PackedScene" uid="uid://ba5v1ujbuhrk7" path="res://scenes/backgrounds/tree_2.tscn" id="4_71v6j"]
+[ext_resource type="PackedScene" uid="uid://ddkc72jw54sdo" path="res://scenes/interface/tree.tscn" id="5_1trwn"]
+[ext_resource type="PackedScene" uid="uid://bov58ixsb6sx4" path="res://scenes/backgrounds/big_tree.tscn" id="7_nfq6x"]
+[ext_resource type="Texture2D" uid="uid://bow40ga5cm22l" path="res://graphics/textures/circle.png" id="7_u1m2e"]
+[ext_resource type="Texture2D" uid="uid://1fmxjtvnnt5q" path="res://graphics/textures/white.png" id="8_auawl"]
+[ext_resource type="AudioStream" uid="uid://cffcyy3llfii4" path="res://sounds/night-sounds.mp3" id="9_3dcl2"]
+[ext_resource type="AudioStream" uid="uid://oj88piin0ivu" path="res://sounds/insect-flying.mp3" id="9_lq4ao"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_eeubv"]
+emission_shape = 1
+emission_sphere_radius = 10.0
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = -20.0
+initial_velocity_max = 20.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+scale_min = 0.05
+scale_max = 0.1
+
+[node name="Cliff" instance=ExtResource("1_f1qu1")]
+script = ExtResource("1_d3iem")
+
+[node name="Sprite2D" type="Sprite2D" parent="." index="0"]
+modulate = Color(0.149043, 0.496485, 0.484385, 1)
+position = Vector2(421, 161)
+scale = Vector2(0.44, 0.44)
+texture = ExtResource("1_m8apy")
+
+[node name="Objects" type="Node2D" parent="." index="1"]
+
+[node name="Tree1" parent="Objects" index="0" instance=ExtResource("3_m8ogp")]
+modulate = Color(0.498039, 0.615686, 0.85098, 1)
+position = Vector2(87, 150)
+
+[node name="Tree2" parent="Objects" index="1" instance=ExtResource("3_m8ogp")]
+modulate = Color(0.498039, 0.615686, 0.85098, 1)
+position = Vector2(340, 171)
+scale = Vector2(0.6, 0.6)
+
+[node name="Tree3" parent="Objects" index="2" instance=ExtResource("4_71v6j")]
+modulate = Color(0.498039, 0.615686, 0.85098, 1)
+position = Vector2(213, 112)
+
+[node name="Tree4" parent="Objects" index="3" instance=ExtResource("4_71v6j")]
+modulate = Color(0.498039, 0.615686, 0.85098, 1)
+position = Vector2(481, 221)
+scale = Vector2(0.4, 0.4)
+
+[node name="Sprite2D" parent="Objects" index="4" instance=ExtResource("5_1trwn")]
+modulate = Color(0.0901961, 0.345098, 0.333333, 1)
+position = Vector2(414, 185)
+
+[node name="BigTree" parent="Objects" index="5" instance=ExtResource("7_nfq6x")]
+modulate = Color(0.129412, 0.352941, 0.4, 1)
+position = Vector2(667, 225)
+rotation = 0.261799
+scale = Vector2(0.15, 0.15)
+
+[node name="StaticBody2D" parent="." index="2" instance=ExtResource("3_dwykb")]
+position = Vector2(1, -14)
+
+[node name="Deer" parent="." index="3"]
+position = Vector2(34, 200)
+
+[node name="Camera2D" parent="Deer" index="7"]
+limit_right = 840
+limit_bottom = 360
+
+[node name="PointLight2D" type="PointLight2D" parent="Deer" index="8"]
+scale = Vector2(0.2, 0.2)
+energy = 0.8
+texture = ExtResource("7_u1m2e")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="Deer" index="9"]
+position = Vector2(9, -11)
+process_material = SubResource("ParticleProcessMaterial_eeubv")
+texture = ExtResource("8_auawl")
+lifetime = 7.0
+
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="." index="10"]
+color = Color(0.34902, 0.160784, 0.0156863, 1)
+blend_mode = 1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="11"]
+stream = ExtResource("9_lq4ao")
+volume_db = -24.0
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="." index="12"]
+stream = ExtResource("9_3dcl2")
+volume_db = -30.0
+autoplay = true
+
+[node name="FireflySound" type="Timer" parent="." index="13"]
+wait_time = 0.6
+autostart = true
+
+[connection signal="timeout" from="FireflySound" to="." method="_on_firefly_sound_timeout"]

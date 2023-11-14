@@ -8,6 +8,7 @@ const JUMP_VELOCITY = -240.0
 const FRICTION = 300;
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
+var respawn_coords = Vector2(40, 140)
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var dying: bool = false
 var player_lost: bool = false
@@ -84,7 +85,7 @@ func respawn():
 	dying = false
 	Globals.male_deer_vulnerable = true
 	get_node("DeerCollision").disabled = false   # enable
-	global_position = Vector2(40, 240)
+	global_position = respawn_coords
 	if Globals.male_deer_lives > 0:
 		Globals.update_male_deer_health(100, null)
 	else:

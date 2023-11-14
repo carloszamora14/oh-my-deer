@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://qrqfwamesqro"]
+[gd_scene load_steps=6 format=3 uid="uid://qrqfwamesqro"]
 
 [ext_resource type="Texture2D" uid="uid://btrt7f0fpkqsk" path="res://graphics/interface/menu.jpg" id="1_38bv6"]
 [ext_resource type="Script" path="res://scenes/interface/main_menu.gd" id="1_s0gcx"]
 [ext_resource type="Texture2D" uid="uid://bcr8polnrei4q" path="res://graphics/interface/health_bar/label_bg.png" id="2_iabhk"]
 [ext_resource type="Theme" uid="uid://b5f8lwa40ge5t" path="res://scenes/interface/themes/label_theme.tres" id="4_gmois"]
+[ext_resource type="AudioStream" uid="uid://bik4plcnk868y" path="res://sounds/dark-depression-116110.mp3" id="5_lyjdo"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -65,6 +66,11 @@ layout_mode = 2
 theme = ExtResource("4_gmois")
 disabled = true
 text = "Continue"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_lyjdo")
+volume_db = -20.0
+autoplay = true
 
 [connection signal="pressed" from="VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/ContinueButton" to="." method="_on_continue_button_pressed"]

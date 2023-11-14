@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cvj6tpwfd2s03"]
+[gd_scene load_steps=12 format=3 uid="uid://cvj6tpwfd2s03"]
 
 [ext_resource type="PackedScene" uid="uid://bqgrls7swt3um" path="res://scenes/levels/main.tscn" id="1_cwp0h"]
 [ext_resource type="TileSet" uid="uid://d2c0ults38s76" path="res://scenes/tilesets/grass.tres" id="2_ewnjs"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://c2tw11ju0sg40" path="res://graphics/background/layers/parallax-forest-front-trees.png" id="5_4ih2m"]
 [ext_resource type="PackedScene" uid="uid://jrt5uqlggamv" path="res://scenes/enemies/hunter.tscn" id="6_idrj7"]
 [ext_resource type="AudioStream" uid="uid://bmrctxn0qyhqb" path="res://sounds/wind-and-birds.mp3" id="9_iabkj"]
+[ext_resource type="PackedScene" uid="uid://bwsnun1k6deqn" path="res://scenes/objects/car.tscn" id="10_rukmb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a5lft"]
 size = Vector2(1751, 20)
@@ -102,3 +103,8 @@ process_mode = 3
 stream = ExtResource("9_iabkj")
 volume_db = -22.0
 autoplay = true
+
+[node name="Objects" type="Node2D" parent="." index="15"]
+
+[node name="Car" parent="Objects" index="0" instance=ExtResource("10_rukmb")]
+position = Vector2(117, 262)

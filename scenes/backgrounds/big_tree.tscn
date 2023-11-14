@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://bov58ixsb6sx4"]
+
+[ext_resource type="Texture2D" uid="uid://pgno7clps3e8" path="res://graphics/background/tree1.png" id="1_vaw2g"]
+
+[node name="BigTree" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_vaw2g")
+region_rect = Rect2(0, 0, 48, 48)

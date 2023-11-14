@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=3 uid="uid://ccf7b7g8uids"]
+
+[ext_resource type="Script" path="res://scenes/projectiles/bullet.gd" id="1_k1iux"]
+[ext_resource type="Texture2D" uid="uid://dxmkuw6fajvc" path="res://graphics/projectiles/bullet.png" id="1_p20n5"]
+[ext_resource type="Texture2D" uid="uid://1fmxjtvnnt5q" path="res://graphics/textures/white.png" id="3_5klmt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wldg4"]
+size = Vector2(2, 1)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_syi3v"]
+emission_shape = 1
+emission_sphere_radius = 1.0
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+scale_min = 0.05
+scale_max = 0.05
+
+[node name="Bullet" type="Area2D" groups=["Bullet"]]
+script = ExtResource("1_k1iux")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_p20n5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_wldg4")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+position = Vector2(-1, 0)
+emitting = false
+amount = 100
+process_material = SubResource("ParticleProcessMaterial_syi3v")
+texture = ExtResource("3_5klmt")
+one_shot = true
+
+[node name="TrailParticles" type="Node2D" parent="."]
+
+[node name="TrailMarker" type="Marker2D" parent="."]
+position = Vector2(-1, 0)

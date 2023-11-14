@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+signal hunter_shot_bullet(position, direction)
 
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
@@ -10,7 +11,8 @@ var is_shooting: bool = false
 var health_points: int = 100
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
-var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+#var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+var gravity = 0
 
 const sounds: Array[String] = [
 	"res://sounds/hunter/this-is-not-a-game-anymore.mp3",
@@ -18,28 +20,37 @@ const sounds: Array[String] = [
 	"res://sounds/hunter/you-deer-are-going-for-a-ride-in-my-truck.mp3"
 ]
 
+func _ready():
+	position = Vector2(150, 150)
+
 func _physics_process(delta):
-	if sees_deer:
-		var angle = (Globals.male_deer_position - global_position).normalized().angle()
-		if angle < 0:
-			angle += 2 * PI
-		if angle >= PI / 4 && angle <= 3 * PI /2:
-			$Sprite2D.scale.x = -0.6
-			$AttackArea.scale.x = -1
-		else:
-			$Sprite2D.scale.x = 0.6
-			$AttackArea.scale.x = 1
-		
-		if (can_shoot):
-			is_shooting = true
-			$AnimationPlayer.play("crouch shoot")
-			can_shoot = false
-			$Timer.start()
-			await $AnimationPlayer.animation_finished
-			if !sees_deer:
-				$AnimationPlayer.play("RESET")
-			is_shooting = false
-#		if angle > PI/2 and angle 
+	var mouse_position = get_global_mouse_position()
+#	var mouse_offset = get_local_mouse_position()
+	var angle = ((mouse_position - $ShoulderMark.global_position).normalized()).angle()
+	$Sprites/LeftContainer.rotation = angle
+	$Sprites/RightContainer.rotation = angle
+	
+#	if sees_deer:
+#		var angle = (Globals.male_deer_position - global_position).normalized().angle()
+#		if angle < 0:
+#			angle += 2 * PI
+#		if angle >= PI / 4 && angle <= 3 * PI /2:
+#			$Sprite2D.scale.x = -0.6
+#			$AttackArea.scale.x = -1
+#		else:
+#			$Sprite2D.scale.x = 0.6
+#			$AttackArea.scale.x = 1
+#
+#		if (can_shoot):
+#			is_shooting = true
+#			$AnimationPlayer.play("crouch shoot")
+#			can_shoot = false
+#			$Timer.start()
+#			await $AnimationPlayer.animation_finished
+#			if !sees_deer:
+#				$AnimationPlayer.play("RESET")
+#			is_shooting = false
+##		if angle > PI/2 and angle 
 #	look_at(Globals.male_deer_position)
 	# Add the gravity.
 	if not is_on_floor():
@@ -47,16 +58,16 @@ func _physics_process(delta):
 
 	
 	# Handle Jump.
-#	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-#		velocity.y = JUMP_VELOCITY
+	if Input.is_action_just_pressed("interact"):
+		shoot_rifle()
 #
 #	# Get the input direction and handle the movement/deceleration.
 #	# As good practice, you should replace UI actions with custom gameplay actions.
-#	var direction = Input.get_axis("ui_left", "ui_right")
-#	if direction:
-#		velocity.x = direction * SPEED
-#	else:
-#		velocity.x = move_toward(velocity.x, 0, SPEED)
+	var direction = Input.get_axis("left", "right")
+	if direction:
+		velocity.x = direction * SPEED
+	else:
+		velocity.x = move_toward(velocity.x, 0, SPEED)
 #
 	move_and_slide()
 	
@@ -66,6 +77,17 @@ func shot_sound():
 	add_child(sound)
 	sound.play()
 	await sound.finished
+
+
+func shoot_rifle():
+	$AnimationPlayer.play("shoot_new")
+	
+func emit_bullet():
+	var mouse_position = get_global_mouse_position()
+#	var mouse_offset = get_local_mouse_position()
+	var gun_nozzle_position = $Sprites/RightContainer/Rifle/GunNozzle.global_position
+	var bullet_direction = (mouse_position - $ShoulderMark.global_position).normalized()
+	hunter_shot_bullet.emit(gun_nozzle_position, bullet_direction)
 
 
 func _on_timer_timeout():

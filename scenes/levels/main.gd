@@ -3,12 +3,38 @@ class_name MainLevel
 
 const WINDOW_HEIGHT: int = 288
 var candy_scene: PackedScene = preload('res://scenes/projectiles/candy.tscn')
+var bullet_scene: PackedScene = preload('res://scenes/projectiles/bullet.tscn')
+var particle_scene: PackedScene = preload('res://scenes/weapons/trail_particle.tscn')
 
 var over: bool = false
 
+
 func _ready():
+	for enemy in get_tree().get_nodes_in_group("Enemy"):
+		enemy.connect("hunter_shot_bullet", _on_hunter_bullet)
 	if Globals.game_loaded:
 		load_game()
+	else:
+		$Deer.position = Vector2(34, 200)
+
+
+func _on_hunter_bullet(bullet_position, bullet_direction):
+	var bullet = bullet_scene.instantiate() as Area2D
+	bullet.position = bullet_position
+	bullet.rotate(bullet_direction.angle())
+	bullet.direction = bullet_direction
+#	bullet.connet("emit_particle", _on_bullet_emit_particle)
+	$Projectiles.add_child(bullet)
+	bullet.connect("emit_particle", _on_bullet_emit_particle)
+
+
+func _on_bullet_emit_particle(pos, dir, vel, p_scale):
+	var particle = particle_scene.instantiate() as Area2D
+	particle.position = pos
+	particle.direction = dir
+	particle.speed = vel
+	particle.scale = p_scale
+	$TrailParticles.add_child(particle)
 
 
 func _on_deer_game_over():
@@ -18,13 +44,15 @@ func _on_deer_game_over():
 
 
 func _process(_delta):
+#	for bullet in get_tree().get_nodes_in_group("Bullet"):
+#		bullet.connect("emit_particle", _on_bullet_emit_particle)
 	if Input.is_action_just_pressed("esc") && !over:
 		get_tree().paused = true
 		$CanvasLayer2.show()
-	if Globals.male_deer_position.y > WINDOW_HEIGHT * 1.2 and !Globals.male_deer_falling:
+	if Globals.male_deer_position.y > WINDOW_HEIGHT * 1.4 and !Globals.male_deer_falling:
 		Globals.male_deer_falling = true
-		$Deer.hit(1000, null)
-		$Deer.respawn()
+#		$Deer.hit(1000, null)
+#		$Deer.respawn()
 
 
 func _on_deer_player_throw_candy(pos, direction):
