@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://isy4atojar3h"]
+
+[ext_resource type="Texture2D" uid="uid://c34cm0ja8jddu" path="res://graphics/platforms/ruines2.png" id="1_l1s8j"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ovo3s"]
+size = Vector2(87.5, 45)
+
+[node name="SlabPillar3" type="StaticBody2D"]
+scale = Vector2(0.4, 0.4)
+collision_layer = 4
+collision_mask = 15
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_l1s8j")
+region_enabled = true
+region_rect = Rect2(177, 279, 86, 45)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_ovo3s")

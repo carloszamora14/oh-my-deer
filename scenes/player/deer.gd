@@ -28,15 +28,16 @@ func _physics_process(delta):
 		velocity.y += gravity * delta
 	
 	if (!dying):
-		if Input.is_action_just_pressed("interact") and can_throw_candy:
-			var marker_pos = $DeerSprite/Marker2D.global_position
-#			print(marker_pos, global_position)
-			var candy_direction = Vector2(1, 0) if $DeerSprite.scale.x >= 0 else Vector2(-1, 0)
-			# Emit the position
-			player_throw_candy.emit(marker_pos, candy_direction)
-			can_throw_candy = false
-			$Timer.start()
-		elif Input.is_action_just_pressed("jump") and is_on_floor():
+#		if Input.is_action_just_pressed("interact") and can_throw_candy:
+#			var marker_pos = $DeerSprite/Marker2D.global_position
+##			print(marker_pos, global_position)
+#			var candy_direction = Vector2(1, 0) if $DeerSprite.scale.x >= 0 else Vector2(-1, 0)
+#			# Emit the position
+#			player_throw_candy.emit(marker_pos, candy_direction)
+#			can_throw_candy = false
+#			$Timer.start()
+		#elif
+		if Input.is_action_just_pressed("jump") and is_on_floor():
 #			$AnimationPlayer.play('death')
 			$IdleTimer.stop()
 			$IdleTimer.start()

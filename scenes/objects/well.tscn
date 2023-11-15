@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://dycklvcglrpoo"]
+
+[ext_resource type="Texture2D" uid="uid://bvo5h4tkb01dn" path="res://graphics/objects/wooden-props.png" id="1_mbp08"]
+
+[node name="Well" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_mbp08")
+region_enabled = true
+region_rect = Rect2(1, 3.89, 30, 42)

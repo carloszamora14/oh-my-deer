@@ -1,0 +1,78 @@
+[gd_scene load_steps=6 format=3 uid="uid://clsvhy2fkamx5"]
+
+[ext_resource type="Script" path="res://scenes/interface/key.gd" id="1_b32sr"]
+[ext_resource type="Texture2D" uid="uid://ctbs71gghp8gi" path="res://graphics/interface/keyboard-keys/A.png" id="2_7b0bn"]
+
+[sub_resource type="Animation" id="Animation_law2s"]
+resource_name = "Press"
+length = 1.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:hframes")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+
+[sub_resource type="Animation" id="Animation_r7obk"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:hframes")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_slhr8"]
+_data = {
+"Press": SubResource("Animation_law2s"),
+"RESET": SubResource("Animation_r7obk")
+}
+
+[node name="Key" type="Node2D"]
+script = ExtResource("1_b32sr")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_7b0bn")
+hframes = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_slhr8")
+}

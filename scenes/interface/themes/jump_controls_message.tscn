@@ -1,0 +1,50 @@
+[gd_scene load_steps=5 format=3 uid="uid://cvgbvwxl2ob1b"]
+
+[ext_resource type="PackedScene" uid="uid://xvd4yghov0pa" path="res://scenes/interface/message.tscn" id="1_ytd1g"]
+[ext_resource type="Theme" uid="uid://c7hfx0wm7lip0" path="res://scenes/interface/themes/info_messages_label.tres" id="2_i54ao"]
+[ext_resource type="Texture2D" uid="uid://ce07a8r6g1w2i" path="res://graphics/interface/keyboard-keys/SPACEALTERNATIVE-0.png" id="3_nt5gr"]
+[ext_resource type="Texture2D" uid="uid://slqkni4y7wfv" path="res://graphics/interface/keyboard-keys/ARROWUP-0.png" id="4_tjnlf"]
+
+[node name="JumpControlsMessage" instance=ExtResource("1_ytd1g")]
+
+[node name="Panel" parent="." index="0"]
+offset_left = -178.0
+offset_bottom = 78.0
+
+[node name="Container" parent="Panel" index="0"]
+anchors_preset = 15
+anchor_left = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/Container" index="0"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/Container/VBoxContainer" index="0"]
+layout_mode = 2
+theme = ExtResource("2_i54ao")
+text = "Jump"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/Container/VBoxContainer" index="1"]
+layout_mode = 2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Panel/Container/VBoxContainer/HBoxContainer" index="0"]
+custom_minimum_size = Vector2(100.5, 24)
+layout_mode = 2
+texture = ExtResource("3_nt5gr")
+
+[node name="Label" type="Label" parent="Panel/Container/VBoxContainer/HBoxContainer" index="1"]
+layout_mode = 2
+text = "or"
+
+[node name="TextureRect2" type="TextureRect" parent="Panel/Container/VBoxContainer/HBoxContainer" index="2"]
+layout_mode = 2
+texture = ExtResource("4_tjnlf")
+expand_mode = 2

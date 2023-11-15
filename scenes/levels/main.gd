@@ -44,22 +44,19 @@ func _on_deer_game_over():
 
 
 func _process(_delta):
-#	for bullet in get_tree().get_nodes_in_group("Bullet"):
-#		bullet.connect("emit_particle", _on_bullet_emit_particle)
 	if Input.is_action_just_pressed("esc") && !over:
 		get_tree().paused = true
 		$CanvasLayer2.show()
 	if Globals.male_deer_position.y > WINDOW_HEIGHT * 1.4 and !Globals.male_deer_falling:
 		Globals.male_deer_falling = true
-#		$Deer.hit(1000, null)
-#		$Deer.respawn()
+		$Deer.hit(1000, null)
+		$Deer.respawn()
 
 
 func _on_deer_player_throw_candy(pos, direction):
 	var candy = candy_scene.instantiate() as Area2D
 	candy.position = pos
 	candy.rotate(direction.angle())
-#	candy.rotate(Vector2.RIGHT.angle_to(direction))
 	candy.direction = direction
 	$Projectiles.add_child(candy)
 

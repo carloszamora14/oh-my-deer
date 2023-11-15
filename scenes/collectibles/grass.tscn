@@ -1,0 +1,266 @@
+[gd_scene load_steps=19 format=3 uid="uid://b78wm44yatqh1"]
+
+[ext_resource type="Script" path="res://scenes/collectibles/grass.gd" id="1_4ureb"]
+[ext_resource type="Texture2D" uid="uid://certj18qh625l" path="res://graphics/deer/food/grass-1.png" id="1_hr53x"]
+[ext_resource type="Shader" path="res://scenes/collectibles/grass.gdshader" id="1_psr6n"]
+[ext_resource type="Texture2D" uid="uid://b1mbplwjhf18d" path="res://graphics/deer/food/grass-2.png" id="2_01le7"]
+[ext_resource type="Texture2D" uid="uid://bs2l085g8eq5l" path="res://graphics/deer/food/grass-3.png" id="3_o4q1x"]
+[ext_resource type="Texture2D" uid="uid://7wttahk0nyb6" path="res://graphics/deer/food/grass-4.png" id="4_5dcsb"]
+[ext_resource type="Texture2D" uid="uid://vw8vs5g3aeym" path="res://graphics/deer/food/grass-5.png" id="5_lv0x6"]
+[ext_resource type="Texture2D" uid="uid://crdssrxlr1xyq" path="res://graphics/deer/food/grass-6.png" id="6_xunuk"]
+[ext_resource type="AudioStream" uid="uid://dork60naqjeln" path="res://sounds/deer-eating-grass.mp3" id="7_81dy5"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_weekd"]
+resource_local_to_scene = true
+shader = ExtResource("1_psr6n")
+shader_parameter/shift_hue = null
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8llcj"]
+resource_local_to_scene = true
+shader = ExtResource("1_psr6n")
+shader_parameter/shift_hue = null
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_h68l1"]
+resource_local_to_scene = true
+shader = ExtResource("1_psr6n")
+shader_parameter/shift_hue = null
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kou77"]
+resource_local_to_scene = true
+shader = ExtResource("1_psr6n")
+shader_parameter/shift_hue = null
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fo366"]
+resource_local_to_scene = true
+shader = ExtResource("1_psr6n")
+shader_parameter/shift_hue = null
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wurny"]
+resource_local_to_scene = true
+shader = ExtResource("1_psr6n")
+shader_parameter/shift_hue = null
+
+[sub_resource type="Animation" id="Animation_m4vt1"]
+resource_name = "being_eaten"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprites/SpriteStage6:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.399, 0.798, 1.197, 1.596, 1.995),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [true, false, false, false, false, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprites/SpriteStage5:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.399, 0.798, 1.197, 1.596, 1.995),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [false, true, false, false, false, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprites/SpriteStage4:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.399, 0.798, 1.197, 1.596, 1.995),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [false, false, true, false, false, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprites/SpriteStage3:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.399, 0.798, 1.197, 1.596, 1.995),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [false, false, false, true, false, false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprites/SpriteStage2:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.399, 0.798, 1.197, 1.596, 1.995),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [false, false, false, false, true, false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Sprites/SpriteStage1:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.399, 0.798, 1.197, 1.596, 1.995),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [false, false, false, false, false, true]
+}
+tracks/6/type = "audio"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("AudioStreamPlayer2D")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"clips": [{
+"end_offset": 0.27,
+"start_offset": 30.4196,
+"stream": ExtResource("7_81dy5")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/6/use_blend = true
+
+[sub_resource type="Animation" id="Animation_d6ggb"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprites/SpriteStage6:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprites/SpriteStage5:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprites/SpriteStage4:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprites/SpriteStage3:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprites/SpriteStage2:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Sprites/SpriteStage1:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pv25g"]
+_data = {
+"RESET": SubResource("Animation_d6ggb"),
+"being_eaten": SubResource("Animation_m4vt1")
+}
+
+[node name="Grass" type="Node2D"]
+script = ExtResource("1_4ureb")
+shift_hue = 0.75
+
+[node name="Sprites" type="Node2D" parent="."]
+
+[node name="SpriteStage1" type="Sprite2D" parent="Sprites"]
+visible = false
+material = SubResource("ShaderMaterial_weekd")
+position = Vector2(0, 19)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("1_hr53x")
+
+[node name="SpriteStage2" type="Sprite2D" parent="Sprites"]
+visible = false
+material = SubResource("ShaderMaterial_8llcj")
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("2_01le7")
+
+[node name="SpriteStage3" type="Sprite2D" parent="Sprites"]
+visible = false
+material = SubResource("ShaderMaterial_h68l1")
+position = Vector2(0, -1.5)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("3_o4q1x")
+
+[node name="SpriteStage4" type="Sprite2D" parent="Sprites"]
+visible = false
+material = SubResource("ShaderMaterial_kou77")
+position = Vector2(0, -1.5)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("4_5dcsb")
+
+[node name="SpriteStage5" type="Sprite2D" parent="Sprites"]
+visible = false
+material = SubResource("ShaderMaterial_fo366")
+position = Vector2(0, -7)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("5_lv0x6")
+
+[node name="SpriteStage6" type="Sprite2D" parent="Sprites"]
+material = SubResource("ShaderMaterial_wurny")
+position = Vector2(0, -1.5)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("6_xunuk")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_pv25g")
+}
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]

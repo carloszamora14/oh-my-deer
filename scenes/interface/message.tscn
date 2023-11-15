@@ -1,0 +1,31 @@
+[gd_scene load_steps=2 format=3 uid="uid://xvd4yghov0pa"]
+
+[ext_resource type="Script" path="res://scenes/interface/info_message.gd" id="1_djd4f"]
+
+[node name="Message" type="CanvasLayer"]
+script = ExtResource("1_djd4f")
+
+[node name="Panel" type="Panel" parent="."]
+self_modulate = Color(0.192157, 0.192157, 0.192157, 0.67451)
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -110.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = 130.0
+grow_horizontal = 0
+
+[node name="Container" type="MarginContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -54.0
+offset_right = 54.0
+offset_bottom = 95.0
+grow_horizontal = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4

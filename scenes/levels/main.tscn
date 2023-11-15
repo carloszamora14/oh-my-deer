@@ -9,17 +9,6 @@
 [node name="Main" type="Node2D"]
 script = ExtResource("1_teyda")
 
-[node name="Deer" parent="." instance=ExtResource("1_u4p0i")]
-position = Vector2(32, 245)
-
-[node name="Camera2D" type="Camera2D" parent="Deer"]
-zoom = Vector2(1.2, 1.2)
-limit_left = 0
-limit_top = 0
-limit_right = 512
-limit_bottom = 288
-position_smoothing_enabled = true
-
 [node name="Tilesets" type="Node2D" parent="."]
 
 [node name="Collectibles" type="Node2D" parent="."]
@@ -41,7 +30,18 @@ visible = false
 
 [node name="TrailParticles" type="Node2D" parent="."]
 
-[connection signal="game_over" from="Deer" to="." method="_on_deer_game_over"]
-[connection signal="player_throw_candy" from="Deer" to="." method="_on_deer_player_throw_candy"]
+[node name="Deer" parent="." instance=ExtResource("1_u4p0i")]
+position = Vector2(32, 245)
+
+[node name="Camera2D" type="Camera2D" parent="Deer"]
+zoom = Vector2(1.2, 1.2)
+limit_left = 0
+limit_top = 0
+limit_right = 512
+limit_bottom = 288
+position_smoothing_enabled = true
+
 [connection signal="continue_game" from="CanvasLayer2/PauseMenu" to="." method="_on_pause_menu_continue_game"]
 [connection signal="exit_game" from="CanvasLayer2/PauseMenu" to="." method="_on_pause_menu_exit_game"]
+[connection signal="game_over" from="Deer" to="." method="_on_deer_game_over"]
+[connection signal="player_throw_candy" from="Deer" to="." method="_on_deer_player_throw_candy"]
