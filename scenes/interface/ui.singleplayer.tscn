@@ -30,4 +30,3 @@ offset_bottom = 51.0
 scale = Vector2(0.35, 0.35)
 
 [node name="DialogBox" parent="." instance=ExtResource("4_1polc")]
-visible = false

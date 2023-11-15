@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://cie2uxvvdx3e2"]
 
-[ext_resource type="Script" path="res://scenes/interface/info_message.gd" id="1_1kqfb"]
 [ext_resource type="FontFile" uid="uid://higyjbrn5xrn" path="res://fonts/PlayMeGames Reguler.ttf" id="1_bkbox"]
+[ext_resource type="Script" path="res://scenes/interface/message.gd" id="1_pmtku"]
 [ext_resource type="Texture2D" uid="uid://baxqafdbls6wg" path="res://graphics/interface/keyboard-keys/A-1.png" id="2_el4uu"]
 [ext_resource type="Texture2D" uid="uid://6apw5f0vx88y" path="res://graphics/interface/keyboard-keys/B-0.png" id="3_nx2dn"]
 [ext_resource type="Texture2D" uid="uid://b7q3gep4noiix" path="res://graphics/interface/keyboard-keys/ARROWLEFT-1.png" id="4_7f34e"]
@@ -20,7 +20,7 @@ _data = {
 }
 
 [node name="InfoMessage" type="CanvasLayer"]
-script = ExtResource("1_1kqfb")
+script = ExtResource("1_pmtku")
 
 [node name="Panel" type="Panel" parent="."]
 self_modulate = Color(0.192157, 0.192157, 0.192157, 0.67451)

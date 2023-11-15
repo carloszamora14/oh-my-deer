@@ -1,7 +1,6 @@
-[gd_scene load_steps=15 format=3 uid="uid://d0dcnyu3nwn1m"]
+[gd_scene load_steps=14 format=3 uid="uid://d0dcnyu3nwn1m"]
 
 [ext_resource type="PackedScene" uid="uid://xvd4yghov0pa" path="res://scenes/interface/message.tscn" id="1_tuy4g"]
-[ext_resource type="Script" path="res://scenes/interface/move_controls_message.gd" id="2_13l8s"]
 [ext_resource type="Theme" uid="uid://c7hfx0wm7lip0" path="res://scenes/interface/themes/info_messages_label.tres" id="3_jhh1x"]
 [ext_resource type="Texture2D" uid="uid://baxqafdbls6wg" path="res://graphics/interface/keyboard-keys/A-1.png" id="3_q6nnk"]
 [ext_resource type="Texture2D" uid="uid://6apw5f0vx88y" path="res://graphics/interface/keyboard-keys/B-0.png" id="4_6x0qj"]
@@ -123,7 +122,6 @@ _data = {
 }
 
 [node name="MoveControlsMessage" instance=ExtResource("1_tuy4g")]
-script = ExtResource("2_13l8s")
 
 [node name="Container" parent="Panel" index="0"]
 anchors_preset = 15

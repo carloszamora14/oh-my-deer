@@ -1,9 +1,9 @@
 [gd_scene load_steps=2 format=3 uid="uid://xvd4yghov0pa"]
 
-[ext_resource type="Script" path="res://scenes/interface/info_message.gd" id="1_djd4f"]
+[ext_resource type="Script" path="res://scenes/interface/message.gd" id="1_pqnw2"]
 
 [node name="Message" type="CanvasLayer"]
-script = ExtResource("1_djd4f")
+script = ExtResource("1_pqnw2")
 
 [node name="Panel" type="Panel" parent="."]
 self_modulate = Color(0.192157, 0.192157, 0.192157, 0.67451)
