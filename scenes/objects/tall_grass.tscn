@@ -1,0 +1,108 @@
+[gd_scene load_steps=16 format=3 uid="uid://5vxl1i08cr0y"]
+
+[ext_resource type="Shader" path="res://scenes/objects/tall_grass.gdshader" id="1_2cd7s"]
+[ext_resource type="Script" path="res://scenes/objects/tall_grass.gd" id="1_44011"]
+[ext_resource type="Texture2D" uid="uid://46n3nveuajx3" path="res://graphics/objects/grass.png" id="1_a774m"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_t22b2"]
+resource_local_to_scene = true
+shader = ExtResource("1_2cd7s")
+shader_parameter/offset = 0.5
+shader_parameter/shift_hue = 0.75
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x6umc"]
+atlas = ExtResource("1_a774m")
+region = Rect2(252, 84, 84, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_df835"]
+atlas = ExtResource("1_a774m")
+region = Rect2(0, 0, 84, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0a4f1"]
+atlas = ExtResource("1_a774m")
+region = Rect2(84, 0, 84, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rq67n"]
+atlas = ExtResource("1_a774m")
+region = Rect2(168, 0, 84, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_87vmj"]
+atlas = ExtResource("1_a774m")
+region = Rect2(252, 0, 84, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ny24j"]
+atlas = ExtResource("1_a774m")
+region = Rect2(0, 84, 84, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4op5n"]
+atlas = ExtResource("1_a774m")
+region = Rect2(84, 84, 84, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m8p7s"]
+atlas = ExtResource("1_a774m")
+region = Rect2(168, 84, 84, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oqwtl"]
+atlas = ExtResource("1_a774m")
+region = Rect2(252, 84, 84, 84)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_r0k0q"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x6umc")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_df835")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0a4f1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rq67n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_87vmj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ny24j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4op5n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m8p7s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oqwtl")
+}],
+"loop": false,
+"name": &"growing",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_b53c4"]
+radius = 2.0
+height = 40.0
+
+[node name="TallGrass" type="Area2D"]
+collision_layer = 32
+collision_mask = 3
+script = ExtResource("1_44011")
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_t22b2")
+position = Vector2(-3, -38)
+sprite_frames = SubResource("SpriteFrames_r0k0q")
+animation = &"growing"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = -1.5708
+shape = SubResource("CapsuleShape2D_b53c4")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

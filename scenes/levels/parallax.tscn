@@ -16,7 +16,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a5lft"]
 size = Vector2(1751, 20)
 
-[node name="Main" instance=ExtResource("1_cwp0h")]
+[node name="InitialLevel" instance=ExtResource("1_cwp0h")]
 
 [node name="Item" parent="Collectibles" index="0" instance=ExtResource("3_mxjxx")]
 position = Vector2(175, -16)

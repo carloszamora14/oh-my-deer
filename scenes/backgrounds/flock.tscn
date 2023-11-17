@@ -1,0 +1,48 @@
+[gd_scene load_steps=3 format=3 uid="uid://c7t1bq0xjubwm"]
+
+[ext_resource type="Script" path="res://scenes/backgrounds/flock.gd" id="1_06joa"]
+[ext_resource type="PackedScene" uid="uid://bj2wvrgddcg54" path="res://scenes/enemies/crow.tscn" id="1_fgii0"]
+
+[node name="Flock" type="Node2D"]
+script = ExtResource("1_06joa")
+
+[node name="Crows" type="Node2D" parent="."]
+
+[node name="Crow" parent="Crows" instance=ExtResource("1_fgii0")]
+collision_layer = 4
+collision_mask = 0
+
+[node name="Crow2" parent="Crows" instance=ExtResource("1_fgii0")]
+position = Vector2(-24, -24)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Crow3" parent="Crows" instance=ExtResource("1_fgii0")]
+position = Vector2(-76, 14)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Crow4" parent="Crows" instance=ExtResource("1_fgii0")]
+position = Vector2(-50, -56)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Crow5" parent="Crows" instance=ExtResource("1_fgii0")]
+position = Vector2(-15, 28)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Crow6" parent="Crows" instance=ExtResource("1_fgii0")]
+position = Vector2(-10, -46)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Crow7" parent="Crows" instance=ExtResource("1_fgii0")]
+position = Vector2(-39, 2)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Crow8" parent="Crows" instance=ExtResource("1_fgii0")]
+position = Vector2(-107, -58)
+collision_layer = 4
+collision_mask = 0

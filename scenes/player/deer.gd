@@ -43,6 +43,7 @@ func _physics_process(delta):
 			$IdleTimer.start()
 			velocity.y = JUMP_VELOCITY
 		var direction = Input.get_axis("left", "right")
+		var directiony = Input.get_axis("up", "down")
 		if direction:
 			$IdleTimer.stop()
 			$IdleTimer.start()
@@ -55,6 +56,16 @@ func _physics_process(delta):
 			if !eating:
 				$DeerSprite.play("idle")
 			velocity.x = move_toward(velocity.x, 0, FRICTION)
+		
+		if directiony:
+			velocity.y = directiony * SPEED
+			if directiony == -1:
+				$DeerSprite.play("walk_up")
+			else:
+				$DeerSprite.play("walk_down")
+				
+		else:
+			velocity.y = move_toward(velocity.y, 0, FRICTION)
 
 		move_and_slide()
 
