@@ -2,7 +2,7 @@ extends Area2D
 
 var speed: float = 1.0
 var direction = Vector2.ZERO
-@export var lifetime: float = 3.0
+@export var lifetime: float = 2.1
 
 func _ready():
 	await get_tree().create_timer(lifetime).timeout

@@ -20,6 +20,12 @@ var female_deer_lives: int = 3
 var female_deer_vulnerable: bool = true
 var female_deer_health: int = 100
 
+var bullet_impact_sounds = [
+	"res://sounds/bullet-impact1.mp3",
+	"res://sounds/bullet-impact2.mp3",
+	"res://sounds/bullet-impact3.mp3",
+]
+
 func update_male_deer_health(value, enemy):
 	if !male_deer_vulnerable:
 		pass
@@ -30,7 +36,7 @@ func update_male_deer_health(value, enemy):
 		male_deer_health = max(0, value)
 		male_deer_invulnerable_timer()
 	if (male_deer_health <= 0):
-		if enemy and ("reset_target" in enemy):
+		if enemy != null && "reset_target" in enemy:
 			enemy.reset_target()
 		male_deer_lives -= 1
 		male_deer_death.emit()
@@ -60,3 +66,15 @@ func update_female_deer_health(value, enemy):
 func female_deer_invulnerable_timer():
 	await get_tree().create_timer(0.5).timeout
 	female_deer_vulnerable = true
+
+
+func play_bullet_impact(sound_position):
+	var sound = AudioStreamPlayer2D.new()
+	var stream = load(bullet_impact_sounds.pick_random())
+	sound.set_stream(stream)
+	sound.global_position = sound_position
+	add_child(sound)
+	sound.play()
+	await sound.finished
+	sound.queue_free()
+	

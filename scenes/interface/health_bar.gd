@@ -13,6 +13,6 @@ func update_stats():
 	if (Globals.male_deer_lives > 1):
 		$HBoxContainer/LivesContainer/LivesLabel.text = str(Globals.male_deer_lives) + " Lives"
 	elif (Globals.male_deer_lives > 0):
-		$HBoxContainer/LivesContainer/LivesLabel.text = str(Globals.male_deer_lives) + " Live"
+		$HBoxContainer/LivesContainer/LivesLabel.text = str(Globals.male_deer_lives) + " Life"
 	else:
-		$HBoxContainer/LivesContainer/LivesLabel.text = "Death"
+		$HBoxContainer/LivesContainer/LivesLabel.text = "Dead"

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://us1tump27am0"
-path="res://.godot/imported/left-arm-shooting.png-897bcc2fb26a9d091849e53fd432d001.ctex"
+uid="uid://dd1oo80ff34oa"
+path="res://.godot/imported/right-arm.png-887e1b769f11cfa273218d79660611f2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://graphics/hunter/shooting/left-arm-shooting.png"
-dest_files=["res://.godot/imported/left-arm-shooting.png-897bcc2fb26a9d091849e53fd432d001.ctex"]
+source_file="res://graphics/hunter/shooting/right-arm.png"
+dest_files=["res://.godot/imported/right-arm.png-887e1b769f11cfa273218d79660611f2.ctex"]
 
 [params]
 

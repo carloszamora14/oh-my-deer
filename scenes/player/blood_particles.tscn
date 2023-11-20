@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://plajkun0x4k"]
+
+[ext_resource type="Texture2D" uid="uid://i8a57ufbbnas" path="res://graphics/textures/blood.png" id="1_gymhp"]
+
+[sub_resource type="Gradient" id="Gradient_rgjpq"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_et2x8"]
+gradient = SubResource("Gradient_rgjpq")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_hcjps"]
+resource_local_to_scene = true
+emission_shape = 1
+emission_sphere_radius = 10.0
+particle_flag_disable_z = true
+spread = 180.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 5.0
+initial_velocity_max = 10.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+scale_min = 0.01
+scale_max = 0.03
+color_ramp = SubResource("GradientTexture1D_et2x8")
+
+[node name="BloodParticles" type="GPUParticles2D"]
+emitting = false
+amount = 6
+process_material = SubResource("ParticleProcessMaterial_hcjps")
+texture = ExtResource("1_gymhp")
+lifetime = 0.4
+one_shot = true

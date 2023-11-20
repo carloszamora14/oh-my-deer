@@ -23,7 +23,6 @@ func _on_hunter_bullet(bullet_position, bullet_direction):
 	bullet.position = bullet_position
 	bullet.rotate(bullet_direction.angle())
 	bullet.direction = bullet_direction
-#	bullet.connet("emit_particle", _on_bullet_emit_particle)
 	$Projectiles.add_child(bullet)
 	bullet.connect("emit_particle", _on_bullet_emit_particle)
 

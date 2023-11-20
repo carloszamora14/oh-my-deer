@@ -1,13 +1,9 @@
-[gd_scene load_steps=19 format=3 uid="uid://jrt5uqlggamv"]
+[gd_scene load_steps=11 format=3 uid="uid://jrt5uqlggamv"]
 
 [ext_resource type="Script" path="res://scenes/enemies/hunter.gd" id="1_6gv3s"]
-[ext_resource type="Texture2D" uid="uid://cfy0fgulr2ntd" path="res://graphics/hunter/player_runwithgun-Sheet.png" id="1_caq02"]
-[ext_resource type="Texture2D" uid="uid://bvtrsd48ydep" path="res://graphics/hunter/player_crouch.png" id="2_s5c0n"]
 [ext_resource type="Texture2D" uid="uid://2aq3nib0801s" path="res://graphics/hunter/shooting/body-shooting.png" id="3_fcx8n"]
-[ext_resource type="Texture2D" uid="uid://bfg4mbovbt2pl" path="res://graphics/hunter/Player_GunFire.png" id="5_adaa4"]
-[ext_resource type="Texture2D" uid="uid://d26yfsjnorsop" path="res://graphics/hunter/shooting/right-arm-shooting.png" id="5_rt7a1"]
-[ext_resource type="Texture2D" uid="uid://b5honso2301v3" path="res://graphics/hunter/Player_crouchGunFire-Sheet.png" id="7_7xc4b"]
-[ext_resource type="Texture2D" uid="uid://dhekbo1sw3qux" path="res://graphics/hunter/shooting/pixil-frame-0 (5).png" id="9_d266n"]
+[ext_resource type="Texture2D" uid="uid://dyhebdm4mx2d" path="res://graphics/hunter/shooting/left-arm.png" id="4_3v4gw"]
+[ext_resource type="Texture2D" uid="uid://dd1oo80ff34oa" path="res://graphics/hunter/shooting/right-arm.png" id="5_o1kx4"]
 [ext_resource type="PackedScene" uid="uid://bj2vpdnajkxfs" path="res://scenes/weapons/rifle.tscn" id="9_x66tu"]
 
 [sub_resource type="Animation" id="Animation_msxij"]
@@ -15,103 +11,103 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/path = NodePath("NoticeArea:monitoring")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("2_s5c0n")]
+"values": [true]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/path = NodePath("Sprites/RightContainer/RightArmContainer/RightArm:texture")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [1]
+"values": [ExtResource("5_o1kx4")]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/path = NodePath("Sprites/RightContainer/RightArmContainer/RightArm:frame")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
+"update": 0,
 "values": [0]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("NoticeArea:monitoring")
+tracks/3/path = NodePath("Sprites/Body:texture")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [true]
+"values": [ExtResource("3_fcx8n")]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("AttackArea/CollisionShape2D:disabled")
+tracks/4/path = NodePath("Sprites/Body:hframes")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [true]
+"values": [5]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("Sprites/RightContainer/RightArmContainer/RightArm:texture")
+tracks/5/path = NodePath("Sprites/Body:frame")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("5_rt7a1")]
+"update": 0,
+"values": [0]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("Sprites/RightContainer/RightArmContainer/RightArm:frame")
+tracks/6/path = NodePath("Sprites/RightContainer/RightArmContainer/RightArm:hframes")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0]
+"update": 1,
+"values": [5]
 }
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("Sprites/Body:texture")
+tracks/7/path = NodePath("Sprites/LeftContainer/LeftArm:texture")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("3_fcx8n")]
+"values": [ExtResource("4_3v4gw")]
 }
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("Sprites/Body:hframes")
+tracks/8/path = NodePath("Sprites/LeftContainer/LeftArm:hframes")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
@@ -123,227 +119,18 @@ tracks/8/keys = {
 tracks/9/type = "value"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath("Sprites/Body:frame")
+tracks/9/path = NodePath("Sprites/LeftContainer/LeftArm:frame")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0]
-}
-tracks/10/type = "value"
-tracks/10/imported = false
-tracks/10/enabled = true
-tracks/10/path = NodePath("Sprites/RightContainer/RightArmContainer/RightArm:hframes")
-tracks/10/interp = 1
-tracks/10/loop_wrap = true
-tracks/10/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [5]
-}
-tracks/11/type = "value"
-tracks/11/imported = false
-tracks/11/enabled = true
-tracks/11/path = NodePath("Sprites/LeftContainer/LeftArm:texture")
-tracks/11/interp = 1
-tracks/11/loop_wrap = true
-tracks/11/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("9_d266n")]
-}
-tracks/12/type = "value"
-tracks/12/imported = false
-tracks/12/enabled = true
-tracks/12/path = NodePath("Sprites/LeftContainer/LeftArm:hframes")
-tracks/12/interp = 1
-tracks/12/loop_wrap = true
-tracks/12/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [5]
-}
-tracks/13/type = "value"
-tracks/13/imported = false
-tracks/13/enabled = true
-tracks/13/path = NodePath("Sprites/LeftContainer/LeftArm:frame")
-tracks/13/interp = 1
-tracks/13/loop_wrap = true
-tracks/13/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [0]
-}
-
-[sub_resource type="Animation" id="Animation_cwnc0"]
-resource_name = "crouch shoot"
-length = 0.6
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("7_7xc4b")]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:hframes")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [5]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:frame")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.5, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [0, 4, 0]
-}
-tracks/3/type = "method"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath(".")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0.5),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"shot_sound"
-}]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("AttackArea/CollisionShape2D:disabled")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0.4, 0.5, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [false, false, true]
-}
-
-[sub_resource type="Animation" id="Animation_k72o7"]
-resource_name = "run"
-length = 1.2
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("1_caq02")]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:hframes")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [6]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:frame")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 1.2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0, 5]
-}
-
-[sub_resource type="Animation" id="Animation_fmgyp"]
-resource_name = "shoot"
-length = 0.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("5_adaa4")]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:hframes")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [5]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:frame")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0, 4]
-}
-tracks/3/type = "method"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath(".")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0.1),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"shot_sound"
-}]
 }
 
 [sub_resource type="Animation" id="Animation_e4lb1"]
-resource_name = "shoot_new"
+resource_name = "shoot"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -354,7 +141,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("5_rt7a1")]
+"values": [ExtResource("5_o1kx4")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -440,7 +227,7 @@ tracks/7/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("9_d266n")]
+"values": [ExtResource("4_3v4gw")]
 }
 tracks/8/type = "value"
 tracks/8/imported = false
@@ -484,32 +271,20 @@ tracks/10/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_w6qde"]
 _data = {
 "RESET": SubResource("Animation_msxij"),
-"crouch shoot": SubResource("Animation_cwnc0"),
-"run": SubResource("Animation_k72o7"),
-"shoot": SubResource("Animation_fmgyp"),
-"shoot_new": SubResource("Animation_e4lb1")
+"shoot": SubResource("Animation_e4lb1")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3fwwy"]
-size = Vector2(29.6667, 28)
+size = Vector2(13.3333, 34.6667)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_v6xte"]
-size = Vector2(336, 44)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_18ph4"]
-size = Vector2(174, 6)
+[sub_resource type="CircleShape2D" id="CircleShape2D_gogoc"]
+radius = 108.671
 
 [node name="Hunter" type="CharacterBody2D" groups=["Enemy"]]
-scale = Vector2(3, 3)
+scale = Vector2(1.25, 1.25)
 collision_layer = 2
 collision_mask = 13
 script = ExtResource("1_6gv3s")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(3, -5)
-scale = Vector2(0.6, 0.6)
-texture = ExtResource("2_s5c0n")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -523,23 +298,13 @@ shape = SubResource("RectangleShape2D_3fwwy")
 wait_time = 2.0
 
 [node name="NoticeArea" type="Area2D" parent="."]
-visible = false
 collision_layer = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NoticeArea"]
-shape = SubResource("RectangleShape2D_v6xte")
-
-[node name="AttackArea" type="Area2D" parent="."]
-visible = false
-collision_layer = 4
-collision_mask = 5
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
-position = Vector2(91, -5)
-shape = SubResource("RectangleShape2D_18ph4")
-disabled = true
+shape = SubResource("CircleShape2D_gogoc")
 
 [node name="Sprites" type="Node2D" parent="."]
+position = Vector2(3.33333, -1.66667)
 
 [node name="LeftContainer" type="Node2D" parent="Sprites"]
 position = Vector2(-6, -9)
@@ -548,7 +313,7 @@ rotation = 0.10472
 [node name="LeftArm" type="Sprite2D" parent="Sprites/LeftContainer"]
 position = Vector2(6, 9)
 scale = Vector2(0.6, 0.6)
-texture = ExtResource("9_d266n")
+texture = ExtResource("4_3v4gw")
 hframes = 5
 
 [node name="Body" type="Sprite2D" parent="Sprites"]
@@ -572,13 +337,12 @@ rotation = 0.10472
 [node name="RightArm" type="Sprite2D" parent="Sprites/RightContainer/RightArmContainer"]
 position = Vector2(6, 9)
 scale = Vector2(0.6, 0.6)
-texture = ExtResource("5_rt7a1")
+texture = ExtResource("5_o1kx4")
 hframes = 5
 
 [node name="ShoulderMark" type="Marker2D" parent="."]
-position = Vector2(-6, -9)
+position = Vector2(-2.66667, -10.6667)
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="body_entered" from="NoticeArea" to="." method="_on_notice_area_body_entered"]
 [connection signal="body_exited" from="NoticeArea" to="." method="_on_notice_area_body_exited"]
-[connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]

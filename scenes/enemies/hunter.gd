@@ -10,9 +10,7 @@ var sees_deer: bool = false
 var is_shooting: bool = false
 var health_points: int = 100
 
-# Get the gravity from the project settings to be synced with RigidBody nodes.
-#var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-var gravity = 0
+var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 const sounds: Array[String] = [
 	"res://sounds/hunter/this-is-not-a-game-anymore.mp3",
@@ -58,8 +56,8 @@ func _physics_process(delta):
 
 	
 	# Handle Jump.
-#	if Input.is_action_just_pressed("interact"):
-#		shoot_rifle()
+	if Input.is_action_just_pressed("interact"):
+		shoot_rifle()
 #
 #	# Get the input direction and handle the movement/deceleration.
 #	# As good practice, you should replace UI actions with custom gameplay actions.
@@ -80,11 +78,12 @@ func shot_sound():
 
 
 func shoot_rifle():
-	$AnimationPlayer.play("shoot_new")
+	$AnimationPlayer.play("shoot")
+	await $AnimationPlayer.animation_finished
+	$AnimationPlayer.play("RESET")
 	
 func emit_bullet():
 	var mouse_position = get_global_mouse_position()
-#	var mouse_offset = get_local_mouse_position()
 	var gun_nozzle_position = $Sprites/RightContainer/Rifle/GunNozzle.global_position
 	var bullet_direction = (mouse_position - $ShoulderMark.global_position).normalized()
 	hunter_shot_bullet.emit(gun_nozzle_position, bullet_direction)

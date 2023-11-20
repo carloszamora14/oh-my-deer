@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://cvj6tpwfd2s03"]
+[gd_scene load_steps=19 format=3 uid="uid://cvj6tpwfd2s03"]
 
 [ext_resource type="PackedScene" uid="uid://bqgrls7swt3um" path="res://scenes/levels/main.tscn" id="1_cwp0h"]
 [ext_resource type="TileSet" uid="uid://d2c0ults38s76" path="res://scenes/tilesets/grass.tres" id="2_j6wgb"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://bj2wvrgddcg54" path="res://scenes/enemies/crow.tscn" id="12_io0qp"]
 [ext_resource type="PackedScene" uid="uid://c7t1bq0xjubwm" path="res://scenes/backgrounds/flock.tscn" id="14_1rr85"]
 [ext_resource type="PackedScene" uid="uid://cb8mbkw74p7t7" path="res://scenes/backgrounds/leaf_particles.tscn" id="15_t83lk"]
+[ext_resource type="PackedScene" uid="uid://jrt5uqlggamv" path="res://scenes/enemies/hunter.tscn" id="16_5ua4o"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a5lft"]
 size = Vector2(20, 301)
@@ -117,7 +118,7 @@ position = Vector2(415, 257)
 modulate = Color(0.639216, 0.505882, 0.466667, 1)
 position = Vector2(593, 261)
 
-[node name="Camera2D" parent="Deer" index="7"]
+[node name="Camera2D" parent="Deer" index="8"]
 limit_right = 2000
 
 [node name="Crow" parent="." index="15" instance=ExtResource("12_io0qp")]
@@ -126,3 +127,6 @@ position = Vector2(414, 233)
 [node name="Flock" parent="." index="16" instance=ExtResource("14_1rr85")]
 position = Vector2(1059, 189)
 scale = Vector2(-1, 1)
+
+[node name="Hunter" parent="." index="17" instance=ExtResource("16_5ua4o")]
+position = Vector2(491, 222)
