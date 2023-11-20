@@ -1,18 +1,70 @@
-[gd_scene load_steps=4 format=3 uid="uid://cqmtwkdr7yoxf"]
+[gd_scene load_steps=8 format=3 uid="uid://cqmtwkdr7yoxf"]
 
 [ext_resource type="PackedScene" uid="uid://bqgrls7swt3um" path="res://scenes/levels/main.tscn" id="1_4ce6b"]
 [ext_resource type="PackedScene" uid="uid://bicy8yoqkod3l" path="res://scenes/backgrounds/aqueduct.tscn" id="2_j7q0s"]
-[ext_resource type="PackedScene" uid="uid://cmge43qmo5lv1" path="res://scenes/objects/ruine.tscn" id="3_jifkx"]
+[ext_resource type="Texture2D" uid="uid://cf8x06kc03o1u" path="res://graphics/platforms/unbroken-bridge.png" id="3_3xood"]
+[ext_resource type="PackedScene" uid="uid://ci8bvv4hd08j6" path="res://scenes/objects/orange_road_work.tscn" id="3_wnx86"]
+[ext_resource type="PackedScene" uid="uid://d1ojjop6dx3v2" path="res://scenes/objects/beam_bridge.tscn" id="5_fg6rv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7trk0"]
+size = Vector2(598, 22)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_alw1r"]
+size = Vector2(778, 22)
 
 [node name="Main" instance=ExtResource("1_4ce6b")]
 
-[node name="Aqueduct" parent="." index="0" instance=ExtResource("2_j7q0s")]
+[node name="ParallaxBackground" type="ParallaxBackground" parent="." index="0"]
 
-[node name="Deer" parent="." index="1"]
-position = Vector2(76, 96)
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground" index="0"]
+motion_scale = Vector2(0.1, 0.1)
+
+[node name="Aqueduct" parent="ParallaxBackground/ParallaxLayer" index="0" instance=ExtResource("2_j7q0s")]
+position = Vector2(-2, 0)
 
 [node name="Objects" type="Node2D" parent="." index="8"]
 
-[node name="Ruine" parent="Objects" index="0" instance=ExtResource("3_jifkx")]
-modulate = Color(0.65098, 0.592157, 0.556863, 1)
-position = Vector2(39, 315)
+[node name="OrangeRoadWork" parent="Objects" index="0" instance=ExtResource("3_wnx86")]
+position = Vector2(515, 240.5)
+
+[node name="Deer" parent="." index="9"]
+position = Vector2(76, 96)
+
+[node name="Camera2D" parent="Deer" index="7"]
+limit_right = 2000
+
+[node name="Bridge" type="Node2D" parent="." index="10"]
+
+[node name="FirstSegment" type="StaticBody2D" parent="Bridge" index="0"]
+collision_layer = 5
+collision_mask = 15
+
+[node name="Sprite2D" type="Sprite2D" parent="Bridge/FirstSegment" index="0"]
+position = Vector2(297, 288)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("3_3xood")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bridge/FirstSegment" index="1"]
+position = Vector2(298, 262)
+shape = SubResource("RectangleShape2D_7trk0")
+
+[node name="SecondSegment" type="StaticBody2D" parent="Bridge" index="1"]
+collision_layer = 4
+collision_mask = 15
+
+[node name="Sprite2D" type="Sprite2D" parent="Bridge/SecondSegment" index="0"]
+position = Vector2(893, 288)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("3_3xood")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bridge/SecondSegment" index="1"]
+position = Vector2(805, 262)
+shape = SubResource("RectangleShape2D_alw1r")
+
+[node name="BeamBridge" parent="." index="11" instance=ExtResource("5_fg6rv")]
+position = Vector2(1361, 265)
+scale = Vector2(0.6, 0.6)
+
+[node name="BeamBridge2" parent="." index="12" instance=ExtResource("5_fg6rv")]
+position = Vector2(1681, 267)
+scale = Vector2(0.6, 0.6)

@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://6aj3l4cekigr"]
+
+[ext_resource type="Texture2D" uid="uid://cuugjn6bt3b70" path="res://graphics/platforms/vertical-beam.png" id="1_7sdhc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lkic7"]
+size = Vector2(24, 32)
+
+[node name="VerticalBeam" type="StaticBody2D"]
+collision_layer = 4
+collision_mask = 15
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-2, 0.5)
+texture = ExtResource("1_7sdhc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_lkic7")

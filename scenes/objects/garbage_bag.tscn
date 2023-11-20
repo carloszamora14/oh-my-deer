@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://dqhgkkpbx1p8k"]
+
+[ext_resource type="Texture2D" uid="uid://b6emhtnb10an8" path="res://graphics/objects/trash-bag.png" id="1_f1s8b"]
+
+[node name="GarbageBag" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.03, 0.03)
+texture = ExtResource("1_f1s8b")

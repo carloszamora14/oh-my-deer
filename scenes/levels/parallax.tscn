@@ -1,8 +1,8 @@
-[gd_scene load_steps=14 format=3 uid="uid://cvj6tpwfd2s03"]
+[gd_scene load_steps=18 format=3 uid="uid://cvj6tpwfd2s03"]
 
 [ext_resource type="PackedScene" uid="uid://bqgrls7swt3um" path="res://scenes/levels/main.tscn" id="1_cwp0h"]
+[ext_resource type="TileSet" uid="uid://d2c0ults38s76" path="res://scenes/tilesets/grass.tres" id="2_j6wgb"]
 [ext_resource type="Texture2D" uid="uid://vlojuwdu3jse" path="res://graphics/background/layers/parallax-forest-back-trees.png" id="2_x1j25"]
-[ext_resource type="PackedScene" uid="uid://dv7t85durca68" path="res://scenes/collectibles/item.tscn" id="3_mxjxx"]
 [ext_resource type="Texture2D" uid="uid://bnm4pog4rqhdg" path="res://graphics/background/layers/parallax-forest-lights.png" id="3_yu57h"]
 [ext_resource type="Texture2D" uid="uid://d0rlgw3koar28" path="res://graphics/background/layers/parallax-forest-middle-trees.png" id="4_0ftt7"]
 [ext_resource type="PackedScene" uid="uid://b78wm44yatqh1" path="res://scenes/collectibles/grass.tscn" id="4_ueu64"]
@@ -11,33 +11,27 @@
 [ext_resource type="AudioStream" uid="uid://bmrctxn0qyhqb" path="res://sounds/wind-and-birds.mp3" id="9_iabkj"]
 [ext_resource type="PackedScene" uid="uid://dycklvcglrpoo" path="res://scenes/objects/well.tscn" id="10_2shu1"]
 [ext_resource type="PackedScene" uid="uid://bwsnun1k6deqn" path="res://scenes/objects/car.tscn" id="10_rukmb"]
+[ext_resource type="PackedScene" uid="uid://dqhgkkpbx1p8k" path="res://scenes/objects/garbage_bag.tscn" id="11_mwuce"]
 [ext_resource type="PackedScene" uid="uid://bj2wvrgddcg54" path="res://scenes/enemies/crow.tscn" id="12_io0qp"]
+[ext_resource type="PackedScene" uid="uid://c7t1bq0xjubwm" path="res://scenes/backgrounds/flock.tscn" id="14_1rr85"]
+[ext_resource type="PackedScene" uid="uid://cb8mbkw74p7t7" path="res://scenes/backgrounds/leaf_particles.tscn" id="15_t83lk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a5lft"]
-size = Vector2(1751, 20)
+size = Vector2(20, 301)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lsind"]
+size = Vector2(20, 301)
 
 [node name="InitialLevel" instance=ExtResource("1_cwp0h")]
 
-[node name="Item" parent="Collectibles" index="0" instance=ExtResource("3_mxjxx")]
-position = Vector2(175, -16)
+[node name="TileMap" type="TileMap" parent="Tilesets" index="0"]
+modulate = Color(1, 1, 0, 1)
+tile_set = ExtResource("2_j6wgb")
+format = 2
+layer_0/tile_data = PackedInt32Array(1114112, 65536, 0, 1114113, 65536, 0, 1114114, 65536, 0, 1114115, 65536, 0, 1114116, 65536, 0, 1114117, 65536, 0, 1114118, 65536, 0, 1114119, 65536, 0, 1114120, 65536, 0, 1114121, 65536, 0, 1114122, 65536, 0, 1114123, 65536, 0, 1114124, 65536, 0, 1114125, 65536, 0, 1114126, 65536, 0, 1114127, 65536, 0, 1114128, 65536, 0, 1114129, 65536, 0, 1114130, 65536, 0, 1114131, 65536, 0, 1114132, 65536, 0, 1114133, 65536, 0, 1114134, 65536, 0, 1114135, 65536, 0, 1114136, 65536, 0, 1114137, 65536, 0, 1114138, 65536, 0, 1114139, 65536, 0, 1114140, 65536, 0, 1114141, 65536, 0, 1114142, 65536, 0, 1114143, 65536, 0, 1114144, 65536, 0, 1114145, 65536, 0, 1114146, 65536, 0, 1114147, 65536, 0, 1114148, 65536, 0, 1114149, 65536, 0, 1114150, 65536, 0, 1114151, 65536, 0, 1114152, 65536, 0, 1114153, 65536, 0, 1114154, 65536, 0, 1114155, 65536, 0, 1114156, 65536, 0, 1114157, 65536, 0, 1114158, 65536, 0, 1114159, 65536, 0, 1114160, 65536, 0, 1114161, 65536, 0, 1114162, 65536, 0, 1114163, 65536, 0, 1114164, 65536, 0, 1114165, 65536, 0, 1114166, 65536, 0, 1114167, 65536, 0, 1114168, 65536, 0, 1114169, 65536, 0, 1114170, 65536, 0, 1114172, 65536, 0, 1114173, 65536, 0, 1114174, 65536, 0, 1114175, 65536, 0, 1114171, 65536, 0)
 
-[node name="Item2" parent="Collectibles" index="1" instance=ExtResource("3_mxjxx")]
-position = Vector2(360, -21)
-
-[node name="Item3" parent="Collectibles" index="2" instance=ExtResource("3_mxjxx")]
-position = Vector2(518, 17)
-
-[node name="Item4" parent="Collectibles" index="3" instance=ExtResource("3_mxjxx")]
-position = Vector2(654, -16)
-
-[node name="Item5" parent="Collectibles" index="4" instance=ExtResource("3_mxjxx")]
-position = Vector2(895, -36)
-
-[node name="Item6" parent="Collectibles" index="5" instance=ExtResource("3_mxjxx")]
-position = Vector2(1034, -145)
-
-[node name="Grass" parent="Collectibles" index="6" instance=ExtResource("4_ueu64")]
-position = Vector2(502, 24)
+[node name="Grass" parent="Collectibles" index="0" instance=ExtResource("4_ueu64")]
+position = Vector2(228, 13.2)
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="." index="5"]
 
@@ -56,6 +50,17 @@ modulate = Color(1, 1, 1, 0.117647)
 position = Vector2(245, 80)
 scale = Vector2(1.8, 1)
 texture = ExtResource("3_yu57h")
+
+[node name="Leaves" type="Node2D" parent="ParallaxBackground/ParallaxLayer" index="2"]
+
+[node name="LeafParticles" parent="ParallaxBackground/ParallaxLayer/Leaves" index="0" instance=ExtResource("15_t83lk")]
+position = Vector2(-81, 84)
+
+[node name="LeafParticles2" parent="ParallaxBackground/ParallaxLayer/Leaves" index="1" instance=ExtResource("15_t83lk")]
+position = Vector2(336, 141)
+
+[node name="LeafParticles3" parent="ParallaxBackground/ParallaxLayer/Leaves" index="2" instance=ExtResource("15_t83lk")]
+position = Vector2(560, 136)
 
 [node name="ParallaxBackground2" type="ParallaxBackground" parent="." index="6"]
 
@@ -85,8 +90,12 @@ collision_layer = 4
 collision_mask = 15
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/StaticBody2D" index="0"]
-position = Vector2(873, 281)
+position = Vector2(-10, 137.5)
 shape = SubResource("RectangleShape2D_a5lft")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Node2D/StaticBody2D" index="1"]
+position = Vector2(1032, 137)
+shape = SubResource("RectangleShape2D_lsind")
 
 [node name="MoveControlsMessage" parent="." index="9" instance=ExtResource("8_t7eid")]
 
@@ -99,13 +108,21 @@ autoplay = true
 [node name="Objects" type="Node2D" parent="." index="13"]
 
 [node name="Car" parent="Objects" index="0" instance=ExtResource("10_rukmb")]
-position = Vector2(117, 262)
+position = Vector2(689, 253)
 
 [node name="Well" parent="Objects" index="1" instance=ExtResource("10_2shu1")]
 position = Vector2(415, 257)
+
+[node name="GarbageBag" parent="Objects" index="2" instance=ExtResource("11_mwuce")]
+modulate = Color(0.639216, 0.505882, 0.466667, 1)
+position = Vector2(593, 261)
 
 [node name="Camera2D" parent="Deer" index="7"]
 limit_right = 2000
 
 [node name="Crow" parent="." index="15" instance=ExtResource("12_io0qp")]
 position = Vector2(414, 233)
+
+[node name="Flock" parent="." index="16" instance=ExtResource("14_1rr85")]
+position = Vector2(1059, 189)
+scale = Vector2(-1, 1)

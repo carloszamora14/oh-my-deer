@@ -24,8 +24,6 @@ func _physics_process(delta):
 		pass
 		
 	Globals.male_deer_position = global_position
-	if not is_on_floor():
-		velocity.y += gravity * delta
 	
 	if (!dying):
 #		if Input.is_action_just_pressed("interact") and can_throw_candy:
@@ -43,7 +41,7 @@ func _physics_process(delta):
 			$IdleTimer.start()
 			velocity.y = JUMP_VELOCITY
 		var direction = Input.get_axis("left", "right")
-		var directiony = Input.get_axis("up", "down")
+#		var directiony = Input.get_axis("up", "down")
 		if direction:
 			$IdleTimer.stop()
 			$IdleTimer.start()
@@ -57,15 +55,18 @@ func _physics_process(delta):
 				$DeerSprite.play("idle")
 			velocity.x = move_toward(velocity.x, 0, FRICTION)
 		
-		if directiony:
-			velocity.y = directiony * SPEED
-			if directiony == -1:
-				$DeerSprite.play("walk_up")
-			else:
-				$DeerSprite.play("walk_down")
-				
-		else:
-			velocity.y = move_toward(velocity.y, 0, FRICTION)
+#		if directiony:
+#			velocity.y = directiony * SPEED
+#			if directiony == -1:
+#				$DeerSprite.play("walk_up")
+#			else:
+#				$DeerSprite.play("walk_down")
+#
+#		else:
+#			velocity.y = move_toward(velocity.y, 0, FRICTION)
+			
+		if not is_on_floor():
+			velocity.y += gravity * delta
 
 		move_and_slide()
 

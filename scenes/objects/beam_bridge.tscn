@@ -1,0 +1,89 @@
+[gd_scene load_steps=10 format=3 uid="uid://d1ojjop6dx3v2"]
+
+[ext_resource type="PackedScene" uid="uid://6aj3l4cekigr" path="res://scenes/objects/vertical_beam.tscn" id="1_sj7me"]
+[ext_resource type="Script" path="res://scenes/objects/beam_bridge.gd" id="1_yrkrq"]
+[ext_resource type="PackedScene" uid="uid://chph7ec5yt6j" path="res://scenes/objects/horizontal_beam_left.tscn" id="2_fiofh"]
+[ext_resource type="PackedScene" uid="uid://6psiluhfu1l0" path="res://scenes/objects/horizontal_beam_right.tscn" id="3_flvc6"]
+[ext_resource type="Texture2D" uid="uid://c3nkdvm046pph" path="res://graphics/textures/437-4373200_free-smoke-texture-png-smoke-particle-texture-sheet.png" id="4_skbvn"]
+[ext_resource type="PackedScene" uid="uid://jselvkwpdtoh" path="res://scenes/objects/horizontal_beam.tscn" id="6_q4mk4"]
+
+[sub_resource type="Animation" id="Animation_t0xup"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_2ml63"]
+resource_name = "collapse"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 59]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rua4k"]
+_data = {
+"RESET": SubResource("Animation_t0xup"),
+"collapse": SubResource("Animation_2ml63")
+}
+
+[node name="BeamBridge" type="Node2D"]
+script = ExtResource("1_yrkrq")
+
+[node name="VerticalBeam" parent="." instance=ExtResource("1_sj7me")]
+position = Vector2(0, 96.2)
+
+[node name="VerticalBeam2" parent="." instance=ExtResource("1_sj7me")]
+position = Vector2(0, 64.2)
+
+[node name="VerticalBeam3" parent="." instance=ExtResource("1_sj7me")]
+position = Vector2(0, 32.2)
+
+[node name="HorizontalBeamRight" parent="." instance=ExtResource("3_flvc6")]
+position = Vector2(168, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-60, 37)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("4_skbvn")
+hframes = 12
+vframes = 5
+region_enabled = true
+region_rect = Rect2(0, 240, 4096, 1460)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_rua4k")
+}
+
+[node name="HorizontalBeamLeft" parent="." instance=ExtResource("2_fiofh")]
+position = Vector2(-168, 0)
+
+[node name="HorizontalBeam" parent="." instance=ExtResource("6_q4mk4")]
+position = Vector2(-22, 0)
+
+[node name="HorizontalBeam3" parent="." instance=ExtResource("6_q4mk4")]
+position = Vector2(-66, 0)
+
+[node name="HorizontalBeam2" parent="." instance=ExtResource("6_q4mk4")]
+position = Vector2(66, 0)
+
+[node name="HorizontalBeam4" parent="." instance=ExtResource("6_q4mk4")]
+position = Vector2(22, 0)

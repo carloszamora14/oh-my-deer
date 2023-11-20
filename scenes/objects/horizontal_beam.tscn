@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://jselvkwpdtoh"]
+
+[ext_resource type="Texture2D" uid="uid://bd74dl4qi0n0" path="res://graphics/platforms/wide-horizontal-beam.png" id="1_a0h0f"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x8yit"]
+size = Vector2(160, 32)
+
+[node name="HorizontalBeam" type="StaticBody2D"]
+collision_layer = 4
+collision_mask = 15
+
+[node name="HorizontalBeam" type="Sprite2D" parent="."]
+texture = ExtResource("1_a0h0f")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_x8yit")
