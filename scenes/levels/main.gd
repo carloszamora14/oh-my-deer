@@ -20,7 +20,7 @@ func _ready():
 
 func _on_hunter_bullet(bullet_position, bullet_direction):
 	var bullet = bullet_scene.instantiate() as Area2D
-	bullet.position = bullet_position
+	bullet.global_position = bullet_position
 	bullet.rotate(bullet_direction.angle())
 	bullet.direction = bullet_direction
 	$Projectiles.add_child(bullet)

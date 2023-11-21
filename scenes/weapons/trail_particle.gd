@@ -5,7 +5,7 @@ var direction = Vector2.ZERO
 @export var lifetime: float = 2.1
 
 func _ready():
-	await get_tree().create_timer(lifetime).timeout
+	await get_tree().create_timer(lifetime, false).timeout
 	var tween = get_tree().create_tween()
 	var duration = randf_range(0.2, 1.0)
 	tween.set_parallel(true)

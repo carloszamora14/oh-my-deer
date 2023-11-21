@@ -37,8 +37,6 @@ process_material = SubResource("ParticleProcessMaterial_syi3v")
 texture = ExtResource("3_5klmt")
 one_shot = true
 
-[node name="TrailParticles" type="Node2D" parent="."]
-
 [node name="TrailMarker" type="Marker2D" parent="."]
 position = Vector2(-1, 0)
 

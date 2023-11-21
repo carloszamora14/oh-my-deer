@@ -4,7 +4,7 @@ extends Area2D
 var direction: Vector2 = Vector2.RIGHT
 
 
-func _on_ready():
+func _ready():
 	$Timer.start()
 
 

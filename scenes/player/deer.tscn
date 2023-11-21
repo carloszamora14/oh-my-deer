@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://7e00atqabf7a"]
+[gd_scene load_steps=15 format=3 uid="uid://7e00atqabf7a"]
 
 [ext_resource type="Script" path="res://scenes/player/deer.gd" id="1_nyqxi"]
 [ext_resource type="Shader" path="res://scenes/player/deer.gdshader" id="2_bhanu"]
@@ -11,12 +11,31 @@ shader = ExtResource("2_bhanu")
 shader_parameter/color = Color(1, 1, 1, 1)
 shader_parameter/progress = 0.0
 
-[sub_resource type="Animation" id="Animation_1fako"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lmcu5"]
+size = Vector2(20, 2)
+
+[sub_resource type="Animation" id="Animation_vaxsa"]
+resource_name = "walk"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [10, 11, 12, 13, 14]
+}
+
+[sub_resource type="Animation" id="Animation_mltdt"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
+tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -28,62 +47,51 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath(".:material")
+tracks/1/path = NodePath("DeerCollision:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [SubResource("ShaderMaterial_pw61s")]
+"values": [false]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("../DeerCollision:disabled")
+tracks/2/path = NodePath("FloorCollision:disabled")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [false]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("../CollisionFloor:disabled")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
 "values": [true]
 }
 
-[sub_resource type="Animation" id="Animation_8s53l"]
-resource_name = "death"
-length = 1.5
+[sub_resource type="Animation" id="Animation_72qfn"]
+resource_name = "idle"
+length = 5.0
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:material")
+tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.4, 0.9, 1.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [SubResource("ShaderMaterial_pw61s"), SubResource("ShaderMaterial_pw61s"), SubResource("ShaderMaterial_pw61s"), SubResource("ShaderMaterial_pw61s")]
+"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2, 2.5, 3, 3.4, 3.8, 4.2, 4.6, 5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 3, 0, 3, 0, 3, 0, 1, 2, 3, 4, 0]
 }
 
-[sub_resource type="Animation" id="Animation_7a800"]
-resource_name = "eat"
+[sub_resource type="Animation" id="Animation_xoq3d"]
+resource_name = "crouch"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
+tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -93,41 +101,25 @@ tracks/0/keys = {
 "values": [5, 9]
 }
 
-[sub_resource type="Animation" id="Animation_q6cih"]
-resource_name = "walk"
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [10, 14]
-}
-
-[sub_resource type="Animation" id="Animation_g4t7m"]
-resource_name = "transparent"
+[sub_resource type="Animation" id="Animation_d6gp6"]
+resource_name = "deactivate_collision"
 length = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("../DeerCollision:disabled")
+tracks/0/path = NodePath("DeerCollision:disabled")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.1),
 "transitions": PackedFloat32Array(1, 1),
-"update": 0,
+"update": 1,
 "values": [false, true]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../CollisionFloor:disabled")
+tracks/1/path = NodePath("FloorCollision:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -137,34 +129,48 @@ tracks/1/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="Animation" id="Animation_qawba"]
-resource_name = "idle"
+[sub_resource type="Animation" id="Animation_qdiij"]
+resource_name = "walk_up"
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
+tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [0, 4]
+"values": [20, 21, 22, 23, 24, 20]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_2cxhr"]
+[sub_resource type="Animation" id="Animation_xlaf6"]
+resource_name = "walk_down"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [15, 16, 17, 18, 19, 15]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jouj0"]
 _data = {
-"RESET": SubResource("Animation_1fako"),
-"death": SubResource("Animation_8s53l"),
-"eat": SubResource("Animation_7a800"),
-"idle": SubResource("Animation_qawba"),
-"transparent": SubResource("Animation_g4t7m"),
-"walk": SubResource("Animation_q6cih")
+"RESET": SubResource("Animation_mltdt"),
+"crouch": SubResource("Animation_xoq3d"),
+"deactivate_collision": SubResource("Animation_d6gp6"),
+"idle": SubResource("Animation_72qfn"),
+"walk": SubResource("Animation_vaxsa"),
+"walk_down": SubResource("Animation_xlaf6"),
+"walk_up": SubResource("Animation_qdiij")
 }
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_lmcu5"]
-size = Vector2(20, 2)
 
 [node name="Deer" type="CharacterBody2D" groups=["Player"]]
 collision_mask = 62
@@ -189,24 +195,23 @@ hframes = 5
 vframes = 5
 frame = 10
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-root_node = NodePath("../Sprite2D")
-libraries = {
-"": SubResource("AnimationLibrary_2cxhr")
-}
-
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.4
 
 [node name="Particles" type="Node2D" parent="."]
 
-[node name="CollisionFloor" type="CollisionShape2D" parent="."]
+[node name="FloorCollision" type="CollisionShape2D" parent="."]
 position = Vector2(-3, 15)
 shape = SubResource("RectangleShape2D_lmcu5")
 disabled = true
 
 [node name="WalkSound" type="AudioStreamPlayer2D" parent="."]
 volume_db = -5.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_jouj0")
+}
 
 [connection signal="timeout" from="IdleTimer" to="." method="_on_idle_timer_timeout"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

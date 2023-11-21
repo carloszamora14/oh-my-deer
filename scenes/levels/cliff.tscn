@@ -160,7 +160,7 @@ tracks/7/path = NodePath("Deer")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
-"times": PackedFloat32Array(2.5, 10),
+"times": PackedFloat32Array(2.5, 11.5),
 "transitions": PackedFloat32Array(1, 1),
 "values": [{
 "args": [],

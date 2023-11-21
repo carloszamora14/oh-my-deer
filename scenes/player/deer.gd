@@ -46,7 +46,15 @@ func _physics_process(delta):
 				$IdleTimer.start()
 				velocity.y = JUMP_VELOCITY
 			var direction = Input.get_axis("left", "right")
-	#		var directiony = Input.get_axis("up", "down")
+#			var directiony = Input.get_axis("up", "down")
+#			if directiony:
+#				velocity.y = directiony * SPEED
+#				if directiony == -1:
+#					$AnimationPlayer.play("walk_up")
+#				else:
+#					$AnimationPlayer.play("walk_down")
+#			else:
+#				velocity.y = move_toward(velocity.y, 0, FRICTION)
 			if direction != 0:
 				$IdleTimer.stop()
 				$IdleTimer.start()
@@ -63,17 +71,6 @@ func _physics_process(delta):
 			if !eating:
 				$AnimationPlayer.play("idle")
 			velocity.x = move_toward(velocity.x, 0, FRICTION)
-	
-		
-#		if directiony:
-#			velocity.y = directiony * SPEED
-#			if directiony == -1:
-#				$AnimationPlayer.play("walk_up")
-#			else:
-#				$AnimationPlayer.play("walk_down")
-#
-#		else:
-#			velocity.y = move_toward(velocity.y, 0, FRICTION)
 			
 		if not is_on_floor():
 			velocity.y += gravity * delta
@@ -82,7 +79,7 @@ func _physics_process(delta):
 
 
 func avoid_bullets():
-	$AnimationPlayer.play("transparent")
+	$AnimationPlayer.play("deactivate_collision")
 	transparent = true
 
 
@@ -105,7 +102,7 @@ func hit(damage, enemy):
 		blood.emitting = true
 
 	Globals.update_male_deer_health(Globals.male_deer_health - damage, enemy)
-	$AnimationPlayer.material.set_shader_parameter("progress", 0.6)
+	$Sprite2D.material.set_shader_parameter("progress", 0.6)
 	Globals.male_deer_vulnerable = false
 	if (Globals.male_deer_health > 0):
 		var sound = AudioStreamPlayer.new()
@@ -114,7 +111,7 @@ func hit(damage, enemy):
 		sound.play()
 	await get_tree().create_timer(0.6, false).timeout
 	Globals.male_deer_vulnerable = true
-	$AnimationPlayer.material.set_shader_parameter("progress", 0)
+	$Sprite2D.material.set_shader_parameter("progress", 0)
 
 
 func increment_score():
@@ -149,7 +146,7 @@ func respawn():
 func _on_idle_timer_timeout():
 	if randf() > 0.5:
 		eating = true
-		$AnimationPlayer.play("eat")
+		$AnimationPlayer.play("crouch")
 		await $AnimationPlayer.animation_finished
 		eating = false
 

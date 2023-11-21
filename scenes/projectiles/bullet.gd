@@ -9,17 +9,17 @@ var initial_pos: Vector2
 var max_distance: float = (speed * trail_lifetime)**2
 
 
-func _on_ready():
+func _ready():
 	initial_pos = position
 
 
-func _process(delta):
-	var traveled = (position.x - initial_pos.x)**2 + (position.y - initial_pos.y)**2
+func _physics_process(delta):
+	var traveled: float = (position.x - initial_pos.x)**2 + (position.y - initial_pos.y)**2
 	
-	if traveled >= 5 * max_distance:
+	if (traveled >= 5 * max_distance):
 		queue_free()
 	
-	if randf() >= traveled / max_distance:
+	if (randf() >= traveled / max_distance):
 		var particle_position = $TrailMarker.global_position
 		var particle_direction = -direction + Vector2.ONE * PI * randf() / 4.0
 		var particle_speed = randf() * 2
