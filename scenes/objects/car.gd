@@ -11,12 +11,12 @@ func _on_activation_area_body_entered(body):
 
 
 func emit_display_dialog():
-	var lines: Array[String] = [
+	var lines = [
 			"Good morning, ladies and gentlemen!",
 			"It's that time of the year again when nature calls and the",
 			"thrill of the hunt beckons. Get ready to embrace the great",
 			"outdoors as we kick off the deer hunting season!",
 			"Grab your gear, load up, and let the adventure begin.",
 	]
-	var timings: Array[float] = [1.6, 2.6, 3.0, 2.8, 2.5]
+	var timings = [1.6, 2.6, 3.0, 2.8, 2.5]
 	display_dialog.emit(lines, timings)

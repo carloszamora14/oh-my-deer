@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://c2wh78x55wwe0"]
+[gd_scene load_steps=26 format=3 uid="uid://c2wh78x55wwe0"]
 
 [ext_resource type="Script" path="res://scenes/levels/cliff.gd" id="1_d3iem"]
 [ext_resource type="PackedScene" uid="uid://bqgrls7swt3um" path="res://scenes/levels/main.tscn" id="1_f1qu1"]
@@ -13,18 +13,288 @@
 [ext_resource type="AudioStream" uid="uid://cffcyy3llfii4" path="res://sounds/night-sounds.mp3" id="9_3dcl2"]
 [ext_resource type="AudioStream" uid="uid://oj88piin0ivu" path="res://sounds/insect-flying.mp3" id="9_lq4ao"]
 [ext_resource type="PackedScene" uid="uid://jrt5uqlggamv" path="res://scenes/enemies/hunter.tscn" id="13_yl5k1"]
+[ext_resource type="PackedScene" uid="uid://ckccj8gqbdf76" path="res://scenes/enemies/wolf.tscn" id="14_pqu4q"]
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_eeubv"]
+[sub_resource type="Gradient" id="Gradient_hhvw1"]
+interpolation_mode = 2
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_pj2ne"]
+gradient = SubResource("Gradient_hhvw1")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_fk8dm"]
 emission_shape = 1
 emission_sphere_radius = 10.0
 particle_flag_disable_z = true
 gravity = Vector3(0, 0, 0)
-initial_velocity_min = -20.0
+initial_velocity_min = 15.0
 initial_velocity_max = 20.0
 orbit_velocity_min = 0.0
 orbit_velocity_max = 0.0
 scale_min = 0.05
 scale_max = 0.1
+color_ramp = SubResource("GradientTexture1D_pj2ne")
+
+[sub_resource type="Gradient" id="Gradient_fgub8"]
+offsets = PackedFloat32Array(0, 0.514706, 1)
+colors = PackedColorArray(0.894531, 0.144531, 0.128906, 1, 0.898039, 0.145098, 0.129412, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_752ry"]
+gradient = SubResource("Gradient_fgub8")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_eeubv"]
+emission_shape = 1
+emission_sphere_radius = 10.0
+particle_flag_disable_z = true
+spread = 180.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 5.0
+initial_velocity_max = 10.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+scale_min = 0.01
+scale_max = 0.04
+color_ramp = SubResource("GradientTexture1D_752ry")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ysbdp"]
+size = Vector2(20, 394)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_47cdd"]
+size = Vector2(20, 232)
+
+[sub_resource type="Animation" id="Animation_t2qot"]
+resource_name = "cutscene"
+length = 20.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Deer/Camera2D:zoom")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6, 9, 10),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1.2, 1.2), Vector2(2, 2), Vector2(2, 2), Vector2(1.6, 1.6)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Deer/Camera2D:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.6, 1.5, 9, 10),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 0), Vector2(80, 0), Vector2(80, 0), Vector2(50, 0)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Wolf")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1.8),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"animate"
+}]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Deer")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"cutscene_started"
+}]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Hunter:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Hunter:collision_layer")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 1.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 2]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Hunter:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(1.8),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(483, 209)]
+}
+tracks/7/type = "method"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Deer")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(2.5, 10),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"avoid_bullets"
+}, {
+"args": [],
+"method": &"reset"
+}]
+}
+tracks/8/type = "method"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath(".")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(5.3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"kill_wolf"
+}]
+}
+tracks/9/type = "method"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath(".")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(8.3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"kill_wolf"
+}]
+}
+tracks/10/type = "method"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Hunter")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(7.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"smoked_him"
+}]
+}
+tracks/11/type = "method"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("Hunter")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(10.2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"coyotes_gotta_eat"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_pj7d6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Deer/Camera2D:zoom")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1.2, 1.2)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Deer/Camera2D:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Hunter:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Hunter:collision_layer")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Hunter:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(483, 209)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_oexi7"]
+_data = {
+"RESET": SubResource("Animation_pj7d6"),
+"cutscene": SubResource("Animation_t2qot")
+}
 
 [node name="Cliff" instance=ExtResource("1_f1qu1")]
 script = ExtResource("1_d3iem")
@@ -87,23 +357,60 @@ autostart = true
 
 [node name="Deer" parent="." index="14"]
 position = Vector2(34, 200)
-
-[node name="Camera2D" parent="Deer" index="7"]
-limit_right = 840
-limit_bottom = 360
+collision_mask = 54
 
 [node name="PointLight2D" type="PointLight2D" parent="Deer" index="8"]
 scale = Vector2(0.2, 0.2)
 energy = 0.8
 texture = ExtResource("7_u1m2e")
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="Deer" index="9"]
-position = Vector2(9, -11)
+[node name="GPUParticles2D" type="GPUParticles2D" parent="Deer" index="10"]
+process_material = SubResource("ParticleProcessMaterial_fk8dm")
+texture = ExtResource("8_auawl")
+lifetime = 7.0
+
+[node name="Camera2D" parent="Deer" index="11"]
+limit_right = 840
+limit_bottom = 360
+
+[node name="Wolf" parent="." index="15" instance=ExtResource("14_pqu4q")]
+position = Vector2(706, 270)
+
+[node name="PointLight2D" type="PointLight2D" parent="Wolf" index="5"]
+scale = Vector2(0.25, 0.25)
+color = Color(0.972549, 0.490196, 0.65098, 1)
+energy = 0.5
+texture = ExtResource("7_u1m2e")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="Wolf" index="6"]
+scale = Vector2(1.25, 1.25)
 process_material = SubResource("ParticleProcessMaterial_eeubv")
 texture = ExtResource("8_auawl")
 lifetime = 7.0
 
-[node name="Hunter" parent="." index="15" instance=ExtResource("13_yl5k1")]
-position = Vector2(185, 149)
+[node name="Border" type="StaticBody2D" parent="." index="16"]
+collision_layer = 4
+collision_mask = 15
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Border" index="0"]
+position = Vector2(-10, 133)
+shape = SubResource("RectangleShape2D_ysbdp")
+
+[node name="CutsceneArea" type="Area2D" parent="." index="17"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CutsceneArea" index="0"]
+position = Vector2(580, 187)
+shape = SubResource("RectangleShape2D_47cdd")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="18"]
+libraries = {
+"": SubResource("AnimationLibrary_oexi7")
+}
+
+[node name="Hunter" parent="." index="19" instance=ExtResource("13_yl5k1")]
+visible = false
+position = Vector2(483, 209)
+collision_layer = 0
 
 [connection signal="timeout" from="FireflySound" to="." method="_on_firefly_sound_timeout"]
+[connection signal="body_entered" from="CutsceneArea" to="." method="_on_cutscene_area_body_entered"]

@@ -1,218 +1,9 @@
-[gd_scene load_steps=38 format=3 uid="uid://7e00atqabf7a"]
+[gd_scene load_steps=14 format=3 uid="uid://7e00atqabf7a"]
 
 [ext_resource type="Script" path="res://scenes/player/deer.gd" id="1_nyqxi"]
 [ext_resource type="Shader" path="res://scenes/player/deer.gdshader" id="2_bhanu"]
 [ext_resource type="Texture2D" uid="uid://di0a8deye6gb7" path="res://graphics/deer/deer_male.png" id="2_gd7v3"]
 [ext_resource type="AudioStream" uid="uid://dkmfg4tqeimfs" path="res://sounds/deer-scream4.mp3" id="5_bugqq"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_owkoo"]
-resource_local_to_scene = true
-shader = ExtResource("2_bhanu")
-shader_parameter/color = Color(1, 1, 1, 1)
-shader_parameter/progress = 0.0
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_u0wnb"]
-atlas = ExtResource("2_gd7v3")
-region = Rect2(0, 32, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_j223h"]
-atlas = ExtResource("2_gd7v3")
-region = Rect2(32, 32, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_0p2x0"]
-atlas = ExtResource("2_gd7v3")
-region = Rect2(64, 32, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_48nf7"]
-atlas = ExtResource("2_gd7v3")
-region = Rect2(96, 32, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_wowk3"]
-atlas = ExtResource("2_gd7v3")
-region = Rect2(128, 32, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_6wvsm"]
-atlas = ExtResource("2_gd7v3")
-region = Rect2(0, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_5vt27"]
-atlas = ExtResource("2_gd7v3")
-region = Rect2(64, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_wyalr"]
-atlas = ExtResource("2_gd7v3")
-region = Rect2(32, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_wblms"]
-atlas = ExtResource("2_gd7v3")
-region = Rect2(96, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_xf3qb"]
-atlas = ExtResource("2_gd7v3")
-region = Rect2(128, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_8rmf6"]
-atlas = ExtResource("2_gd7v3")
-region = Rect2(0, 64, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_nxv1v"]
-atlas = ExtResource("2_gd7v3")
-region = Rect2(32, 64, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_3bqpg"]
-atlas = ExtResource("2_gd7v3")
-region = Rect2(64, 64, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_6qqrc"]
-atlas = ExtResource("2_gd7v3")
-region = Rect2(96, 64, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ljqga"]
-atlas = ExtResource("2_gd7v3")
-region = Rect2(128, 64, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_qmwub"]
-atlas = ExtResource("2_gd7v3")
-region = Rect2(0, 96, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_fejhf"]
-atlas = ExtResource("2_gd7v3")
-region = Rect2(32, 96, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_75s0o"]
-atlas = ExtResource("2_gd7v3")
-region = Rect2(64, 96, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_bpxy5"]
-atlas = ExtResource("2_gd7v3")
-region = Rect2(96, 96, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_7xwtg"]
-atlas = ExtResource("2_gd7v3")
-region = Rect2(128, 96, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_qrmif"]
-atlas = ExtResource("2_gd7v3")
-region = Rect2(0, 128, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_g630q"]
-atlas = ExtResource("2_gd7v3")
-region = Rect2(32, 128, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_y2yo1"]
-atlas = ExtResource("2_gd7v3")
-region = Rect2(64, 128, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_vt3la"]
-atlas = ExtResource("2_gd7v3")
-region = Rect2(96, 128, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_4crw4"]
-atlas = ExtResource("2_gd7v3")
-region = Rect2(128, 128, 32, 32)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_jddvd"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_u0wnb")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_j223h")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_0p2x0")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_48nf7")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_wowk3")
-}],
-"loop": false,
-"name": &"eat",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_6wvsm")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_5vt27")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_wyalr")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_wblms")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_xf3qb")
-}],
-"loop": true,
-"name": &"idle",
-"speed": 1.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_8rmf6")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_nxv1v")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_3bqpg")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_6qqrc")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ljqga")
-}],
-"loop": true,
-"name": &"run",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_qmwub")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_fejhf")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_75s0o")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_bpxy5")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_7xwtg")
-}],
-"loop": true,
-"name": &"walk_down",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_qrmif")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_g630q")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_y2yo1")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_vt3la")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_4crw4")
-}],
-"loop": true,
-"name": &"walk_up",
-"speed": 5.0
-}]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_pw61s"]
 resource_local_to_scene = true
@@ -245,6 +36,30 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [SubResource("ShaderMaterial_pw61s")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../DeerCollision:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../CollisionFloor:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_8s53l"]
@@ -294,27 +109,68 @@ tracks/0/keys = {
 "values": [10, 14]
 }
 
+[sub_resource type="Animation" id="Animation_g4t7m"]
+resource_name = "transparent"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../DeerCollision:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../CollisionFloor:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_qawba"]
+resource_name = "idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 4]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2cxhr"]
 _data = {
 "RESET": SubResource("Animation_1fako"),
 "death": SubResource("Animation_8s53l"),
 "eat": SubResource("Animation_7a800"),
+"idle": SubResource("Animation_qawba"),
+"transparent": SubResource("Animation_g4t7m"),
 "walk": SubResource("Animation_q6cih")
 }
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lmcu5"]
+size = Vector2(20, 2)
 
 [node name="Deer" type="CharacterBody2D" groups=["Player"]]
 collision_mask = 62
 floor_max_angle = 1.03847
+floor_snap_length = 10.0
 script = ExtResource("1_nyqxi")
-
-[node name="DeerSprite" type="AnimatedSprite2D" parent="."]
-material = SubResource("ShaderMaterial_owkoo")
-sprite_frames = SubResource("SpriteFrames_jddvd")
-animation = &"walk_down"
-frame_progress = 0.525379
-
-[node name="Marker2D" type="Marker2D" parent="DeerSprite"]
-position = Vector2(15, -5)
 
 [node name="DeerCollision" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(5, -5, 5, -8, 12, -8, 13, -6, 13, -4, 11, -2, 8, 6, 7, 15, 1, 16, 1, 8, -6, 8, -8, 16, -13, 16, -15, -1, 5, -3)
@@ -327,7 +183,6 @@ wait_time = 2.0
 autostart = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-visible = false
 material = SubResource("ShaderMaterial_pw61s")
 texture = ExtResource("2_gd7v3")
 hframes = 5
@@ -344,6 +199,14 @@ libraries = {
 wait_time = 0.4
 
 [node name="Particles" type="Node2D" parent="."]
+
+[node name="CollisionFloor" type="CollisionShape2D" parent="."]
+position = Vector2(-3, 15)
+shape = SubResource("RectangleShape2D_lmcu5")
+disabled = true
+
+[node name="WalkSound" type="AudioStreamPlayer2D" parent="."]
+volume_db = -5.0
 
 [connection signal="timeout" from="IdleTimer" to="." method="_on_idle_timer_timeout"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

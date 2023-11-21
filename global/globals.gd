@@ -28,7 +28,7 @@ var bullet_impact_sounds = [
 
 func update_male_deer_health(value, enemy):
 	if !male_deer_vulnerable:
-		pass
+		return
 	if value > male_deer_health:
 		male_deer_health = min(100, value)
 	elif male_deer_vulnerable:
@@ -70,8 +70,7 @@ func female_deer_invulnerable_timer():
 
 func play_bullet_impact(sound_position):
 	var sound = AudioStreamPlayer2D.new()
-	var stream = load(bullet_impact_sounds.pick_random())
-	sound.set_stream(stream)
+	sound.stream = load(bullet_impact_sounds.pick_random())
 	sound.global_position = sound_position
 	add_child(sound)
 	sound.play()

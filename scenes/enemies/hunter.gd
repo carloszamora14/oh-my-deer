@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 signal hunter_shot_bullet(position, direction)
+signal display_dialog(lines, timings)
 
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
@@ -9,6 +10,13 @@ var can_shoot: bool = true
 var sees_deer: bool = false
 var is_shooting: bool = false
 var health_points: int = 100
+var target = null
+var angle
+
+var phrases = {
+	"coyotes gotta eat": ["res://sounds/hunter/coyotes-gotta-eat.mp3", ["Coyotes gotta eat"], [2.5]],
+	"i smoked him": ["res://sounds/hunter/i-smoked-him.mp3", ["I smoked him!"] , [2.1]]
+}
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
@@ -18,13 +26,13 @@ const sounds: Array[String] = [
 	"res://sounds/hunter/you-deer-are-going-for-a-ride-in-my-truck.mp3"
 ]
 
-func _ready():
-	position = Vector2(150, 150)
-
 func _physics_process(delta):
-	var mouse_position = get_global_mouse_position()
-#	var mouse_offset = get_local_mouse_position()
-	var angle = ((mouse_position - $ShoulderMark.global_position).normalized()).angle()
+	if target == null:
+		var mouse_position = get_global_mouse_position()
+	#	var mouse_offset = get_local_mouse_position()
+		angle = ((mouse_position - $ShoulderMark.global_position).normalized()).angle()
+	else:
+		angle = ((target.global_position - $ShoulderMark.global_position).normalized()).angle()
 	$Sprites/LeftContainer.rotation = angle
 	$Sprites/RightContainer.rotation = angle
 	
@@ -83,9 +91,13 @@ func shoot_rifle():
 	$AnimationPlayer.play("RESET")
 	
 func emit_bullet():
-	var mouse_position = get_global_mouse_position()
 	var gun_nozzle_position = $Sprites/RightContainer/Rifle/GunNozzle.global_position
-	var bullet_direction = (mouse_position - $ShoulderMark.global_position).normalized()
+	var bullet_direction
+	if target != null:
+		bullet_direction = (target.global_position - $ShoulderMark.global_position).normalized()
+	else:
+		var mouse_position = get_global_mouse_position()
+		bullet_direction = (mouse_position - $ShoulderMark.global_position).normalized()
 	hunter_shot_bullet.emit(gun_nozzle_position, bullet_direction)
 
 
@@ -130,3 +142,30 @@ func save():
 		"current_health" : health_points
 	}
 	return save_dict
+
+func coyotes_gotta_eat():
+	var sound = AudioStreamPlayer2D.new()
+	sound.stream = load(phrases["coyotes gotta eat"][0])
+	sound.global_position = global_position
+	add_child(sound)
+	emit_display_dialog("coyotes gotta eat")
+	sound.play()
+	await sound.finished
+	sound.queue_free()
+
+
+func smoked_him():
+	var sound = AudioStreamPlayer2D.new()
+	sound.stream = load(phrases["i smoked him"][0])
+	sound.global_position = global_position
+	add_child(sound)
+	emit_display_dialog("i smoked him")
+	sound.play()
+	await sound.finished
+	sound.queue_free()
+
+
+func emit_display_dialog(phrase):
+	var lines = phrases[phrase][1]
+	var timings = phrases[phrase][2]
+	display_dialog.emit(lines, timings)

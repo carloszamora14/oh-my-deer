@@ -1,7 +1,7 @@
 extends Control
 
-var lines: Array[String] = ["This is a test", "Pretty sick"]
-var timings: Array[float] = [1.2, 1.9]
+var lines = ["This is a test", "Pretty sick"]
+var timings = [1.2, 1.9]
 var line_index: int = 0
 var read_window: float = 0.5
 
@@ -10,6 +10,7 @@ var read_window: float = 0.5
 func run(in_lines, in_timings):
 	lines = in_lines
 	timings = in_timings
+	line_index = 0
 	load_dialog()
 
 func load_dialog():
