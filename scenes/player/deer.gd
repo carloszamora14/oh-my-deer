@@ -10,12 +10,11 @@ const FRICTION = 300;
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var respawn_coords = Vector2(40, 140)
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-var dying: bool = false
 var player_lost: bool = false
 var eating: bool = false
 var can_throw_candy: bool = true
-var cutscene_playing: bool = false
 var transparent: bool = false
+var can_control_character: bool = true
 
 var blood_particles: PackedScene = preload("res://scenes/player/blood_particles.tscn")
 
@@ -29,53 +28,10 @@ func _physics_process(delta):
 	
 	Globals.male_deer_position = global_position
 	
-	if (!dying):
-#		if Input.is_action_just_pressed("interact") and can_throw_candy:
-#			var marker_pos = $AnimationPlayer/Marker2D.global_position
-##			print(marker_pos, global_position)
-#			var candy_direction = Vector2(1, 0) if $AnimationPlayer.scale.x >= 0 else Vector2(-1, 0)
-#			# Emit the position
-#			player_throw_candy.emit(marker_pos, candy_direction)
-#			can_throw_candy = false
-#			$Timer.start()
-		#elif
-		if !cutscene_playing:
-			if Input.is_action_just_pressed("jump") and is_on_floor():
-	#			$AnimationPlayer.play("death")
-				$IdleTimer.stop()
-				$IdleTimer.start()
-				velocity.y = JUMP_VELOCITY
-			var direction = Input.get_axis("left", "right")
-#			var directiony = Input.get_axis("up", "down")
-#			if directiony:
-#				velocity.y = directiony * SPEED
-#				if directiony == -1:
-#					$AnimationPlayer.play("walk_up")
-#				else:
-#					$AnimationPlayer.play("walk_down")
-#			else:
-#				velocity.y = move_toward(velocity.y, 0, FRICTION)
-			if direction != 0:
-				$IdleTimer.stop()
-				$IdleTimer.start()
-				if !eating:
-					$AnimationPlayer.play("walk")
-				$Sprite2D.scale.x = -1 if direction <= 0 else 1
-				$DeerCollision.scale = Vector2(1 if direction >= 0 else -1, 1)
-				velocity.x = direction * SPEED
-			else:
-				if !eating:
-					$AnimationPlayer.play("idle")
-				velocity.x = move_toward(velocity.x, 0, FRICTION)
-		else:
-			if !eating:
-				$AnimationPlayer.play("idle")
-			velocity.x = move_toward(velocity.x, 0, FRICTION)
-			
-		if not is_on_floor():
-			velocity.y += gravity * delta
-
-		move_and_slide()
+	if not is_on_floor():
+		velocity.y += gravity * delta
+	
+	move_and_slide()
 
 
 func avoid_bullets():
@@ -85,7 +41,7 @@ func avoid_bullets():
 
 func reset():
 	transparent = false
-	$AnimationPlayer.play("RESET")
+	$AnimationPlayer.play_backwards("deactivate_collision")
 
 
 func hit(damage, enemy):
@@ -122,12 +78,12 @@ func respawn():
 	if player_lost:
 		return
 
-	dying = true
+	can_control_character = false
 	Globals.male_deer_vulnerable = false
 	$DeathSound.play()
 #	get_node("DeerCollision").disabled = true    # disable
 	await get_tree().create_timer(0.6).timeout
-	dying = false
+	can_control_character = true
 	Globals.male_deer_vulnerable = true
 	get_node("DeerCollision").disabled = false   # enable
 	velocity = Vector2.ZERO
@@ -168,8 +124,8 @@ func save():
 	return save_dict
 
 func cutscene_started():
-	cutscene_playing = true
+	can_control_character = false
 	
 
 func cutscene_ended():
-	cutscene_playing = false
+	can_control_character = true

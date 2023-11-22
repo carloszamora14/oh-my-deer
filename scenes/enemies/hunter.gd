@@ -93,11 +93,11 @@ func shoot_rifle():
 func emit_bullet():
 	var gun_nozzle_position = $Sprites/RightContainer/Rifle/GunNozzle.global_position
 	var bullet_direction
-	if target != null:
-		bullet_direction = (target.global_position - $ShoulderMark.global_position).normalized()
-	else:
+	if target == null:
 		var mouse_position = get_global_mouse_position()
 		bullet_direction = (mouse_position - $ShoulderMark.global_position).normalized()
+	else:
+		bullet_direction = (target.global_position - $ShoulderMark.global_position).normalized()
 	hunter_shot_bullet.emit(gun_nozzle_position, bullet_direction)
 
 
