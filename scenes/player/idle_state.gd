@@ -17,7 +17,7 @@ func physics_update(_delta):
 		
 		direction = Input.get_axis("left", "right")
 		
-	if direction:
+	if direction or actor.cutscene_speed:
 		transitioned.emit(self, "WalkingState")
 	else:
 		actor.velocity.x = move_toward(actor.velocity.x, 0, FRICTION)

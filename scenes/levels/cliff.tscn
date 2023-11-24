@@ -127,7 +127,7 @@ tracks/4/keys = {
 
 [sub_resource type="Animation" id="Animation_t2qot"]
 resource_name = "cutscene"
-length = 20.0
+length = 25.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -135,10 +135,10 @@ tracks/0/path = NodePath("Deer/Camera2D:zoom")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.6, 9, 10),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.6, 7, 8, 16.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(1.2, 1.2), Vector2(2, 2), Vector2(2, 2), Vector2(1.6, 1.6)]
+"values": [Vector2(1.2, 1.2), Vector2(2, 2), Vector2(2, 2), Vector2(1.6, 1.6), Vector2(1.2, 1.2)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -147,7 +147,7 @@ tracks/1/path = NodePath("Deer/Camera2D:offset")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.6, 1.5, 9, 10),
+"times": PackedFloat32Array(0, 0.6, 1.5, 7, 8),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
 "values": [Vector2(0, 0), Vector2(0, 0), Vector2(80, 0), Vector2(80, 0), Vector2(50, 0)]
@@ -254,11 +254,20 @@ tracks/9/path = NodePath(".")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
-"times": PackedFloat32Array(8.3),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(8.3, 15, 24, 24.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "values": [{
 "args": [],
 "method": &"kill_wolf"
+}, {
+"args": [],
+"method": &"shoot_deer"
+}, {
+"args": [],
+"method": &"fade_to_black"
+}, {
+"args": [],
+"method": &"play_water_splash"
 }]
 }
 tracks/10/type = "method"
@@ -282,11 +291,40 @@ tracks/11/path = NodePath("Hunter")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/keys = {
-"times": PackedFloat32Array(10.2),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(10.2, 13, 16.8, 19.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "values": [{
 "args": [],
 "method": &"coyotes_gotta_eat"
+}, {
+"args": [],
+"method": &"come_here_deer"
+}, {
+"args": [],
+"method": &"dont_run"
+}, {
+"args": [],
+"method": &"if_i_dont_kill_you"
+}]
+}
+tracks/12/type = "method"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("Deer")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(6.8, 14, 16.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"values": [{
+"args": [],
+"method": &"cliff_cutscene"
+}, {
+"args": [],
+"method": &"cliff_cutscene_2nd_part"
+}, {
+"args": [],
+"method": &"cliff_cutscene_3rd_part"
 }]
 }
 
@@ -370,7 +408,7 @@ texture = ExtResource("8_auawl")
 lifetime = 7.0
 
 [node name="Camera2D" parent="Deer" index="12"]
-limit_right = 840
+limit_right = 790
 limit_bottom = 360
 
 [node name="Wolf" parent="." index="15" instance=ExtResource("14_pqu4q")]

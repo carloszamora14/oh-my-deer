@@ -22,8 +22,10 @@ func physics_update(_delta):
 		direction = Input.get_axis("left", "right")
 		
 	if direction:
-		actor.velocity.x = SPEED * direction
+		actor.velocity.x = direction * SPEED
 		sprite.scale.x = -1 if direction < 0 else 1
 		collision_shape.scale.x = 1 if direction >= 0 else -1
+	elif actor.cutscene_speed:
+		actor.velocity.x = actor.cutscene_speed
 	else:
 		transitioned.emit(self, "IdleState")

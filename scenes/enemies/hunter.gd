@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-signal hunter_shot_bullet(position, direction)
+signal hunter_shot_bullet(position, direction, damage)
 signal display_dialog(lines, timings)
 
 const SPEED = 300.0
@@ -11,11 +11,20 @@ var sees_deer: bool = false
 var is_shooting: bool = false
 var health_points: int = 100
 var target = null
-var angle
+var angle: float
+var aiming: bool = true
+var bullet_damage: float = 0
 
 var phrases = {
 	"coyotes gotta eat": ["res://sounds/hunter/coyotes-gotta-eat.mp3", ["Coyotes gotta eat"], [2.5]],
-	"i smoked him": ["res://sounds/hunter/i-smoked-him.mp3", ["I smoked him!"] , [2.1]]
+	"i smoked him": ["res://sounds/hunter/i-smoked-him.mp3", ["I smoked him!"], [2.1]],
+	"come here deer": ["res://sounds/hunter/come-here-deer.mp3", ["Come here deer!"], [2.2]],
+	"dont run": ["res://sounds/hunter/dont-run-you-stupid-deer.mp3", ["Don't run you stupid deer!"], [2.3]],
+	"if i dont kill you": [
+		"res://sounds/hunter/even-if-i-dont-kill-you-budy-somebody-else-will.mp3",
+		["Even if I don't kill you, buddy,", "then somebody else will."],
+		[1.4, 2]
+	],
 }
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -27,14 +36,15 @@ const sounds: Array[String] = [
 ]
 
 func _physics_process(delta):
-	if target == null:
-		var mouse_position = get_global_mouse_position()
-	#	var mouse_offset = get_local_mouse_position()
-		angle = ((mouse_position - $ShoulderMark.global_position).normalized()).angle()
-	else:
-		angle = ((target.global_position - $ShoulderMark.global_position).normalized()).angle()
-	$Sprites/LeftContainer.rotation = angle
-	$Sprites/RightContainer.rotation = angle
+	if aiming:
+		if target == null:
+			var mouse_position = get_global_mouse_position()
+		#	var mouse_offset = get_local_mouse_position()
+			angle = ((mouse_position - $ShoulderMark.global_position).normalized()).angle()
+		else:
+			angle = ((target.global_position - $ShoulderMark.global_position).normalized()).angle()
+		$Sprites/LeftContainer.rotation = angle
+		$Sprites/RightContainer.rotation = angle
 	
 #	if sees_deer:
 #		var angle = (Globals.male_deer_position - global_position).normalized().angle()
@@ -61,14 +71,10 @@ func _physics_process(delta):
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y += gravity * delta
+		
+#	if Input.is_action_just_pressed("interact"):
+#		shoot_rifle(35)
 
-	
-	# Handle Jump.
-	if Input.is_action_just_pressed("interact"):
-		shoot_rifle()
-#
-#	# Get the input direction and handle the movement/deceleration.
-#	# As good practice, you should replace UI actions with custom gameplay actions.
 #	var direction = Input.get_axis("left", "right")
 #	if direction:
 #		velocity.x = direction * SPEED
@@ -85,9 +91,12 @@ func shot_sound():
 	await sound.finished
 
 
-func shoot_rifle():
+func shoot_rifle(damage):
+	if damage:
+		bullet_damage = damage
 	$AnimationPlayer.play("shoot")
 	await $AnimationPlayer.animation_finished
+	bullet_damage = 0
 	$AnimationPlayer.play("RESET")
 	
 func emit_bullet():
@@ -98,7 +107,7 @@ func emit_bullet():
 		bullet_direction = (mouse_position - $ShoulderMark.global_position).normalized()
 	else:
 		bullet_direction = (target.global_position - $ShoulderMark.global_position).normalized()
-	hunter_shot_bullet.emit(gun_nozzle_position, bullet_direction)
+	hunter_shot_bullet.emit(gun_nozzle_position, bullet_direction, bullet_damage)
 
 
 func _on_timer_timeout():
@@ -143,26 +152,36 @@ func save():
 	}
 	return save_dict
 
-func coyotes_gotta_eat():
+
+func play_sound(sound_name):
 	var sound = AudioStreamPlayer2D.new()
-	sound.stream = load(phrases["coyotes gotta eat"][0])
+	sound.stream = load(phrases[sound_name][0])
 	sound.global_position = global_position
 	add_child(sound)
-	emit_display_dialog("coyotes gotta eat")
+	emit_display_dialog(sound_name)
 	sound.play()
 	await sound.finished
 	sound.queue_free()
+
+
+func coyotes_gotta_eat():
+	play_sound("coyotes gotta eat")
 
 
 func smoked_him():
-	var sound = AudioStreamPlayer2D.new()
-	sound.stream = load(phrases["i smoked him"][0])
-	sound.global_position = global_position
-	add_child(sound)
-	emit_display_dialog("i smoked him")
-	sound.play()
-	await sound.finished
-	sound.queue_free()
+	play_sound("i smoked him")
+
+
+func come_here_deer():
+	play_sound("come here deer")
+
+
+func dont_run():
+	play_sound("dont run")
+
+
+func if_i_dont_kill_you():
+	play_sound("if i dont kill you")
 
 
 func emit_display_dialog(phrase):

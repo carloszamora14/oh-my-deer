@@ -18,11 +18,12 @@ func _ready():
 		$Deer.position = Vector2(34, 200)
 
 
-func _on_hunter_bullet(bullet_position, bullet_direction):
+func _on_hunter_bullet(bullet_position, bullet_direction, damage):
 	var bullet = bullet_scene.instantiate() as Area2D
 	bullet.global_position = bullet_position
 	bullet.rotate(bullet_direction.angle())
 	bullet.direction = bullet_direction
+	bullet.damage = damage
 	$Projectiles.add_child(bullet)
 	bullet.connect("emit_particle", _on_bullet_emit_particle)
 
@@ -46,7 +47,7 @@ func _process(_delta):
 	if Input.is_action_just_pressed("esc") && !over:
 		get_tree().paused = true
 		$CanvasLayer2.show()
-	if Globals.male_deer_position.y > WINDOW_HEIGHT * 1.4 and !Globals.male_deer_falling:
+	if Globals.male_deer_vulnerable && Globals.male_deer_position.y > WINDOW_HEIGHT * 1.4 && !Globals.male_deer_falling:
 		Globals.male_deer_falling = true
 		$Deer.hit(1000, null)
 		$Deer.respawn()

@@ -15,6 +15,7 @@ var eating: bool = false
 var can_throw_candy: bool = true
 var transparent: bool = false
 var can_control_character: bool = true
+var cutscene_speed: int = 0
 
 var blood_particles: PackedScene = preload("res://scenes/player/blood_particles.tscn")
 
@@ -42,6 +43,8 @@ func avoid_bullets():
 func reset():
 	transparent = false
 	$AnimationPlayer.play_backwards("deactivate_collision")
+	await $AnimationPlayer.animation_finished
+	$AnimationPlayer.play("idle")
 
 
 func hit(damage, enemy):
@@ -65,7 +68,7 @@ func hit(damage, enemy):
 		sound.stream = load("res://sounds/deer-scream1.mp3")
 		add_child(sound)
 		sound.play()
-	await get_tree().create_timer(0.6, false).timeout
+	await get_tree().create_timer(0.3, false).timeout
 	Globals.male_deer_vulnerable = true
 	$Sprite2D.material.set_shader_parameter("progress", 0)
 
@@ -129,3 +132,32 @@ func cutscene_started():
 
 func cutscene_ended():
 	can_control_character = true
+
+
+func cliff_cutscene():
+	$DeerCollision.scale.x = -1
+	$FloorCollision.scale.x = -1
+	$Sprite2D.scale.x = -1
+	cutscene_speed = 15
+	await get_tree().create_timer(0.3, false).timeout
+	cutscene_speed = 0
+
+
+func cliff_cutscene_2nd_part():
+	cutscene_speed = 10
+	await get_tree().create_timer(1, false).timeout
+	cutscene_speed = 0
+
+
+func cliff_cutscene_3rd_part():
+	$DeerCollision.scale.x = 1
+	$FloorCollision.scale.x = 1
+	$Sprite2D.scale.x = 1
+	await get_tree().create_timer(0.1, false).timeout
+	cutscene_speed = 80
+	await get_tree().create_timer(2.0, false).timeout
+	Globals.male_deer_vulnerable = false
+	await get_tree().create_timer(1, false).timeout
+	cutscene_speed = 0
+	await get_tree().create_timer(0.5, false).timeout
+	gravity = 0

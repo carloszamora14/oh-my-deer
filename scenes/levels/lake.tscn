@@ -30,7 +30,7 @@ position = Vector2(515, 240.5)
 [node name="Deer" parent="." index="9"]
 position = Vector2(76, 96)
 
-[node name="Camera2D" parent="Deer" index="9"]
+[node name="Camera2D" parent="Deer" index="10"]
 limit_right = 2000
 
 [node name="Bridge" type="Node2D" parent="." index="10"]

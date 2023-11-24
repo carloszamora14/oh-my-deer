@@ -118,7 +118,7 @@ position = Vector2(415, 257)
 modulate = Color(0.639216, 0.505882, 0.466667, 1)
 position = Vector2(593, 261)
 
-[node name="Camera2D" parent="Deer" index="9"]
+[node name="Camera2D" parent="Deer" index="10"]
 limit_right = 2000
 
 [node name="Crow" parent="." index="15" instance=ExtResource("12_io0qp")]

@@ -27,4 +27,26 @@ func _on_cutscene_area_body_entered(_body):
 
 func kill_wolf():
 	$Hunter.target = $Wolf/Headshot
-	$Hunter.shoot_rifle()
+	$Hunter.shoot_rifle(null)
+
+
+func shoot_deer():
+	$Hunter.target = $Deer/DeerCollision/Markers.get_children().pick_random()
+	$Hunter.shoot_rifle(Globals.male_deer_health - 1)
+	await get_tree().create_timer(2, false).timeout
+	$Hunter.aiming = false
+
+
+func fade_to_black():
+	TransitionLayer.change_scene("res://scenes/interface/to_be_continued.tscn")
+
+
+func play_water_splash():
+	var sound = AudioStreamPlayer2D.new()
+	sound.stream = load("res://sounds/water-splash.mp3")
+	sound.max_distance = 5000
+	sound.global_position = $Deer.global_position
+	add_child(sound)
+	sound.play()
+	await sound.finished
+	sound.queue_free()
