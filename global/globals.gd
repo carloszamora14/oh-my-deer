@@ -4,9 +4,14 @@ signal stats_change()
 signal score_change()
 signal male_deer_death()
 signal female_deer_death()
+signal falling
 
 var game_loaded: bool = false
-var male_deer_falling: bool = false
+var male_deer_falling: bool = false:
+	set(value):
+		male_deer_falling = value
+		if value:
+			falling.emit()
 var male_deer_position: Vector2
 var male_deer_lives: int = 3
 var male_deer_vulnerable: bool = true

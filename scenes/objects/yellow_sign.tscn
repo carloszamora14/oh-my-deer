@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://drf4civkh2su6"]
+
+[ext_resource type="Texture2D" uid="uid://kwto4oc5yevh" path="res://graphics/objects/road-work1.png" id="1_u2n8s"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hyf6j"]
+size = Vector2(110, 70)
+
+[node name="YellowSign" type="StaticBody2D"]
+scale = Vector2(0.3, 0.3)
+collision_layer = 4
+collision_mask = 15
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1, 0)
+texture = ExtResource("1_u2n8s")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_hyf6j")
