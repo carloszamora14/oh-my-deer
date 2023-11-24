@@ -124,6 +124,30 @@ tracks/4/keys = {
 "update": 0,
 "values": [Vector2(483, 209)]
 }
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("AudioStreamPlayer:volume_db")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-24.0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("AudioStreamPlayer2:volume_db")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-30.0]
+}
 
 [sub_resource type="Animation" id="Animation_t2qot"]
 resource_name = "cutscene"
@@ -327,6 +351,30 @@ tracks/12/keys = {
 "method": &"cliff_cutscene_3rd_part"
 }]
 }
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("AudioStreamPlayer:volume_db")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(24, 25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-24.0, -80.0]
+}
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("AudioStreamPlayer2:volume_db")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(24, 25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-30.0, -80.0]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_oexi7"]
 _data = {
@@ -395,7 +443,6 @@ autostart = true
 
 [node name="Deer" parent="." index="14"]
 position = Vector2(34, 200)
-collision_mask = 54
 
 [node name="PointLight2D" type="PointLight2D" parent="Deer" index="8"]
 scale = Vector2(0.2, 0.2)

@@ -36,14 +36,13 @@ func _physics_process(delta):
 
 
 func avoid_bullets():
-	$AnimationPlayer.play("deactivate_collision")
+	$ProjectilesCollision/Collision.disabled = true
 	transparent = true
 
 
 func reset():
 	transparent = false
-	$AnimationPlayer.play_backwards("deactivate_collision")
-	await $AnimationPlayer.animation_finished
+	$ProjectilesCollision/Collision.disabled = false
 	$AnimationPlayer.play("idle")
 
 
@@ -136,7 +135,7 @@ func cutscene_ended():
 
 func cliff_cutscene():
 	$DeerCollision.scale.x = -1
-	$FloorCollision.scale.x = -1
+	$ProjectilesCollision.scale.x = -1
 	$Sprite2D.scale.x = -1
 	cutscene_speed = 15
 	await get_tree().create_timer(0.3, false).timeout
@@ -151,7 +150,7 @@ func cliff_cutscene_2nd_part():
 
 func cliff_cutscene_3rd_part():
 	$DeerCollision.scale.x = 1
-	$FloorCollision.scale.x = 1
+	$ProjectilesCollision.scale.x = 1
 	$Sprite2D.scale.x = 1
 	await get_tree().create_timer(0.1, false).timeout
 	cutscene_speed = 80

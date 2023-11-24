@@ -1,8 +1,9 @@
-[gd_scene load_steps=18 format=3 uid="uid://7e00atqabf7a"]
+[gd_scene load_steps=20 format=3 uid="uid://7e00atqabf7a"]
 
 [ext_resource type="Script" path="res://scenes/player/deer.gd" id="1_nyqxi"]
 [ext_resource type="Shader" path="res://scenes/player/deer.gdshader" id="2_bhanu"]
 [ext_resource type="Texture2D" uid="uid://di0a8deye6gb7" path="res://graphics/deer/deer_male.png" id="2_gd7v3"]
+[ext_resource type="Script" path="res://scenes/player/ProjectilesCollision.gd" id="4_k5pho"]
 [ext_resource type="Script" path="res://scenes/player/state_machine.gd" id="5_7sbfk"]
 [ext_resource type="AudioStream" uid="uid://dkmfg4tqeimfs" path="res://sounds/deer-scream4.mp3" id="5_bugqq"]
 [ext_resource type="Script" path="res://scenes/player/walking_state.gd" id="6_7aysy"]
@@ -14,6 +15,9 @@ resource_local_to_scene = true
 shader = ExtResource("2_bhanu")
 shader_parameter/color = Color(1, 1, 1, 1)
 shader_parameter/progress = 0.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ya5mv"]
+size = Vector2(20, 17)
 
 [sub_resource type="Animation" id="Animation_mltdt"]
 length = 0.001
@@ -32,7 +36,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("DeerCollision:disabled")
+tracks/1/path = NodePath("ProjectilesCollision/Collision:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -40,18 +44,6 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("FloorCollision:disabled")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_xoq3d"]
@@ -75,7 +67,7 @@ length = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("DeerCollision:disabled")
+tracks/0/path = NodePath("ProjectilesCollision/Collision:disabled")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -83,18 +75,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [false, true]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("FloorCollision:disabled")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
 }
 
 [sub_resource type="Animation" id="Animation_72qfn"]
@@ -174,34 +154,10 @@ _data = {
 }
 
 [node name="Deer" type="CharacterBody2D" groups=["Player"]]
-collision_mask = 62
+collision_mask = 54
 floor_max_angle = 1.03847
 floor_snap_length = 10.0
 script = ExtResource("1_nyqxi")
-
-[node name="DeerCollision" type="CollisionPolygon2D" parent="."]
-polygon = PackedVector2Array(5, -5, 5, -8, 12, -8, 13, -6, 13, -4, 11, -2, 8, 6, 7, 15, 1, 16, 1, 8, -6, 8, -8, 16, -13, 16, -15, -1, 5, -3)
-
-[node name="Markers" type="Node2D" parent="DeerCollision"]
-position = Vector2(9, -7)
-
-[node name="Head" type="Marker2D" parent="DeerCollision/Markers"]
-
-[node name="Stomach" type="Marker2D" parent="DeerCollision/Markers"]
-position = Vector2(-11, 10)
-
-[node name="Tail" type="Marker2D" parent="DeerCollision/Markers"]
-position = Vector2(-19, 9)
-
-[node name="Chest" type="Marker2D" parent="DeerCollision/Markers"]
-position = Vector2(-3, 8)
-
-[node name="DeathSound" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("5_bugqq")
-
-[node name="IdleTimer" type="Timer" parent="."]
-wait_time = 2.0
-autostart = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_pw61s")
@@ -209,32 +165,41 @@ texture = ExtResource("2_gd7v3")
 hframes = 5
 vframes = 5
 
-[node name="Timer" type="Timer" parent="."]
-wait_time = 0.4
+[node name="ProjectilesCollision" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 8
+script = ExtResource("4_k5pho")
 
-[node name="Particles" type="Node2D" parent="."]
+[node name="Collision" type="CollisionPolygon2D" parent="ProjectilesCollision"]
+polygon = PackedVector2Array(6, -7, 5, -7, 5, -8, 6, -8, 6, -9, 7, -9, 7, -8, 9, -8, 9, -9, 10, -9, 10, -8, 11, -8, 11, -6, 12, -6, 12, -4, 11, -4, 11, -3, 10, -3, 10, -2, 9, -2, 9, 2, 8, 2, 8, 5, 7, 5, 7, 8, 6, 8, 6, 15, 5, 15, 5, 7, 4, 7, 4, 10, 3, 10, 3, 16, 2, 16, 2, 6, -5, 6, -5, 7, -6, 7, -6, 8, -7, 8, -7, 9, -8, 9, -8, 15, -9, 15, -9, 10, -10, 10, -10, 11, -11, 11, -11, 16, -12, 16, -12, 9, -11, 9, -11, 6, -12, 6, -12, 4, -13, 4, -13, 3, -14, 3, -14, 0, -13, 0, -13, 1, -11, 1, -11, 0, -9, 0, -9, -1, 4, -1, 4, -2, 5, -2, 5, -3, 6, -3)
 
-[node name="FloorCollision" type="CollisionPolygon2D" parent="."]
-position = Vector2(-3, 15)
-polygon = PackedVector2Array(-10, 1, -5, 1, 4, 1, 10, 0, -10, 0)
-disabled = true
+[node name="Markers" type="Node2D" parent="ProjectilesCollision/Collision"]
+position = Vector2(9, -7)
 
-[node name="WalkSound" type="AudioStreamPlayer2D" parent="."]
-volume_db = -5.0
+[node name="Head" type="Marker2D" parent="ProjectilesCollision/Collision/Markers"]
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_jouj0")
-}
+[node name="Stomach" type="Marker2D" parent="ProjectilesCollision/Collision/Markers"]
+position = Vector2(-11, 10)
+
+[node name="Tail" type="Marker2D" parent="ProjectilesCollision/Collision/Markers"]
+position = Vector2(-19, 9)
+
+[node name="Chest" type="Marker2D" parent="ProjectilesCollision/Collision/Markers"]
+position = Vector2(-3, 8)
+
+[node name="IdleTimer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("5_7sbfk")
 initial_state = NodePath("IdleState")
 
-[node name="WalkingState" type="Node" parent="StateMachine" node_paths=PackedStringArray("sprite", "collision_shape", "actor", "animation_player")]
+[node name="WalkingState" type="Node" parent="StateMachine" node_paths=PackedStringArray("sprite", "collision_shape", "projectiles_collision", "actor", "animation_player")]
 script = ExtResource("6_7aysy")
 sprite = NodePath("../../Sprite2D")
 collision_shape = NodePath("../../DeerCollision")
+projectiles_collision = NodePath("../../ProjectilesCollision")
 actor = NodePath("../..")
 animation_player = NodePath("../../AnimationPlayer")
 
@@ -247,5 +212,25 @@ animation_player = NodePath("../../AnimationPlayer")
 script = ExtResource("8_k30fw")
 actor = NodePath("../..")
 animation_player = NodePath("../../AnimationPlayer")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.4
+
+[node name="Particles" type="Node2D" parent="."]
+
+[node name="DeerCollision" type="CollisionShape2D" parent="."]
+position = Vector2(-3, 7.5)
+shape = SubResource("RectangleShape2D_ya5mv")
+
+[node name="WalkSound" type="AudioStreamPlayer2D" parent="."]
+volume_db = -5.0
+
+[node name="DeathSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_bugqq")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_jouj0")
+}
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

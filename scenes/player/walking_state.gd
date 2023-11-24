@@ -5,7 +5,8 @@ const JUMP_VELOCITY = -240.0
 const FRICTION = 300;
 
 @export var sprite: Sprite2D
-@export var collision_shape: CollisionPolygon2D
+@export var collision_shape: CollisionShape2D
+@export var projectiles_collision: Area2D
 
 func enter():
 	animation_player.play("walk")
@@ -25,6 +26,7 @@ func physics_update(_delta):
 		actor.velocity.x = direction * SPEED
 		sprite.scale.x = -1 if direction < 0 else 1
 		collision_shape.scale.x = 1 if direction >= 0 else -1
+		projectiles_collision.scale.x = 1 if direction >= 0 else -1
 	elif actor.cutscene_speed:
 		actor.velocity.x = actor.cutscene_speed
 	else:

@@ -33,3 +33,8 @@ func _on_body_entered(body):
 	if 'hit' in body:
 		body.hit(damage, self)
 	queue_free()
+
+
+func _on_area_entered(area):
+	area.emit_shot(damage, self)
+	queue_free()

@@ -31,7 +31,7 @@ func kill_wolf():
 
 
 func shoot_deer():
-	$Hunter.target = $Deer/DeerCollision/Markers.get_children().pick_random()
+	$Hunter.target = $Deer/ProjectilesCollision/Collision/Markers.get_children().pick_random()
 	$Hunter.shoot_rifle(Globals.male_deer_health - 1)
 	await get_tree().create_timer(2, false).timeout
 	$Hunter.aiming = false
