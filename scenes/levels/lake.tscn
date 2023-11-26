@@ -41,13 +41,13 @@ position = Vector2(428, 241)
 [node name="YellowSign2" parent="Objects" index="3" instance=ExtResource("4_guaij")]
 position = Vector2(333, 241)
 
-[node name="Deer" parent="." index="9"]
+[node name="Deer" parent="." index="10"]
 position = Vector2(21, 235)
 
 [node name="Camera2D" parent="Deer" index="10"]
 limit_right = 2000
 
-[node name="Bridge" type="Node2D" parent="." index="10"]
+[node name="Bridge" type="Node2D" parent="." index="11"]
 
 [node name="FirstSegment" type="StaticBody2D" parent="Bridge" index="0"]
 collision_layer = 5
@@ -79,7 +79,7 @@ region_rect = Rect2(-1, 0, 80, 71)
 position = Vector2(563, 262)
 shape = SubResource("RectangleShape2D_v1304")
 
-[node name="BeamBridges" type="Node2D" parent="." index="11"]
+[node name="BeamBridges" type="Node2D" parent="." index="12"]
 
 [node name="BeamBridge" parent="BeamBridges" index="0" instance=ExtResource("5_fg6rv")]
 position = Vector2(774, 265)

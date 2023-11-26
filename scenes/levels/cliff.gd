@@ -42,9 +42,10 @@ func fade_to_black():
 
 
 func play_water_splash():
+	print($Deer.global_position)
 	var sound = AudioStreamPlayer2D.new()
 	sound.stream = load("res://sounds/water-splash.mp3")
-	sound.max_distance = 5000
+	sound.max_distance = 10000
 	sound.global_position = $Deer.global_position
 	add_child(sound)
 	sound.play()

@@ -11,21 +11,23 @@ func _process(_delta):
 		var audio = AudioStreamPlayer2D.new()
 		audio.stream = load(sounds.pick_random())
 		add_child(audio)
-		audio.play()
+#		audio.play()
 		await audio.finished
 		reproducing = false
 		audio.queue_free()
 
 
 func _on_area_2d_body_entered(_body):
+	print("enter")
 	if first_time:
 		first_time = false
-		await get_tree().create_timer(1.5, false).timeout
+		await get_tree().create_timer(2.2, false).timeout
 		collapse()
 	player_on_top = true
 
 
 func _on_area_2d_body_exited(_body):
+	print("exit")
 	player_on_top = false
 
 

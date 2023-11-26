@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 var direction: Vector2 = Vector2.RIGHT
 var speed: int = 0
+@export var making_noises: bool = false
 
 
 func _ready():
@@ -9,10 +10,10 @@ func _ready():
 
 
 func _process(delta):
-#	if randf() >= 0.999:
-#		$AnimationPlayer.play("caw")
-#		await $AnimationPlayer.animation_finished
-#		$AnimationPlayer.play("idle")
+	if making_noises && randf() >= 0.999:
+		$AnimationPlayer.play("caw")
+		await $AnimationPlayer.animation_finished
+		$AnimationPlayer.play("idle")
 	position += direction * speed * delta
 
 

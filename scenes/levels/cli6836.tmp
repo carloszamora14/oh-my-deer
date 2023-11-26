@@ -15,26 +15,6 @@
 [ext_resource type="PackedScene" uid="uid://jrt5uqlggamv" path="res://scenes/enemies/hunter.tscn" id="13_yl5k1"]
 [ext_resource type="PackedScene" uid="uid://ckccj8gqbdf76" path="res://scenes/enemies/wolf.tscn" id="14_pqu4q"]
 
-[sub_resource type="Gradient" id="Gradient_hhvw1"]
-interpolation_mode = 2
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_pj2ne"]
-gradient = SubResource("Gradient_hhvw1")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_fk8dm"]
-emission_shape = 1
-emission_sphere_radius = 10.0
-particle_flag_disable_z = true
-gravity = Vector3(0, 0, 0)
-initial_velocity_min = 15.0
-initial_velocity_max = 20.0
-orbit_velocity_min = 0.0
-orbit_velocity_max = 0.0
-scale_min = 0.05
-scale_max = 0.1
-color_ramp = SubResource("GradientTexture1D_pj2ne")
-
 [sub_resource type="Gradient" id="Gradient_fgub8"]
 offsets = PackedFloat32Array(0, 0.514706, 1)
 colors = PackedColorArray(0.894531, 0.144531, 0.128906, 1, 0.898039, 0.145098, 0.129412, 1, 1, 1, 1, 0)
@@ -264,14 +244,11 @@ tracks/8/path = NodePath(".")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
-"times": PackedFloat32Array(5.3, 23.8),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(5.3),
+"transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
 "method": &"kill_wolf"
-}, {
-"args": [],
-"method": &"play_water_splash"
 }]
 }
 tracks/9/type = "method"
@@ -281,8 +258,8 @@ tracks/9/path = NodePath(".")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
-"times": PackedFloat32Array(8.3, 15, 24),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(8.3, 15, 24, 24.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "values": [{
 "args": [],
 "method": &"kill_wolf"
@@ -292,6 +269,9 @@ tracks/9/keys = {
 }, {
 "args": [],
 "method": &"fade_to_black"
+}, {
+"args": [],
+"method": &"play_water_splash"
 }]
 }
 tracks/10/type = "method"
@@ -382,6 +362,26 @@ _data = {
 "cutscene": SubResource("Animation_t2qot")
 }
 
+[sub_resource type="Gradient" id="Gradient_hhvw1"]
+interpolation_mode = 2
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_pj2ne"]
+gradient = SubResource("Gradient_hhvw1")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_fk8dm"]
+emission_shape = 1
+emission_sphere_radius = 10.0
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 15.0
+initial_velocity_max = 20.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+scale_min = 0.05
+scale_max = 0.1
+color_ramp = SubResource("GradientTexture1D_pj2ne")
+
 [node name="Cliff" instance=ExtResource("1_f1qu1")]
 script = ExtResource("1_d3iem")
 
@@ -441,23 +441,6 @@ autoplay = true
 wait_time = 0.6
 autostart = true
 
-[node name="Deer" parent="." index="14"]
-position = Vector2(34, 200)
-
-[node name="PointLight2D" type="PointLight2D" parent="Deer" index="8"]
-scale = Vector2(0.2, 0.2)
-energy = 0.8
-texture = ExtResource("7_u1m2e")
-
-[node name="GPUParticles2D" type="GPUParticles2D" parent="Deer" index="10"]
-process_material = SubResource("ParticleProcessMaterial_fk8dm")
-texture = ExtResource("8_auawl")
-lifetime = 7.0
-
-[node name="Camera2D" parent="Deer" index="12"]
-limit_right = 790
-limit_bottom = 360
-
 [node name="Wolf" parent="." index="15" instance=ExtResource("14_pqu4q")]
 position = Vector2(706, 270)
 
@@ -496,6 +479,23 @@ libraries = {
 visible = false
 position = Vector2(483, 209)
 collision_layer = 0
+
+[node name="Deer" parent="." index="20"]
+position = Vector2(34, 200)
+
+[node name="PointLight2D" type="PointLight2D" parent="Deer" index="8"]
+scale = Vector2(0.2, 0.2)
+energy = 0.8
+texture = ExtResource("7_u1m2e")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="Deer" index="10"]
+process_material = SubResource("ParticleProcessMaterial_fk8dm")
+texture = ExtResource("8_auawl")
+lifetime = 7.0
+
+[node name="Camera2D" parent="Deer" index="12"]
+limit_right = 790
+limit_bottom = 360
 
 [connection signal="timeout" from="FireflySound" to="." method="_on_firefly_sound_timeout"]
 [connection signal="body_entered" from="CutsceneArea" to="." method="_on_cutscene_area_body_entered"]

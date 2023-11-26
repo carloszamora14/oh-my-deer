@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://b78wm44yatqh1"]
+[gd_scene load_steps=24 format=3 uid="uid://b78wm44yatqh1"]
 
 [ext_resource type="Script" path="res://scenes/collectibles/grass.gd" id="1_4ureb"]
 [ext_resource type="Texture2D" uid="uid://certj18qh625l" path="res://graphics/deer/food/grass-1.png" id="1_hr53x"]
@@ -8,12 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://7wttahk0nyb6" path="res://graphics/deer/food/grass-4.png" id="4_5dcsb"]
 [ext_resource type="Texture2D" uid="uid://vw8vs5g3aeym" path="res://graphics/deer/food/grass-5.png" id="5_lv0x6"]
 [ext_resource type="Texture2D" uid="uid://crdssrxlr1xyq" path="res://graphics/deer/food/grass-6.png" id="6_xunuk"]
-[ext_resource type="AudioStream" uid="uid://dork60naqjeln" path="res://sounds/deer-eating-grass.mp3" id="7_81dy5"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_weekd"]
-resource_local_to_scene = true
-shader = ExtResource("1_psr6n")
-shader_parameter/shift_hue = null
+[ext_resource type="Texture2D" uid="uid://cddnsayq7pyvu" path="res://graphics/interface/keyboard-keys/E-0.png" id="10_aqvoo"]
+[ext_resource type="Texture2D" uid="uid://dtl001uywvneb" path="res://graphics/interface/keyboard-keys/E-1.png" id="11_gfgty"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8llcj"]
 resource_local_to_scene = true
@@ -36,6 +32,11 @@ shader = ExtResource("1_psr6n")
 shader_parameter/shift_hue = null
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wurny"]
+resource_local_to_scene = true
+shader = ExtResource("1_psr6n")
+shader_parameter/shift_hue = null
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_weekd"]
 resource_local_to_scene = true
 shader = ExtResource("1_psr6n")
 shader_parameter/shift_hue = null
@@ -190,26 +191,74 @@ tracks/5/keys = {
 "update": 1,
 "values": [false, false, false, false, false, true]
 }
-tracks/6/type = "audio"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("AudioStreamPlayer2D")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"clips": [{
-"end_offset": 0.27,
-"start_offset": 30.4196,
-"stream": ExtResource("7_81dy5")
-}],
-"times": PackedFloat32Array(0)
-}
-tracks/6/use_blend = true
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_pv25g"]
 _data = {
 "RESET": SubResource("Animation_d6ggb"),
 "being_eaten": SubResource("Animation_m4vt1")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gqnnj"]
+size = Vector2(36, 71)
+
+[sub_resource type="Animation" id="Animation_v3okv"]
+resource_name = "button"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Instructions/MarginContainer/TextureRect:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [ExtResource("10_aqvoo"), ExtResource("11_gfgty"), ExtResource("10_aqvoo")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Instructions:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_ixsjv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Instructions/MarginContainer/TextureRect:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("10_aqvoo")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Instructions:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nb8po"]
+_data = {
+"RESET": SubResource("Animation_ixsjv"),
+"button": SubResource("Animation_v3okv")
 }
 
 [node name="Grass" type="Node2D"]
@@ -218,16 +267,10 @@ shift_hue = 0.75
 
 [node name="Sprites" type="Node2D" parent="."]
 
-[node name="SpriteStage1" type="Sprite2D" parent="Sprites"]
-visible = false
-material = SubResource("ShaderMaterial_weekd")
-position = Vector2(0, 19)
-scale = Vector2(0.3, 0.3)
-texture = ExtResource("1_hr53x")
-
 [node name="SpriteStage2" type="Sprite2D" parent="Sprites"]
 visible = false
 material = SubResource("ShaderMaterial_8llcj")
+position = Vector2(0, -1.05)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("2_01le7")
 
@@ -248,7 +291,7 @@ texture = ExtResource("4_5dcsb")
 [node name="SpriteStage5" type="Sprite2D" parent="Sprites"]
 visible = false
 material = SubResource("ShaderMaterial_fo366")
-position = Vector2(0, -7)
+position = Vector2(0, -3.15)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("5_lv0x6")
 
@@ -258,9 +301,63 @@ position = Vector2(0, -1.5)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("6_xunuk")
 
+[node name="SpriteStage1" type="Sprite2D" parent="Sprites"]
+visible = false
+material = SubResource("ShaderMaterial_weekd")
+position = Vector2(0, 3.5)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("1_hr53x")
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_pv25g")
 }
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+
+[node name="Instructions" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -32.0
+offset_bottom = -32.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.65, 0.65)
+size_flags_horizontal = 4
+
+[node name="MarginContainer" type="MarginContainer" parent="Instructions"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="TextureRect" type="TextureRect" parent="Instructions/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+texture = ExtResource("10_aqvoo")
+stretch_mode = 3
+
+[node name="ActiveArea" type="Area2D" parent="."]
+collision_layer = 128
+collision_mask = 256
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ActiveArea"]
+position = Vector2(0, -21.5)
+shape = SubResource("RectangleShape2D_gqnnj")
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_nb8po")
+}
+
+[connection signal="area_entered" from="ActiveArea" to="." method="_on_active_area_area_entered"]
+[connection signal="area_exited" from="ActiveArea" to="." method="_on_active_area_area_exited"]

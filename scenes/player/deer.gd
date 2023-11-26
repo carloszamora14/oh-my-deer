@@ -22,6 +22,36 @@ var blood_particles: PackedScene = preload("res://scenes/player/blood_particles.
 func _ready():
 	Globals.male_deer_position = global_position
 	Globals.connect("male_deer_death", respawn)
+	Globals.connect("taking_hunger_damage", hunger_damage)
+
+
+func reset_shader():
+	$Sprite2D.material.set_shader_parameter("progress", 0)
+	$Sprite2D.material.set_shader_parameter("color", Vector3(1, 1, 1))
+
+func hunger_damage():
+	if Globals.male_deer_vulnerable:
+		Globals.update_male_deer_health(Globals.male_deer_health - 10, null)
+		Globals.male_deer_vulnerable = false
+		$Sprite2D.material.set_shader_parameter("color", Vector3(1, 0, 0))
+		$Sprite2D.material.set_shader_parameter("progress", 0.6)
+		if (Globals.male_deer_health > 0):
+			get_tree().create_timer(0.2, false).timeout.connect(reset_shader)
+			var sound = AudioStreamPlayer.new()
+			sound.stream = load("res://sounds/hungry-stomach.mp3")
+			sound.volume_db = -10
+			add_child(sound)
+			sound.play()
+			await sound.finished
+			sound.queue_free()
+			Globals.male_deer_vulnerable = true
+		else:
+			get_tree().create_timer(0.6, false).timeout.connect(reset_shader)
+
+
+func increase_hunger():
+	Globals.male_deer_hunger -= 1
+
 
 func _physics_process(delta):
 	if player_lost:
@@ -135,6 +165,7 @@ func cutscene_ended():
 
 func cliff_cutscene():
 	$DeerCollision.scale.x = -1
+	$HeadArea.scale.x = -1
 	$ProjectilesCollision.scale.x = -1
 	$Sprite2D.scale.x = -1
 	cutscene_speed = 15
@@ -158,5 +189,5 @@ func cliff_cutscene_3rd_part():
 	Globals.male_deer_vulnerable = false
 	await get_tree().create_timer(1, false).timeout
 	cutscene_speed = 0
-	await get_tree().create_timer(0.5, false).timeout
 	gravity = 0
+	await get_tree().create_timer(0.5, false).timeout

@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://7e00atqabf7a"]
+[gd_scene load_steps=21 format=3 uid="uid://7e00atqabf7a"]
 
 [ext_resource type="Script" path="res://scenes/player/deer.gd" id="1_nyqxi"]
 [ext_resource type="Shader" path="res://scenes/player/deer.gdshader" id="2_bhanu"]
@@ -17,7 +17,7 @@ shader_parameter/color = Color(1, 1, 1, 1)
 shader_parameter/progress = 0.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ya5mv"]
-size = Vector2(20, 17)
+size = Vector2(22, 18)
 
 [sub_resource type="Animation" id="Animation_mltdt"]
 length = 0.001
@@ -153,6 +153,9 @@ _data = {
 "walk_up": SubResource("Animation_qdiij")
 }
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_w3epq"]
+radius = 5.0
+
 [node name="Deer" type="CharacterBody2D" groups=["Player"]]
 collision_mask = 54
 floor_max_angle = 1.03847
@@ -195,11 +198,12 @@ autostart = true
 script = ExtResource("5_7sbfk")
 initial_state = NodePath("IdleState")
 
-[node name="WalkingState" type="Node" parent="StateMachine" node_paths=PackedStringArray("sprite", "collision_shape", "projectiles_collision", "actor", "animation_player")]
+[node name="WalkingState" type="Node" parent="StateMachine" node_paths=PackedStringArray("sprite", "collision_shape", "projectiles_collision", "head", "actor", "animation_player")]
 script = ExtResource("6_7aysy")
 sprite = NodePath("../../Sprite2D")
 collision_shape = NodePath("../../DeerCollision")
 projectiles_collision = NodePath("../../ProjectilesCollision")
+head = NodePath("../../HeadArea")
 actor = NodePath("../..")
 animation_player = NodePath("../../AnimationPlayer")
 
@@ -219,7 +223,7 @@ wait_time = 0.4
 [node name="Particles" type="Node2D" parent="."]
 
 [node name="DeerCollision" type="CollisionShape2D" parent="."]
-position = Vector2(-3, 7.5)
+position = Vector2(-3, 7)
 shape = SubResource("RectangleShape2D_ya5mv")
 
 [node name="WalkSound" type="AudioStreamPlayer2D" parent="."]
@@ -232,5 +236,13 @@ stream = ExtResource("5_bugqq")
 libraries = {
 "": SubResource("AnimationLibrary_jouj0")
 }
+
+[node name="HeadArea" type="Area2D" parent="."]
+collision_layer = 256
+collision_mask = 128
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HeadArea"]
+position = Vector2(9, -6)
+shape = SubResource("CircleShape2D_w3epq")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

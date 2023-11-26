@@ -2,6 +2,8 @@ extends Node
 
 signal stats_change()
 signal score_change()
+signal hunger_change()
+signal taking_hunger_damage()
 signal male_deer_death()
 signal female_deer_death()
 signal falling
@@ -20,6 +22,17 @@ var male_deer_score: int = 0:
 	set(value):
 		male_deer_score = value
 		score_change.emit()
+var male_deer_hunger: int = 5:
+	set(value):
+		if value >= 5:
+			male_deer_hunger = 5
+		elif value < 0:
+			taking_hunger_damage.emit()
+			male_deer_hunger = 0
+		else:
+			male_deer_hunger = value
+		
+		hunger_change.emit()
 
 var female_deer_lives: int = 3
 var female_deer_vulnerable: bool = true

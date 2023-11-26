@@ -62,6 +62,7 @@ text = "New game
 "
 
 [node name="ContinueButton" type="Button" parent="VBoxContainer"]
+visible = false
 layout_mode = 2
 theme = ExtResource("4_gmois")
 disabled = true
