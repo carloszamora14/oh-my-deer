@@ -11,6 +11,57 @@
 [ext_resource type="Texture2D" uid="uid://c8ja2cp0d6vn3" path="res://graphics/interface/keyboard-keys/A-0.png" id="8_pabom"]
 [ext_resource type="Texture2D" uid="uid://b7ctww8odygxe" path="res://graphics/interface/keyboard-keys/B-1.png" id="9_6esvl"]
 
+[sub_resource type="Animation" id="Animation_awtkg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Panel/Container/VBoxContainer/HBoxContainer/A:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_q6nnk")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Panel/Container/VBoxContainer/HBoxContainer/B:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("4_6x0qj")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Panel/Container/VBoxContainer/HBoxContainer2/LeftArrow:texture")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("6_uscy0")]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Panel/Container/VBoxContainer/HBoxContainer2/RightArrow:texture")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("7_klqus")]
+}
+
 [sub_resource type="Animation" id="Animation_mvfoh"]
 resource_name = "press"
 length = 1.4
@@ -64,64 +115,14 @@ tracks/3/keys = {
 "values": [ExtResource("7_klqus"), ExtResource("6_6hixd"), ExtResource("7_klqus")]
 }
 
-[sub_resource type="Animation" id="Animation_awtkg"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Panel/Container/VBoxContainer/HBoxContainer/A:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("3_q6nnk")]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Panel/Container/VBoxContainer/HBoxContainer/B:texture")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("4_6x0qj")]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Panel/Container/VBoxContainer/HBoxContainer2/LeftArrow:texture")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("6_uscy0")]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Panel/Container/VBoxContainer/HBoxContainer2/RightArrow:texture")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("7_klqus")]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_yqaol"]
 _data = {
 "RESET": SubResource("Animation_awtkg"),
 "press": SubResource("Animation_mvfoh")
 }
 
-[node name="MoveControlsMessage" instance=ExtResource("1_tuy4g")]
+[node name="MoveControlsMessage" node_paths=PackedStringArray("animation_player") instance=ExtResource("1_tuy4g")]
+animation_player = NodePath("AnimationPlayer")
 
 [node name="Container" parent="Panel" index="0"]
 anchors_preset = 15

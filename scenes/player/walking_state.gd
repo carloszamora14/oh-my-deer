@@ -16,7 +16,6 @@ func enter():
 
 func physics_update(_delta):
 	if randf() >= 0.999 && hunger_active:
-#	if randf() >= 0.9:
 		hunger_active = false
 		actor.increase_hunger()
 		await get_tree().create_timer(10.0, false).timeout

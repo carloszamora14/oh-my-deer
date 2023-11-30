@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://cvj6tpwfd2s03"]
+[gd_scene load_steps=29 format=3 uid="uid://cvj6tpwfd2s03"]
 
 [ext_resource type="PackedScene" uid="uid://bqgrls7swt3um" path="res://scenes/levels/main.tscn" id="1_cwp0h"]
 [ext_resource type="TileSet" uid="uid://d2c0ults38s76" path="res://scenes/tilesets/grass.tres" id="2_j6wgb"]
@@ -9,12 +9,21 @@
 [ext_resource type="Texture2D" uid="uid://c2tw11ju0sg40" path="res://graphics/background/layers/parallax-forest-front-trees.png" id="5_4ih2m"]
 [ext_resource type="PackedScene" uid="uid://d0dcnyu3nwn1m" path="res://scenes/interface/move_controls_message.tscn" id="8_t7eid"]
 [ext_resource type="AudioStream" uid="uid://bmrctxn0qyhqb" path="res://sounds/wind-and-birds.mp3" id="9_iabkj"]
+[ext_resource type="PackedScene" uid="uid://cytbborgocjpn" path="res://scenes/objects/banner.tscn" id="9_uxshs"]
 [ext_resource type="PackedScene" uid="uid://dycklvcglrpoo" path="res://scenes/objects/well.tscn" id="10_2shu1"]
 [ext_resource type="PackedScene" uid="uid://bwsnun1k6deqn" path="res://scenes/objects/car.tscn" id="10_rukmb"]
+[ext_resource type="Script" path="res://scenes/levels/messages_controls.gd" id="11_3wxyv"]
 [ext_resource type="PackedScene" uid="uid://dqhgkkpbx1p8k" path="res://scenes/objects/garbage_bag.tscn" id="11_mwuce"]
 [ext_resource type="PackedScene" uid="uid://bj2wvrgddcg54" path="res://scenes/enemies/crow.tscn" id="12_io0qp"]
+[ext_resource type="PackedScene" uid="uid://c1lu6dwt4qgyh" path="res://scenes/backgrounds/bench.tscn" id="13_4lxvs"]
+[ext_resource type="PackedScene" uid="uid://cvgbvwxl2ob1b" path="res://scenes/interface/themes/jump_controls_message.tscn" id="13_d03wl"]
 [ext_resource type="PackedScene" uid="uid://c7t1bq0xjubwm" path="res://scenes/backgrounds/flock.tscn" id="14_1rr85"]
+[ext_resource type="Script" path="res://scenes/interface/message.gd" id="14_67ede"]
 [ext_resource type="PackedScene" uid="uid://cb8mbkw74p7t7" path="res://scenes/backgrounds/leaf_particles.tscn" id="15_t83lk"]
+[ext_resource type="PackedScene" uid="uid://crxctj53oul61" path="res://scenes/backgrounds/bush.tscn" id="17_dnsho"]
+[ext_resource type="PackedScene" uid="uid://cviic60rdsu8l" path="res://scenes/interface/eat_controls_message.tscn" id="19_28545"]
+[ext_resource type="Texture2D" uid="uid://b4r1k42jmba31" path="res://graphics/platforms/Terrain_and_Props.png" id="21_u1hoh"]
+[ext_resource type="Texture2D" uid="uid://bwgbn0awhtots" path="res://graphics/objects/flowers.png" id="22_cs8gy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a5lft"]
 size = Vector2(20, 301)
@@ -22,16 +31,27 @@ size = Vector2(20, 301)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lsind"]
 size = Vector2(20, 301)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2eefi"]
+size = Vector2(77, 131)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_66upp"]
+size = Vector2(95, 113.5)
+
 [node name="InitialLevel" instance=ExtResource("1_cwp0h")]
 
 [node name="TileMap" type="TileMap" parent="Tilesets" index="0"]
 modulate = Color(1, 1, 0, 1)
+z_index = 1
 tile_set = ExtResource("2_j6wgb")
 format = 2
 layer_0/tile_data = PackedInt32Array(1114112, 65536, 0, 1114113, 65536, 0, 1114114, 65536, 0, 1114115, 65536, 0, 1114116, 65536, 0, 1114117, 65536, 0, 1114118, 65536, 0, 1114119, 65536, 0, 1114120, 65536, 0, 1114121, 65536, 0, 1114122, 65536, 0, 1114123, 65536, 0, 1114124, 65536, 0, 1114125, 65536, 0, 1114126, 65536, 0, 1114127, 65536, 0, 1114128, 65536, 0, 1114129, 65536, 0, 1114130, 65536, 0, 1114131, 65536, 0, 1114132, 65536, 0, 1114133, 65536, 0, 1114134, 65536, 0, 1114135, 65536, 0, 1114136, 65536, 0, 1114137, 65536, 0, 1114138, 65536, 0, 1114139, 65536, 0, 1114140, 65536, 0, 1114141, 65536, 0, 1114142, 65536, 0, 1114143, 65536, 0, 1114144, 65536, 0, 1114145, 65536, 0, 1114146, 65536, 0, 1114147, 65536, 0, 1114148, 65536, 0, 1114149, 65536, 0, 1114150, 65536, 0, 1114151, 65536, 0, 1114152, 65536, 0, 1114153, 65536, 0, 1114154, 65536, 0, 1114155, 65536, 0, 1114156, 65536, 0, 1114157, 65536, 0, 1114158, 65536, 0, 1114159, 65536, 0, 1114160, 65536, 0, 1114161, 65536, 0, 1114162, 65536, 0, 1114163, 65536, 0, 1114164, 65536, 0, 1114165, 65536, 0, 1114166, 65536, 0, 1114167, 65536, 0, 1114168, 65536, 0, 1114169, 65536, 0, 1114170, 65536, 0, 1114172, 65536, 0, 1114173, 65536, 0, 1114174, 65536, 0, 1114175, 65536, 0, 1114171, 65536, 0)
 
 [node name="Grass" parent="Collectibles" index="0" instance=ExtResource("4_ueu64")]
-position = Vector2(228, 13.2)
+position = Vector2(863, 13.5)
+
+[node name="Grass2" parent="Collectibles" index="1" instance=ExtResource("4_ueu64")]
+position = Vector2(920, 14.6)
+scale = Vector2(0.9, 0.9)
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="." index="5"]
 
@@ -75,7 +95,25 @@ texture = ExtResource("4_0ftt7")
 
 [node name="ParallaxBackground3" type="ParallaxBackground" parent="." index="7"]
 
-[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground3" index="0"]
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground3" index="0"]
+motion_mirroring = Vector2(1020, 0)
+
+[node name="Banner" parent="ParallaxBackground3/ParallaxLayer2" index="0" instance=ExtResource("9_uxshs")]
+modulate = Color(0.27451, 0.313726, 0.196078, 0.384314)
+position = Vector2(54, 219)
+rotation = -0.0436332
+
+[node name="Banner3" parent="ParallaxBackground3/ParallaxLayer2" index="1" instance=ExtResource("9_uxshs")]
+modulate = Color(0.27451, 0.313726, 0.196078, 0.384314)
+position = Vector2(542, 229)
+rotation = -0.0436332
+
+[node name="Banner2" parent="ParallaxBackground3/ParallaxLayer2" index="2" instance=ExtResource("9_uxshs")]
+modulate = Color(0.27451, 0.313726, 0.196078, 0.384314)
+position = Vector2(172, 226)
+rotation = 0.0767945
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground3" index="1"]
 motion_mirroring = Vector2(510, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground3/ParallaxLayer" index="0"]
@@ -83,47 +121,153 @@ position = Vector2(256, 144)
 scale = Vector2(1.882, 1.8)
 texture = ExtResource("5_4ih2m")
 
-[node name="Node2D" type="Node2D" parent="." index="8"]
+[node name="Borders" type="Node2D" parent="." index="8"]
 
-[node name="StaticBody2D" type="StaticBody2D" parent="Node2D" index="0"]
+[node name="StaticBody2D" type="StaticBody2D" parent="Borders" index="0"]
 collision_layer = 4
 collision_mask = 15
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/StaticBody2D" index="0"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/StaticBody2D" index="0"]
 position = Vector2(-10, 137.5)
 shape = SubResource("RectangleShape2D_a5lft")
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Node2D/StaticBody2D" index="1"]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Borders/StaticBody2D" index="1"]
 position = Vector2(1032, 137)
 shape = SubResource("RectangleShape2D_lsind")
 
-[node name="MoveControlsMessage" parent="." index="9" instance=ExtResource("8_t7eid")]
+[node name="TriggerAreas" type="Node2D" parent="." index="9"]
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="12"]
+[node name="JumpMsgArea" type="Area2D" parent="TriggerAreas" index="0"]
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TriggerAreas/JumpMsgArea" index="0"]
+position = Vector2(575.5, 206.5)
+shape = SubResource("RectangleShape2D_2eefi")
+
+[node name="EatMsgArea" type="Area2D" parent="TriggerAreas" index="1"]
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TriggerAreas/EatMsgArea" index="0"]
+position = Vector2(922, 219)
+shape = SubResource("RectangleShape2D_66upp")
+
+[node name="MessagesControls" type="Control" parent="." index="10"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("11_3wxyv")
+
+[node name="MoveControlsMessage" parent="MessagesControls" index="0" instance=ExtResource("8_t7eid")]
+visible = false
+
+[node name="EatControlsMessage" parent="MessagesControls" index="1" instance=ExtResource("19_28545")]
+visible = false
+script = ExtResource("14_67ede")
+
+[node name="JumpControlsMessage" parent="MessagesControls" index="2" instance=ExtResource("13_d03wl")]
+visible = false
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="13"]
 process_mode = 3
 stream = ExtResource("9_iabkj")
-volume_db = -22.0
+volume_db = -30.0
 autoplay = true
 
-[node name="Objects" type="Node2D" parent="." index="13"]
+[node name="Objects" type="Node2D" parent="." index="14"]
 
 [node name="Car" parent="Objects" index="0" instance=ExtResource("10_rukmb")]
-position = Vector2(689, 253)
+position = Vector2(689, 259.4)
 
-[node name="Well" parent="Objects" index="1" instance=ExtResource("10_2shu1")]
-position = Vector2(415, 257)
+[node name="Bench" parent="Objects" index="1" instance=ExtResource("13_4lxvs")]
+modulate = Color(0.501961, 0.294118, 0.196078, 1)
+position = Vector2(515, 261)
+scale = Vector2(0.6, 0.6)
 
 [node name="GarbageBag" parent="Objects" index="2" instance=ExtResource("11_mwuce")]
-modulate = Color(0.639216, 0.505882, 0.466667, 1)
-position = Vector2(593, 261)
+modulate = Color(0.427451, 0.329412, 0.2, 1)
+position = Vector2(530, 255)
+scale = Vector2(0.7, 0.7)
+
+[node name="Rock" type="Sprite2D" parent="Objects" index="3"]
+modulate = Color(0.964706, 0.698039, 0.431373, 1)
+position = Vector2(710, 264.4)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("21_u1hoh")
+region_enabled = true
+region_rect = Rect2(37, 365, 53, 19)
+
+[node name="Flowers" type="Sprite2D" parent="Objects" index="4"]
+modulate = Color(0.705882, 0.529412, 0.494118, 1)
+position = Vector2(662, 267)
+texture = ExtResource("22_cs8gy")
+region_enabled = true
+region_rect = Rect2(399, 14, 4, 10)
+
+[node name="Flowers2" type="Sprite2D" parent="Objects" index="5"]
+modulate = Color(0.705882, 0.529412, 0.494118, 1)
+position = Vector2(667, 269)
+texture = ExtResource("22_cs8gy")
+region_enabled = true
+region_rect = Rect2(759, 18, 6, 6)
+
+[node name="Flowers6" type="Sprite2D" parent="Objects" index="6"]
+modulate = Color(0.705882, 0.529412, 0.494118, 1)
+position = Vector2(653, 269)
+texture = ExtResource("22_cs8gy")
+region_enabled = true
+region_rect = Rect2(759, 18, 6, 6)
+
+[node name="Flowers3" type="Sprite2D" parent="Objects" index="7"]
+modulate = Color(0.705882, 0.529412, 0.494118, 1)
+position = Vector2(660, 269)
+texture = ExtResource("22_cs8gy")
+region_enabled = true
+region_rect = Rect2(771, 18, 6, 6)
+
+[node name="Flowers5" type="Sprite2D" parent="Objects" index="8"]
+modulate = Color(0.705882, 0.529412, 0.494118, 1)
+position = Vector2(655, 269.5)
+texture = ExtResource("22_cs8gy")
+region_enabled = true
+region_rect = Rect2(832, 19, 5, 5)
+
+[node name="Flowers4" type="Sprite2D" parent="Objects" index="9"]
+modulate = Color(0.705882, 0.529412, 0.494118, 1)
+position = Vector2(672, 268.5)
+texture = ExtResource("22_cs8gy")
+region_enabled = true
+region_rect = Rect2(818, 17, 8, 7)
 
 [node name="Camera2D" parent="Deer" index="11"]
 limit_right = 2000
 
-[node name="Crow" parent="." index="15" instance=ExtResource("12_io0qp")]
-position = Vector2(414, 233)
-making_noises = true
-
 [node name="Flock" parent="." index="16" instance=ExtResource("14_1rr85")]
 position = Vector2(1059, 189)
 scale = Vector2(-1, 1)
+
+[node name="ParallaxBackground4" type="ParallaxBackground" parent="." index="17"]
+layer = 0
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground4" index="0"]
+motion_scale = Vector2(1.4, 1)
+
+[node name="Crow" parent="ParallaxBackground4/ParallaxLayer" index="0" instance=ExtResource("12_io0qp")]
+position = Vector2(414, 205)
+scale = Vector2(2, 2)
+collision_layer = 0
+collision_mask = 0
+making_noises = true
+
+[node name="Well" parent="ParallaxBackground4/ParallaxLayer" index="1" instance=ExtResource("10_2shu1")]
+modulate = Color(0.65098, 0.45098, 0.501961, 1)
+position = Vector2(415, 257)
+scale = Vector2(2, 2)
+
+[node name="Bush" parent="ParallaxBackground4/ParallaxLayer" index="2" instance=ExtResource("17_dnsho")]
+modulate = Color(0.960784, 0.905882, 0.862745, 1)
+position = Vector2(387, 282)
+scale = Vector2(1.6, 1.6)
+
+[connection signal="body_entered" from="TriggerAreas/JumpMsgArea" to="MessagesControls" method="_on_jump_msg_area_body_entered"]
+[connection signal="body_entered" from="TriggerAreas/EatMsgArea" to="MessagesControls" method="_on_eat_msg_area_body_entered"]

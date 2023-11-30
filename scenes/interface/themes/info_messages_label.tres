@@ -3,5 +3,6 @@
 [ext_resource type="FontFile" uid="uid://higyjbrn5xrn" path="res://fonts/PlayMeGames Reguler.ttf" id="1_xslp8"]
 
 [resource]
+Label/colors/font_color = Color(1, 1, 1, 0.784314)
 Label/font_sizes/font_size = 24
 Label/fonts/font = ExtResource("1_xslp8")

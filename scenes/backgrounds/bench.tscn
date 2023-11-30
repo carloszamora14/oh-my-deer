@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://c1lu6dwt4qgyh"]
+
+[ext_resource type="Texture2D" uid="uid://cjum2bv58fycb" path="res://graphics/objects/bench-backless-wood.png" id="1_14g22"]
+
+[node name="Bench" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_14g22")
+region_enabled = true
+region_rect = Rect2(3, 25, 90, 38)

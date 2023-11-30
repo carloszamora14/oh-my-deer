@@ -122,6 +122,9 @@ func respawn():
 	$DeathSound.play()
 	if Globals.male_deer_lives == 0 || (Globals.male_deer_lives == 1 && !Globals.reducing_life_instantaneously):
 		player_lost = true
+	if !respawn_active:
+		gravity = 0
+		velocity.y = 0
 	await get_tree().create_timer(0.6 if respawn_active || player_lost else 2.0).timeout
 	can_control_character = true
 	Globals.male_deer_vulnerable = true

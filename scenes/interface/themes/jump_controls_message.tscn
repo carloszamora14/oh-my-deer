@@ -7,6 +7,33 @@
 [ext_resource type="Texture2D" uid="uid://slqkni4y7wfv" path="res://graphics/interface/keyboard-keys/ARROWUP-0.png" id="4_tjnlf"]
 [ext_resource type="Texture2D" uid="uid://c7anlxf2ho3t" path="res://graphics/interface/keyboard-keys/ARROWUP-1.png" id="6_x8m4p"]
 
+[sub_resource type="Animation" id="Animation_rgwyv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Panel/Container/VBoxContainer/HBoxContainer/TextureRect:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_garbb")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Panel/Container/VBoxContainer/HBoxContainer/TextureRect2:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("4_tjnlf")]
+}
+
 [sub_resource type="Animation" id="Animation_lmvl8"]
 resource_name = "press"
 length = 1.4
@@ -35,40 +62,14 @@ tracks/1/keys = {
 "values": [ExtResource("4_tjnlf"), ExtResource("6_x8m4p"), ExtResource("4_tjnlf")]
 }
 
-[sub_resource type="Animation" id="Animation_rgwyv"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Panel/Container/VBoxContainer/HBoxContainer/TextureRect:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("3_garbb")]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Panel/Container/VBoxContainer/HBoxContainer/TextureRect2:texture")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("4_tjnlf")]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_qg4dr"]
 _data = {
 "RESET": SubResource("Animation_rgwyv"),
 "press": SubResource("Animation_lmvl8")
 }
 
-[node name="JumpControlsMessage" instance=ExtResource("1_ytd1g")]
+[node name="JumpControlsMessage" node_paths=PackedStringArray("animation_player") instance=ExtResource("1_ytd1g")]
+animation_player = NodePath("AnimationPlayer")
 
 [node name="Panel" parent="." index="0"]
 offset_left = -178.0
@@ -105,7 +106,10 @@ texture = ExtResource("3_garbb")
 
 [node name="Label" type="Label" parent="Panel/Container/VBoxContainer/HBoxContainer" index="1"]
 layout_mode = 2
+theme = ExtResource("2_i54ao")
+theme_override_font_sizes/font_size = 20
 text = "or"
+vertical_alignment = 2
 
 [node name="TextureRect2" type="TextureRect" parent="Panel/Container/VBoxContainer/HBoxContainer" index="2"]
 layout_mode = 2

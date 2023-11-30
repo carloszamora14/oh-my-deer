@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://d2sdcjynk1hq2"]
+
+[ext_resource type="Texture2D" uid="uid://bt30bs4pvp53p" path="res://graphics/objects/Props.png" id="1_2trdl"]
+
+[node name="SmallGrass" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_2trdl")
+region_enabled = true
+region_rect = Rect2(1, 56, 13, 8)
