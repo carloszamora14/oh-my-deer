@@ -86,7 +86,8 @@ enter={
 2d_physics/layer_6="Grass"
 2d_physics/layer_7="Dead Bodies"
 2d_physics/layer_8="Food"
-2d_physics/layer_9="DeerHead"
+2d_physics/layer_9="Deer Head"
+2d_physics/layer_10="Player Border"
 
 [rendering]
 

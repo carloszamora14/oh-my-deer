@@ -16,6 +16,7 @@ var can_throw_candy: bool = true
 var transparent: bool = false
 var can_control_character: bool = true
 var cutscene_speed: int = 0
+var respawn_active: bool = true
 
 var blood_particles: PackedScene = preload("res://scenes/player/blood_particles.tscn")
 
@@ -66,15 +67,21 @@ func _physics_process(delta):
 
 
 func avoid_bullets():
-	$ProjectilesCollision/Collision.disabled = true
 	transparent = true
+	call_deferred("avoid_bullets_aux")
 
+
+func avoid_bullets_aux():
+	$ProjectilesCollision/Collision.disabled = true
 
 func reset():
 	transparent = false
-	$ProjectilesCollision/Collision.disabled = false
+	call_deferred("reset_aux")
 	$AnimationPlayer.play("idle")
 
+
+func reset_aux():
+	$ProjectilesCollision/Collision.disabled = false
 
 func hit(damage, enemy):
 	if transparent || player_lost:
@@ -113,18 +120,19 @@ func respawn():
 	can_control_character = false
 	Globals.male_deer_vulnerable = false
 	$DeathSound.play()
-#	get_node("DeerCollision").disabled = true    # disable
-	await get_tree().create_timer(0.6).timeout
+	if Globals.male_deer_lives == 0 || (Globals.male_deer_lives == 1 && !Globals.reducing_life_instantaneously):
+		player_lost = true
+	await get_tree().create_timer(0.6 if respawn_active || player_lost else 2.0).timeout
 	can_control_character = true
 	Globals.male_deer_vulnerable = true
 	get_node("DeerCollision").disabled = false   # enable
 	velocity = Vector2.ZERO
-	if Globals.male_deer_lives > 0:
-		global_position = respawn_coords
-		Globals.update_male_deer_health(100, null)
+	if Globals.male_deer_lives > 1 || (Globals.male_deer_lives == 1 && Globals.reducing_life_instantaneously):
+		if respawn_active:
+			global_position = respawn_coords
+			Globals.update_male_deer_health(100, null)
+			Globals.male_deer_hunger = 5
 	else:
-		player_lost = true
-#		get_node("DeerCollision").disabled = true   # enable
 		game_over.emit()
 		hide()
 	Globals.male_deer_falling = false
@@ -183,6 +191,7 @@ func cliff_cutscene_3rd_part():
 	$DeerCollision.scale.x = 1
 	$ProjectilesCollision.scale.x = 1
 	$Sprite2D.scale.x = 1
+	$HeadArea.scale.x = 1
 	await get_tree().create_timer(0.1, false).timeout
 	cutscene_speed = 80
 	await get_tree().create_timer(2.0, false).timeout
@@ -191,3 +200,16 @@ func cliff_cutscene_3rd_part():
 	cutscene_speed = 0
 	gravity = 0
 	await get_tree().create_timer(0.5, false).timeout
+
+
+func exit_scene(scene_name):
+	can_control_character = false
+	$DeerCollision.scale.x = 1
+	$ProjectilesCollision.scale.x = 1
+	$Sprite2D.scale.x = 1
+	$HeadArea.scale.x = 1
+	await get_tree().create_timer(0.1, false).timeout
+	cutscene_speed = 45
+	await get_tree().create_timer(2.0, false).timeout
+	TransitionLayer.change_scene(scene_name)
+	cutscene_speed = 0

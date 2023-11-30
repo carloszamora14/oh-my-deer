@@ -3,8 +3,8 @@ extends CharacterBody2D
 signal hunter_shot_bullet(position, direction, damage)
 signal display_dialog(lines, timings)
 
-const SPEED = 300.0
-const JUMP_VELOCITY = -400.0
+const SPEED = 100.0
+const JUMP_VELOCITY = -200.0
 
 var can_shoot: bool = true
 var sees_deer: bool = false
@@ -14,6 +14,13 @@ var target = null
 var angle: float
 var aiming: bool = true
 var bullet_damage: float = 0
+var move_right: bool = false
+var move_left: bool = false
+var looking_for_deer: bool = false
+var inactive: bool = false
+var allow_to_aim: bool = false
+var chasing: bool = false
+var is_in_shooting_area: bool = false
 
 var phrases = {
 	"coyotes gotta eat": ["res://sounds/hunter/coyotes-gotta-eat.mp3", ["Coyotes gotta eat"], [2.5]],
@@ -24,6 +31,11 @@ var phrases = {
 		"res://sounds/hunter/even-if-i-dont-kill-you-budy-somebody-else-will.mp3",
 		["Even if I don't kill you, buddy,", "then somebody else will."],
 		[1.4, 2]
+	],
+	"look what i found": [
+		"res://sounds/hunter/Look what I found.mp3",
+		["Look what I found — a little deer alone,", "and at point-blank range."],
+		[1.9, 1.5]
 	],
 }
 
@@ -36,52 +48,106 @@ const sounds: Array[String] = [
 ]
 
 func _physics_process(delta):
-	if aiming:
-		if target == null:
-			var mouse_position = get_global_mouse_position()
-		#	var mouse_offset = get_local_mouse_position()
-			angle = ((mouse_position - $ShoulderMark.global_position).normalized()).angle()
+	if !inactive:
+		var should_follow = !(is_in_shooting_area && global_position.x < target.global_position.x)
+		
+		if chasing && target != null:	
+			if sees_deer || !should_follow:
+				move_left = false
+				move_right = false
+			elif global_position.x > target.global_position.x:
+				move_left = true
+				move_right = false
+			else:
+				move_right = true
+				move_left = false
+			
+		if (allow_to_aim && aiming) || (target != null && !should_follow):
+			var pos = get_global_mouse_position() if target == null else target.global_position
+			if abs(pos.x - global_position.x) >= 40:
+				if pos.x < global_position.x:
+					$Sprites.scale.x = -abs($Sprites.scale.x)
+					$SpriteRunning.scale.x = -abs($SpriteRunning.scale.x)
+					$ShoulderMark.scale.x = -1
+					$CollisionShape2D.position.x = 7.2
+				else:
+					$Sprites.scale.x = abs($Sprites.scale.x)
+					$SpriteRunning.scale.x = abs($SpriteRunning.scale.x)
+					$ShoulderMark.scale.x = 1
+					$CollisionShape2D.position.x = 0
+			if target == null:
+				var mouse_position = get_global_mouse_position()
+				pos = mouse_position
+			#	var mouse_offset = get_local_mouse_position()
+				angle = ((mouse_position - $ShoulderMark.global_position).normalized()).angle()
+			else:
+				pos = target.global_position
+				angle = ((target.global_position - $ShoulderMark.global_position).normalized()).angle()
+				
+			if !target:
+				angle = PI/8
+			$Sprites/LeftContainer.rotation = (PI - angle) if pos.x < global_position.x else angle
+			$Sprites/RightContainer.rotation = (PI - angle) if pos.x < global_position.x else angle
+			
+			if looking_for_deer && (sees_deer || !should_follow) && can_shoot:
+				shoot_rifle(0)
+				can_shoot = false
+				$Timer.start()
+		
+		#	if sees_deer:
+		#		var angle = (Globals.male_deer_position - global_position).normalized().angle()
+		#		if angle < 0:
+		#			angle += 2 * PI
+		#		if angle >= PI / 4 && angle <= 3 * PI /2:
+		#			$Sprite2D.scale.x = -0.6
+		#			$AttackArea.scale.x = -1
+		#		else:
+		#			$Sprite2D.scale.x = 0.6
+		#			$AttackArea.scale.x = 1
+		#
+		#		if (can_shoot):
+		#			is_shooting = true
+		#			$AnimationPlayer.play("crouch shoot")
+		#			can_shoot = false
+		#			$Timer.start()
+		#			await $AnimationPlayer.animation_finished
+		#			if !sees_deer:
+		#				$AnimationPlayer.play("RESET")
+		#			is_shooting = false
+		##		if angle > PI/2 and angle 
+		#	look_at(Globals.male_deer_position)
+			# Add the gravity.
+		
+		if !is_shooting:
+			if move_right:
+				velocity.x = SPEED
+				$AnimationPlayer.play("run")
+			elif move_left:
+				velocity.x = -SPEED
+			else:
+				velocity.x = move_toward(velocity.x, 0, SPEED)
+				$AnimationPlayer.play("RESET")
 		else:
-			angle = ((target.global_position - $ShoulderMark.global_position).normalized()).angle()
-		$Sprites/LeftContainer.rotation = angle
-		$Sprites/RightContainer.rotation = angle
-	
-#	if sees_deer:
-#		var angle = (Globals.male_deer_position - global_position).normalized().angle()
-#		if angle < 0:
-#			angle += 2 * PI
-#		if angle >= PI / 4 && angle <= 3 * PI /2:
-#			$Sprite2D.scale.x = -0.6
-#			$AttackArea.scale.x = -1
-#		else:
-#			$Sprite2D.scale.x = 0.6
-#			$AttackArea.scale.x = 1
+			velocity.x = move_toward(velocity.x, 0, SPEED)
+			
+	#	if Input.is_action_just_pressed("interact"):
+	#		shoot_rifle(35)
+
+	#	var direction = Input.get_axis("left", "right")
+	#	if direction:
+	#		velocity.x = direction * SPEED
+	#	else:
+	#		velocity.x = move_toward(velocity.x, 0, SPEED)
 #
-#		if (can_shoot):
-#			is_shooting = true
-#			$AnimationPlayer.play("crouch shoot")
-#			can_shoot = false
-#			$Timer.start()
-#			await $AnimationPlayer.animation_finished
-#			if !sees_deer:
-#				$AnimationPlayer.play("RESET")
-#			is_shooting = false
-##		if angle > PI/2 and angle 
-#	look_at(Globals.male_deer_position)
-	# Add the gravity.
 	if not is_on_floor():
 		velocity.y += gravity * delta
 		
-#	if Input.is_action_just_pressed("interact"):
-#		shoot_rifle(35)
-
-#	var direction = Input.get_axis("left", "right")
-#	if direction:
-#		velocity.x = direction * SPEED
-#	else:
-#		velocity.x = move_toward(velocity.x, 0, SPEED)
-#
 	move_and_slide()
+	
+	if !inactive:
+		if is_on_wall() && is_on_floor() && !is_shooting && !sees_deer:
+			velocity.y += JUMP_VELOCITY
+
 	
 func shot_sound():
 	var sound = AudioStreamPlayer.new()
@@ -92,10 +158,12 @@ func shot_sound():
 
 
 func shoot_rifle(damage):
+	is_shooting = true
 	if damage:
 		bullet_damage = damage
 	$AnimationPlayer.play("shoot")
 	await $AnimationPlayer.animation_finished
+	is_shooting = false
 	bullet_damage = 0
 	$AnimationPlayer.play("RESET")
 	
@@ -115,6 +183,7 @@ func _on_timer_timeout():
 
 
 func _on_notice_area_body_entered(_body):
+	aiming = true
 	sees_deer = true
 
 
@@ -122,6 +191,7 @@ func _on_notice_area_body_exited(_body):
 	if !is_shooting:
 		$AnimationPlayer.play("RESET")
 	sees_deer = false
+	aiming = false
 
 
 func _on_attack_area_body_entered(body):
@@ -188,3 +258,23 @@ func emit_display_dialog(phrase):
 	var lines = phrases[phrase][1]
 	var timings = phrases[phrase][2]
 	display_dialog.emit(lines, timings)
+
+
+func look_what_i_found():
+	play_sound("look what i found")
+
+
+func start_chasing_deer(deer_marker):
+	looking_for_deer = true
+	aiming = false
+	move_right = true
+	target = deer_marker
+	await get_tree().create_timer(1.3, false).timeout
+	$AnimationPlayer.play("RESET")
+	$Sprites/LeftContainer.rotation = PI/8
+	$Sprites/RightContainer.rotation = PI/8
+	move_right = false
+	await get_tree().create_timer(3.4, false).timeout
+	allow_to_aim = true
+	chasing = true
+	

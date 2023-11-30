@@ -1,10 +1,10 @@
 [gd_scene load_steps=2 format=3 uid="uid://bicy8yoqkod3l"]
 
-[ext_resource type="Texture2D" uid="uid://c1jtx3wkdgb18" path="res://graphics/background/lake-sun-setting.jpg" id="1_jijj6"]
+[ext_resource type="Texture2D" uid="uid://c26223h0y1pf4" path="res://graphics/background/lake-background.jpg" id="1_uoq1i"]
 
 [node name="Aqueduct" type="Node2D"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(309, 41)
-scale = Vector2(0.6, 0.6)
-texture = ExtResource("1_jijj6")
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_uoq1i")

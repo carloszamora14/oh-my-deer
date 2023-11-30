@@ -18,17 +18,22 @@ func _process(_delta):
 
 
 func _on_area_2d_body_entered(_body):
-	print("enter")
 	if first_time:
 		first_time = false
-		await get_tree().create_timer(2.2, false).timeout
-		collapse()
+		get_tree().create_timer(1.0, false).timeout.connect(start_collapsing)
 	player_on_top = true
 
 
 func _on_area_2d_body_exited(_body):
-	print("exit")
 	player_on_top = false
+
+
+func start_collapsing():
+	if player_on_top:
+		await get_tree().create_timer(1.4, false).timeout
+		collapse()
+	else:
+		first_time = true
 
 
 func collapse():

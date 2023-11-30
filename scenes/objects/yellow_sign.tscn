@@ -5,7 +5,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hyf6j"]
 size = Vector2(110, 70)
 
-[node name="YellowSign" type="StaticBody2D"]
+[node name="YellowSign" type="StaticBody2D" groups=["Object"]]
 scale = Vector2(0.3, 0.3)
 collision_layer = 4
 collision_mask = 15

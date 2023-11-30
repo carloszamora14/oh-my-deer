@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cqmtwkdr7yoxf"]
+[gd_scene load_steps=23 format=3 uid="uid://cqmtwkdr7yoxf"]
 
 [ext_resource type="PackedScene" uid="uid://bqgrls7swt3um" path="res://scenes/levels/main.tscn" id="1_4ce6b"]
 [ext_resource type="Script" path="res://scenes/levels/lake.gd" id="2_a0agm"]
@@ -8,12 +8,142 @@
 [ext_resource type="PackedScene" uid="uid://drf4civkh2su6" path="res://scenes/objects/yellow_sign.tscn" id="4_guaij"]
 [ext_resource type="PackedScene" uid="uid://d1ojjop6dx3v2" path="res://scenes/objects/beam_bridge.tscn" id="5_fg6rv"]
 [ext_resource type="Texture2D" uid="uid://0y00jbel2s2" path="res://graphics/platforms/bridge.png" id="5_gpuqh"]
+[ext_resource type="PackedScene" uid="uid://nxqv4xndi210" path="res://scenes/objects/cliff_lake.tscn" id="9_i3k5f"]
+[ext_resource type="PackedScene" uid="uid://jrt5uqlggamv" path="res://scenes/enemies/hunter.tscn" id="10_esay2"]
+[ext_resource type="AudioStream" uid="uid://dpvhsm3e84ky7" path="res://sounds/Epic Dark Battle Music - Escape [Powerful Fantasy Horror by Ebunny].mp3" id="11_rqagq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7trk0"]
 size = Vector2(543, 22)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v1304"]
 size = Vector2(44, 22)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3c7y3"]
+size = Vector2(593, 22)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i0o6i"]
+size = Vector2(22, 353)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oai4c"]
+size = Vector2(311.5, 66)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0iin6"]
+size = Vector2(20, 86)
+
+[sub_resource type="Animation" id="Animation_it2qt"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hunter:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-98, 209)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Deer/Camera2D:zoom")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1.2, 1.2)]
+}
+
+[sub_resource type="Animation" id="Animation_5c6lu"]
+resource_name = "begin_level"
+length = 300.0
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(1.1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"begin_level_hunter"
+}]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Hunter")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(2.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"look_what_i_found"
+}]
+}
+tracks/2/type = "audio"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AudioStreamPlayer2D")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("11_rqagq")
+}],
+"times": PackedFloat32Array(0.1)
+}
+tracks/2/use_blend = true
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Deer/Camera2D:zoom")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1.8, 2.5, 4, 5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1.2, 1.2), Vector2(1.2, 1.2), Vector2(2, 2), Vector2(2, 2), Vector2(1.2, 1.2)]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.4, 1.8),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"begin_level_deer"
+}, {
+"args": [],
+"method": &"offset_camera"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_juhqq"]
+_data = {
+"RESET": SubResource("Animation_it2qt"),
+"begin_level": SubResource("Animation_5c6lu")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_io5ic"]
+size = Vector2(20, 58)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dpbjv"]
+size = Vector2(21, 62)
 
 [node name="Lake" instance=ExtResource("1_4ce6b")]
 script = ExtResource("2_a0agm")
@@ -29,28 +159,50 @@ position = Vector2(-2, 0)
 [node name="Objects" type="Node2D" parent="." index="8"]
 
 [node name="OrangeRoadWork" parent="Objects" index="0" instance=ExtResource("3_wnx86")]
-position = Vector2(515, 240.5)
+position = Vector2(515, 224.5)
 
 [node name="OrangeRoadWork2" parent="Objects" index="1" instance=ExtResource("3_wnx86")]
-position = Vector2(452, 240)
+position = Vector2(452, 224)
 scale = Vector2(-0.3, 0.3)
 
 [node name="YellowSign" parent="Objects" index="2" instance=ExtResource("4_guaij")]
-position = Vector2(428, 241)
+position = Vector2(428, 225)
 
 [node name="YellowSign2" parent="Objects" index="3" instance=ExtResource("4_guaij")]
-position = Vector2(333, 241)
+position = Vector2(333, 225)
 
-[node name="Deer" parent="." index="10"]
-position = Vector2(21, 235)
+[node name="BeamBridges" type="Node2D" parent="." index="9"]
 
-[node name="Camera2D" parent="Deer" index="10"]
-limit_right = 2000
+[node name="BeamBridge" parent="BeamBridges" index="0" instance=ExtResource("5_fg6rv")]
+position = Vector2(774, 249)
+scale = Vector2(0.6, 0.6)
 
-[node name="Bridge" type="Node2D" parent="." index="11"]
+[node name="BeamBridge2" parent="BeamBridges" index="1" instance=ExtResource("5_fg6rv")]
+position = Vector2(1122, 251)
+scale = Vector2(0.6, 0.6)
 
-[node name="FirstSegment" type="StaticBody2D" parent="Bridge" index="0"]
-collision_layer = 5
+[node name="BeamBridge3" parent="BeamBridges" index="2" instance=ExtResource("5_fg6rv")]
+position = Vector2(1465, 251)
+scale = Vector2(0.6, 0.6)
+
+[node name="CliffLake" parent="." index="10" instance=ExtResource("9_i3k5f")]
+position = Vector2(1617, 175)
+
+[node name="Deer" parent="." index="11"]
+position = Vector2(21, 219)
+collision_mask = 566
+
+[node name="Camera2D" parent="Deer" index="11"]
+limit_right = 1742
+
+[node name="Hunter" parent="." index="12" instance=ExtResource("10_esay2")]
+position = Vector2(-98, 209)
+
+[node name="Bridge" type="Node2D" parent="." index="13"]
+position = Vector2(0, -16)
+
+[node name="FirstSegment" type="StaticBody2D" parent="Bridge" index="0" groups=["Bridge"]]
+collision_layer = 4
 collision_mask = 15
 
 [node name="Sprite2D" type="Sprite2D" parent="Bridge/FirstSegment" index="0"]
@@ -64,7 +216,7 @@ region_rect = Rect2(0, 0, 684, 150)
 position = Vector2(270.5, 262)
 shape = SubResource("RectangleShape2D_7trk0")
 
-[node name="SecondSegment" type="StaticBody2D" parent="Bridge" index="1"]
+[node name="SecondSegment" type="StaticBody2D" parent="Bridge" index="1" groups=["Bridge"]]
 collision_layer = 4
 collision_mask = 15
 
@@ -79,16 +231,67 @@ region_rect = Rect2(-1, 0, 80, 71)
 position = Vector2(563, 262)
 shape = SubResource("RectangleShape2D_v1304")
 
-[node name="BeamBridges" type="Node2D" parent="." index="12"]
+[node name="ZerothSegment" type="StaticBody2D" parent="Bridge" index="2" groups=["Bridge"]]
+collision_layer = 4
+collision_mask = 79
 
-[node name="BeamBridge" parent="BeamBridges" index="0" instance=ExtResource("5_fg6rv")]
-position = Vector2(774, 265)
-scale = Vector2(0.6, 0.6)
+[node name="Sprite2D" type="Sprite2D" parent="Bridge/ZerothSegment" index="0"]
+position = Vector2(-300, 288)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("3_3xood")
 
-[node name="BeamBridge2" parent="BeamBridges" index="1" instance=ExtResource("5_fg6rv")]
-position = Vector2(1122, 267)
-scale = Vector2(0.6, 0.6)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bridge/ZerothSegment" index="1"]
+position = Vector2(-297.5, 262)
+shape = SubResource("RectangleShape2D_3c7y3")
 
-[node name="BeamBridge3" parent="BeamBridges" index="2" instance=ExtResource("5_fg6rv")]
-position = Vector2(1465, 267)
-scale = Vector2(0.6, 0.6)
+[node name="Borders" type="Node2D" parent="." index="14"]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Borders" index="0"]
+collision_layer = 512
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/StaticBody2D" index="0"]
+position = Vector2(-11, 177.5)
+shape = SubResource("RectangleShape2D_i0o6i")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="Borders" index="1"]
+collision_layer = 4
+collision_mask = 79
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/StaticBody2D2" index="0"]
+position = Vector2(1889.25, 278)
+shape = SubResource("RectangleShape2D_oai4c")
+
+[node name="ExitArea" type="Area2D" parent="." index="15"]
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExitArea" index="0"]
+position = Vector2(1727, 205)
+shape = SubResource("RectangleShape2D_0iin6")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="16"]
+libraries = {
+"": SubResource("AnimationLibrary_juhqq")
+}
+
+[node name="StartArea" type="Area2D" parent="." index="17"]
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StartArea" index="0"]
+position = Vector2(153, 206)
+shape = SubResource("RectangleShape2D_io5ic")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." index="18"]
+volume_db = -15.0
+
+[node name="ShootingArea" type="Area2D" parent="." index="19"]
+collision_layer = 1024
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ShootingArea" index="0"]
+position = Vector2(565.5, 204)
+shape = SubResource("RectangleShape2D_dpbjv")
+
+[connection signal="body_entered" from="ExitArea" to="." method="_on_exit_area_body_entered"]
+[connection signal="body_entered" from="StartArea" to="." method="_on_start_area_body_entered"]
+[connection signal="body_entered" from="ShootingArea" to="." method="_on_shooting_area_body_entered"]
+[connection signal="body_exited" from="ShootingArea" to="." method="_on_shooting_area_body_exited"]

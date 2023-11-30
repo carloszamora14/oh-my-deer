@@ -1,0 +1,135 @@
+[gd_scene load_steps=15 format=3 uid="uid://cqmtwkdr7yoxf"]
+
+[ext_resource type="PackedScene" uid="uid://bqgrls7swt3um" path="res://scenes/levels/main.tscn" id="1_4ce6b"]
+[ext_resource type="Script" path="res://scenes/levels/lake.gd" id="2_a0agm"]
+[ext_resource type="PackedScene" uid="uid://bicy8yoqkod3l" path="res://scenes/backgrounds/aqueduct.tscn" id="2_j7q0s"]
+[ext_resource type="Texture2D" uid="uid://cf8x06kc03o1u" path="res://graphics/platforms/unbroken-bridge.png" id="3_3xood"]
+[ext_resource type="PackedScene" uid="uid://ci8bvv4hd08j6" path="res://scenes/objects/orange_road_work.tscn" id="3_wnx86"]
+[ext_resource type="PackedScene" uid="uid://drf4civkh2su6" path="res://scenes/objects/yellow_sign.tscn" id="4_guaij"]
+[ext_resource type="PackedScene" uid="uid://d1ojjop6dx3v2" path="res://scenes/objects/beam_bridge.tscn" id="5_fg6rv"]
+[ext_resource type="Texture2D" uid="uid://0y00jbel2s2" path="res://graphics/platforms/bridge.png" id="5_gpuqh"]
+[ext_resource type="PackedScene" uid="uid://nxqv4xndi210" path="res://scenes/objects/cliff_lake.tscn" id="9_i3k5f"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7trk0"]
+size = Vector2(543, 22)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v1304"]
+size = Vector2(44, 22)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i0o6i"]
+size = Vector2(22, 353)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oai4c"]
+size = Vector2(311.5, 66)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0iin6"]
+size = Vector2(20, 86)
+
+[node name="Lake" instance=ExtResource("1_4ce6b")]
+script = ExtResource("2_a0agm")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="." index="0"]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground" index="0"]
+motion_scale = Vector2(0.1, 0.1)
+
+[node name="Aqueduct" parent="ParallaxBackground/ParallaxLayer" index="0" instance=ExtResource("2_j7q0s")]
+position = Vector2(-2, 0)
+
+[node name="Objects" type="Node2D" parent="." index="8"]
+
+[node name="OrangeRoadWork" parent="Objects" index="0" instance=ExtResource("3_wnx86")]
+position = Vector2(515, 224.5)
+
+[node name="OrangeRoadWork2" parent="Objects" index="1" instance=ExtResource("3_wnx86")]
+position = Vector2(452, 224)
+scale = Vector2(-0.3, 0.3)
+
+[node name="YellowSign" parent="Objects" index="2" instance=ExtResource("4_guaij")]
+position = Vector2(428, 225)
+
+[node name="YellowSign2" parent="Objects" index="3" instance=ExtResource("4_guaij")]
+position = Vector2(333, 225)
+
+[node name="BeamBridges" type="Node2D" parent="." index="9"]
+
+[node name="BeamBridge" parent="BeamBridges" index="0" instance=ExtResource("5_fg6rv")]
+position = Vector2(774, 249)
+scale = Vector2(0.6, 0.6)
+
+[node name="BeamBridge2" parent="BeamBridges" index="1" instance=ExtResource("5_fg6rv")]
+position = Vector2(1122, 251)
+scale = Vector2(0.6, 0.6)
+
+[node name="BeamBridge3" parent="BeamBridges" index="2" instance=ExtResource("5_fg6rv")]
+position = Vector2(1465, 251)
+scale = Vector2(0.6, 0.6)
+
+[node name="CliffLake" parent="." index="10" instance=ExtResource("9_i3k5f")]
+position = Vector2(1617, 175)
+
+[node name="Deer" parent="." index="11"]
+position = Vector2(21, 219)
+
+[node name="Camera2D" parent="Deer" index="11"]
+limit_right = 1742
+
+[node name="Bridge" type="Node2D" parent="." index="12"]
+position = Vector2(0, -16)
+
+[node name="FirstSegment" type="StaticBody2D" parent="Bridge" index="0"]
+collision_layer = 5
+collision_mask = 15
+
+[node name="Sprite2D" type="Sprite2D" parent="Bridge/FirstSegment" index="0"]
+position = Vector2(268, 288)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("3_3xood")
+region_enabled = true
+region_rect = Rect2(0, 0, 684, 150)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bridge/FirstSegment" index="1"]
+position = Vector2(270.5, 262)
+shape = SubResource("RectangleShape2D_7trk0")
+
+[node name="SecondSegment" type="StaticBody2D" parent="Bridge" index="1"]
+collision_layer = 4
+collision_mask = 15
+
+[node name="Sprite2D" type="Sprite2D" parent="Bridge/SecondSegment" index="0"]
+position = Vector2(573, 249)
+scale = Vector2(-0.8, 0.8)
+texture = ExtResource("5_gpuqh")
+region_enabled = true
+region_rect = Rect2(-1, 0, 80, 71)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bridge/SecondSegment" index="1"]
+position = Vector2(563, 262)
+shape = SubResource("RectangleShape2D_v1304")
+
+[node name="Borders" type="Node2D" parent="." index="13"]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Borders" index="0"]
+collision_layer = 4
+collision_mask = 79
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/StaticBody2D" index="0"]
+position = Vector2(-11, 177.5)
+shape = SubResource("RectangleShape2D_i0o6i")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="Borders" index="1"]
+collision_layer = 4
+collision_mask = 79
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/StaticBody2D2" index="0"]
+position = Vector2(1889.25, 278)
+shape = SubResource("RectangleShape2D_oai4c")
+
+[node name="ExitArea" type="Area2D" parent="." index="14"]
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExitArea" index="0"]
+position = Vector2(1727, 205)
+shape = SubResource("RectangleShape2D_0iin6")
+
+[connection signal="body_entered" from="ExitArea" to="." method="_on_exit_area_body_entered"]

@@ -572,7 +572,7 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3fwwy"]
-size = Vector2(13.3333, 34.6667)
+size = Vector2(9.6, 34.6667)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gogoc"]
 radius = 108.671
@@ -601,7 +601,7 @@ collision_layer = 16
 shape = SubResource("CircleShape2D_gogoc")
 
 [node name="Sprites" type="Node2D" parent="."]
-position = Vector2(3.33333, -1.66667)
+position = Vector2(3.33, -1.66)
 
 [node name="LeftContainer" type="Node2D" parent="Sprites"]
 position = Vector2(-6, -9)

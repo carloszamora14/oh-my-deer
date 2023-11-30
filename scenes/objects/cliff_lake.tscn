@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://nxqv4xndi210"]
+
+[ext_resource type="Texture2D" uid="uid://bjfw8spqj5hc5" path="res://graphics/background/cliff-lake.png" id="1_ncwkm"]
+
+[node name="CliffLake" type="StaticBody2D"]
+collision_layer = 4
+collision_mask = 15
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_ncwkm")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(-144, 112)
+scale = Vector2(-0.5, 0.5)
+texture = ExtResource("1_ncwkm")
+region_enabled = true
+region_rect = Rect2(71, 449, 77, 52)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(14, 70, 125, 70, 125, 125, 75, 125, 14, 77)

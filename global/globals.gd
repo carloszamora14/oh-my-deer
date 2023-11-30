@@ -8,6 +8,7 @@ signal male_deer_death()
 signal female_deer_death()
 signal falling
 
+var reducing_life_instantaneously: bool = true
 var game_loaded: bool = false
 var male_deer_falling: bool = false:
 	set(value):
@@ -45,7 +46,7 @@ var bullet_impact_sounds = [
 ]
 
 func update_male_deer_health(value, enemy):
-	if !male_deer_vulnerable:
+	if !male_deer_vulnerable && value < male_deer_health:
 		return
 	if value > male_deer_health:
 		male_deer_health = min(100, value)
@@ -56,7 +57,8 @@ func update_male_deer_health(value, enemy):
 	if (male_deer_health <= 0):
 		if enemy != null && "reset_target" in enemy:
 			enemy.reset_target()
-		male_deer_lives -= 1
+		if reducing_life_instantaneously:
+			male_deer_lives -= 1
 		male_deer_death.emit()
 	stats_change.emit()
 

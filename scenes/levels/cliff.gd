@@ -6,6 +6,7 @@ extends MainLevel
 var cutscene_played: bool = false
 
 func _ready():
+	$Hunter.allow_to_aim = true
 	for enemy in get_tree().get_nodes_in_group("Enemy"):
 		enemy.connect("hunter_shot_bullet", _on_hunter_bullet)
 	polygon_2d.polygon = collision_polygon_2d.polygon
@@ -42,7 +43,6 @@ func fade_to_black():
 
 
 func play_water_splash():
-	print($Deer.global_position)
 	var sound = AudioStreamPlayer2D.new()
 	sound.stream = load("res://sounds/water-splash.mp3")
 	sound.max_distance = 10000

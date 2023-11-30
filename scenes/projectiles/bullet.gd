@@ -7,7 +7,9 @@ signal emit_particle(position, direction, velocity, scale)
 var direction: Vector2 = Vector2.UP
 var initial_pos: Vector2
 var max_distance: float = (speed * trail_lifetime)**2
-var damage: float = 35
+const BASE_DAMAGE: float = 40
+var traveled: float
+var damage: float
 
 
 func _ready():
@@ -15,9 +17,9 @@ func _ready():
 
 
 func _physics_process(delta):
-	var traveled: float = (position.x - initial_pos.x)**2 + (position.y - initial_pos.y)**2
+	traveled = (position.x - initial_pos.x)**2 + (position.y - initial_pos.y)**2
 	
-	if (traveled >= 5 * max_distance):
+	if (traveled >= 10 * max_distance):
 		queue_free()
 	
 	if (randf() >= traveled / max_distance):
@@ -30,11 +32,15 @@ func _physics_process(delta):
 
 
 func _on_body_entered(body):
-	if 'hit' in body:
+	if 'hit' in body && !body.is_in_group("Enemy"):
+		if damage <= 0:
+			damage = int(BASE_DAMAGE - min(35 * (traveled / (5 * max_distance)), 35))
 		body.hit(damage, self)
 	queue_free()
 
 
 func _on_area_entered(area):
+	if damage <= 0:
+		damage = int(BASE_DAMAGE - min(35 * (traveled / (5 * max_distance)), 35))
 	area.emit_shot(damage, self)
 	queue_free()
