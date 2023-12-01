@@ -205,6 +205,15 @@ func cliff_cutscene_3rd_part():
 	await get_tree().create_timer(0.5, false).timeout
 
 
+func walk_right_nonstop():
+	can_control_character = false
+	$DeerCollision.scale.x = 1
+	$ProjectilesCollision.scale.x = 1
+	$Sprite2D.scale.x = 1
+	$HeadArea.scale.x = 1
+	cutscene_speed = 45
+
+
 func exit_scene(scene_name):
 	can_control_character = false
 	$DeerCollision.scale.x = 1

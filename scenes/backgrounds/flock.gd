@@ -1,10 +1,13 @@
 extends Node2D
 
+@export_range(-80.0, 24) var db_sound: float = 18.0
+var direction: Vector2 = Vector2(-1.0, 0)
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
+	$AudioStreamPlayer2D.volume_db = db_sound
 	var flock = $Crows.get_children()
 	for crow in flock:
+		crow.direction = direction
 		crow.speed = 50 + randi() % 15
 		crow.fly(randf_range(0.4, 0.8))
 

@@ -10,6 +10,9 @@ var over: bool = false
 
 
 func _ready():
+	Globals.male_deer_vulnerable = true
+	Globals.male_deer_falling = false	
+	Globals.reducing_life_instantaneously = true
 	for enemy in get_tree().get_nodes_in_group("Enemy"):
 		enemy.connect("hunter_shot_bullet", _on_hunter_bullet)
 	if Globals.game_loaded:

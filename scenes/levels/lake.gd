@@ -35,7 +35,7 @@ func _on_exit_area_body_entered(body):
 	$Deer.avoid_bullets()
 	$Hunter.inactive = true
 	if "exit_scene" in body:
-		body.exit_scene("res://scenes/levels/cliff.tscn")
+		body.exit_scene("res://scenes/levels/before_cliff.tscn")
 
 
 func _on_start_area_body_entered(_body):
