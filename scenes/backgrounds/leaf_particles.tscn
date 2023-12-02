@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cb8mbkw74p7t7"]
 
-[ext_resource type="Texture2D" uid="uid://df1v6iaeei15h" path="res://graphics/textures/leaf.png" id="1_aeggh"]
+[ext_resource type="Texture2D" uid="uid://n6p3wp667uxm" path="res://graphics/textures/leaf-dark.png" id="1_tveyj"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_q2ovg"]
 emission_shape = 3
@@ -19,12 +19,11 @@ linear_accel_min = 1.0
 linear_accel_max = 2.0
 scale_min = 0.05
 scale_max = 0.07
-color = Color(0.992157, 0.427451, 0.580392, 1)
 
 [node name="LeafParticles" type="Node2D"]
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 amount = 12
 process_material = SubResource("ParticleProcessMaterial_q2ovg")
-texture = ExtResource("1_aeggh")
+texture = ExtResource("1_tveyj")
 lifetime = 7.0

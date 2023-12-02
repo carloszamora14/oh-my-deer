@@ -1,6 +1,8 @@
 extends Node2D
 
 @export var shift_hue: float = 0
+@export var sprite_scale: float = 1.0
+
 var is_deer_close: bool = false
 var being_eaten: bool = false
 var was_eaten: bool = false
@@ -11,6 +13,7 @@ var audio: AudioStreamPlayer2D
 func _ready():
 	var stages = $Sprites.get_children()
 	for stage in stages:
+		stage.scale *= sprite_scale
 		stage.material.set_shader_parameter("shift_hue", shift_hue)
 	$AnimationPlayer.animation_finished.connect(deer_ate_grass)
 	$AnimationPlayer2.play("RESET")

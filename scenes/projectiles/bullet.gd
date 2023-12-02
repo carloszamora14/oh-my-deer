@@ -10,9 +10,11 @@ var max_distance: float = (speed * trail_lifetime)**2
 const BASE_DAMAGE: float = 40
 var traveled: float
 var damage: float
+var through_objects: bool
 
 
 func _ready():
+	through_objects = randf() > 0.5
 	initial_pos = position
 
 
@@ -32,6 +34,9 @@ func _physics_process(delta):
 
 
 func _on_body_entered(body):
+	if through_objects && body.is_in_group("Object"):
+		return
+		
 	if 'hit' in body && !body.is_in_group("Enemy"):
 		if damage <= 0:
 			damage = int(BASE_DAMAGE - min(35 * (traveled / (5 * max_distance)), 35))

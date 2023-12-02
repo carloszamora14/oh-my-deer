@@ -17,6 +17,8 @@ var transparent: bool = false
 var can_control_character: bool = true
 var cutscene_speed: int = 0
 var respawn_active: bool = true
+var can_jump: bool = true
+var jump_timer_running: bool = false
 
 var blood_particles: PackedScene = preload("res://scenes/player/blood_particles.tscn")
 
@@ -57,6 +59,12 @@ func increase_hunger():
 func _physics_process(delta):
 	if player_lost:
 		return
+	
+	if is_on_floor() && !can_jump && !jump_timer_running:
+		jump_timer_running = true
+		await get_tree().create_timer(0.6, false).timeout
+		can_jump = true
+		jump_timer_running = false
 	
 	Globals.male_deer_position = global_position
 	

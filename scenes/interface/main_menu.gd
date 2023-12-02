@@ -23,4 +23,5 @@ func reset_globals():
 	Globals.male_deer_health = 100
 	Globals.male_deer_score = 0
 	Globals.male_deer_lives = 3
+	Globals.male_deer_hunger = 5
 	Globals.male_deer_position = Vector2(32, 240)

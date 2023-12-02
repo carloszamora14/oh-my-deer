@@ -3,13 +3,13 @@
 [ext_resource type="PackedScene" uid="uid://xvd4yghov0pa" path="res://scenes/interface/message.tscn" id="1_tuy4g"]
 [ext_resource type="Theme" uid="uid://c7hfx0wm7lip0" path="res://scenes/interface/themes/info_messages_label.tres" id="3_jhh1x"]
 [ext_resource type="Texture2D" uid="uid://baxqafdbls6wg" path="res://graphics/interface/keyboard-keys/A-1.png" id="3_q6nnk"]
-[ext_resource type="Texture2D" uid="uid://6apw5f0vx88y" path="res://graphics/interface/keyboard-keys/B-0.png" id="4_6x0qj"]
+[ext_resource type="Texture2D" uid="uid://djn3tb2odpnip" path="res://graphics/interface/keyboard-keys/D-0.png" id="4_sisfl"]
 [ext_resource type="Texture2D" uid="uid://b7q3gep4noiix" path="res://graphics/interface/keyboard-keys/ARROWLEFT-1.png" id="5_bbnms"]
 [ext_resource type="Texture2D" uid="uid://te5kr2hgui0j" path="res://graphics/interface/keyboard-keys/ARROWRIGHT-0.png" id="6_6hixd"]
 [ext_resource type="Texture2D" uid="uid://cwvhunuq2dx7" path="res://graphics/interface/keyboard-keys/ARROWLEFT-0.png" id="6_uscy0"]
 [ext_resource type="Texture2D" uid="uid://dqo2hqimy2y3t" path="res://graphics/interface/keyboard-keys/ARROWRIGHT-1.png" id="7_klqus"]
 [ext_resource type="Texture2D" uid="uid://c8ja2cp0d6vn3" path="res://graphics/interface/keyboard-keys/A-0.png" id="8_pabom"]
-[ext_resource type="Texture2D" uid="uid://b7ctww8odygxe" path="res://graphics/interface/keyboard-keys/B-1.png" id="9_6esvl"]
+[ext_resource type="Texture2D" uid="uid://dc86mona1e5bl" path="res://graphics/interface/keyboard-keys/D-1.png" id="9_cxbdr"]
 
 [sub_resource type="Animation" id="Animation_awtkg"]
 length = 0.001
@@ -28,14 +28,14 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Panel/Container/VBoxContainer/HBoxContainer/B:texture")
+tracks/1/path = NodePath("Panel/Container/VBoxContainer/HBoxContainer/D:texture")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("4_6x0qj")]
+"values": [ExtResource("4_sisfl")]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -81,14 +81,14 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Panel/Container/VBoxContainer/HBoxContainer/B:texture")
+tracks/1/path = NodePath("Panel/Container/VBoxContainer/HBoxContainer/D:texture")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.7, 1.4),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [ExtResource("4_6x0qj"), ExtResource("9_6esvl"), ExtResource("4_6x0qj")]
+"values": [ExtResource("4_sisfl"), ExtResource("9_cxbdr"), ExtResource("4_sisfl")]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -161,10 +161,10 @@ texture = ExtResource("3_q6nnk")
 expand_mode = 3
 stretch_mode = 4
 
-[node name="B" type="TextureRect" parent="Panel/Container/VBoxContainer/HBoxContainer" index="1"]
+[node name="D" type="TextureRect" parent="Panel/Container/VBoxContainer/HBoxContainer" index="1"]
 custom_minimum_size = Vector2(34, 32)
 layout_mode = 2
-texture = ExtResource("4_6x0qj")
+texture = ExtResource("4_sisfl")
 
 [node name="Label2" type="Label" parent="Panel/Container/VBoxContainer" index="2"]
 custom_minimum_size = Vector2(100, 0)

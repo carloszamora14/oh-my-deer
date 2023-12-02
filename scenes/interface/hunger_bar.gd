@@ -5,6 +5,7 @@ var icons: Array
 func _ready():
 	Globals.connect("hunger_change", update_hunger_bar)
 	icons = $HBoxContainer.get_children()
+	update_hunger_bar()
 
 
 func update_hunger_bar():

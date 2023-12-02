@@ -147,6 +147,9 @@ func _physics_process(delta):
 	if !inactive:
 		if is_on_wall() && is_on_floor() && !is_shooting && !sees_deer:
 			velocity.y += JUMP_VELOCITY
+	elif velocity.x != 0:
+		$AnimationPlayer.play("RESET")
+		velocity.x = move_toward(velocity.x, 0, SPEED)
 
 	
 func shot_sound():

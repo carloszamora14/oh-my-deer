@@ -1,10 +1,11 @@
-[gd_scene load_steps=23 format=3 uid="uid://cqmtwkdr7yoxf"]
+[gd_scene load_steps=24 format=3 uid="uid://cqmtwkdr7yoxf"]
 
 [ext_resource type="PackedScene" uid="uid://bqgrls7swt3um" path="res://scenes/levels/main.tscn" id="1_4ce6b"]
 [ext_resource type="Script" path="res://scenes/levels/lake.gd" id="2_a0agm"]
 [ext_resource type="PackedScene" uid="uid://bicy8yoqkod3l" path="res://scenes/backgrounds/aqueduct.tscn" id="2_j7q0s"]
 [ext_resource type="Texture2D" uid="uid://cf8x06kc03o1u" path="res://graphics/platforms/unbroken-bridge.png" id="3_3xood"]
 [ext_resource type="PackedScene" uid="uid://ci8bvv4hd08j6" path="res://scenes/objects/orange_road_work.tscn" id="3_wnx86"]
+[ext_resource type="PackedScene" uid="uid://b78wm44yatqh1" path="res://scenes/collectibles/grass.tscn" id="4_a3f7p"]
 [ext_resource type="PackedScene" uid="uid://drf4civkh2su6" path="res://scenes/objects/yellow_sign.tscn" id="4_guaij"]
 [ext_resource type="PackedScene" uid="uid://d1ojjop6dx3v2" path="res://scenes/objects/beam_bridge.tscn" id="5_fg6rv"]
 [ext_resource type="Texture2D" uid="uid://0y00jbel2s2" path="res://graphics/platforms/bridge.png" id="5_gpuqh"]
@@ -155,6 +156,15 @@ motion_scale = Vector2(0.1, 0.1)
 
 [node name="Aqueduct" parent="ParallaxBackground/ParallaxLayer" index="0" instance=ExtResource("2_j7q0s")]
 position = Vector2(-2, 0)
+
+[node name="Grass" parent="Collectibles" index="0" instance=ExtResource("4_a3f7p")]
+position = Vector2(1614, -14)
+shift_hue = 0.77
+
+[node name="Grass2" parent="Collectibles" index="1" instance=ExtResource("4_a3f7p")]
+position = Vector2(1659, -16)
+shift_hue = 0.74
+sprite_scale = 0.9
 
 [node name="Objects" type="Node2D" parent="." index="8"]
 

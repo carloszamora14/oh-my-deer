@@ -24,11 +24,11 @@ func physics_update(_delta):
 	var direction
 #	var directiony
 	if actor.can_control_character:
-		var is_jump_just_pressed: bool = Input.is_action_just_pressed("jump")
+		var is_jump_pressed: bool = Input.is_action_pressed("jump")
 		
-		if is_jump_just_pressed:
-			if actor.is_on_floor():
-				actor.velocity.y = JUMP_VELOCITY
+		if is_jump_pressed && actor.is_on_floor() && actor.can_jump:
+			actor.can_jump = false
+			actor.velocity.y = JUMP_VELOCITY
 		
 		direction = Input.get_axis("left", "right")
 #		directiony = Input.get_axis("down", "jump")
