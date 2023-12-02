@@ -45,6 +45,7 @@ var bullet_impact_sounds = [
 	"res://sounds/bullet-impact3.mp3",
 ]
 
+
 func update_male_deer_health(value, enemy):
 	if !male_deer_vulnerable && value < male_deer_health:
 		return
@@ -96,4 +97,3 @@ func play_bullet_impact(sound_position):
 	sound.play()
 	await sound.finished
 	sound.queue_free()
-	

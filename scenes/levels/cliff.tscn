@@ -454,7 +454,7 @@ process_material = SubResource("ParticleProcessMaterial_fk8dm")
 texture = ExtResource("8_auawl")
 lifetime = 7.0
 
-[node name="Camera2D" parent="Deer" index="13"]
+[node name="Camera2D" parent="Deer" index="14"]
 limit_right = 790
 limit_bottom = 360
 

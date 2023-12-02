@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://by3dppekchmgd" path="res://scenes/interface/game_over.tscn" id="4_qgytl"]
 [ext_resource type="PackedScene" uid="uid://ghofatkoy8my" path="res://scenes/projectiles/pause_menu.tscn" id="5_kquh5"]
 
-[node name="Main" type="Node2D"]
+[node name="Main" type="Node2D" groups=["Level"]]
 script = ExtResource("1_teyda")
 
 [node name="Tilesets" type="Node2D" parent="."]

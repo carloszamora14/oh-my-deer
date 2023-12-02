@@ -7,6 +7,8 @@ func _ready():
 	Globals.male_deer_falling = false	
 	Globals.reducing_life_instantaneously = false
 	$Deer.respawn_active = false
+	for player in get_tree().get_nodes_in_group("Player"):
+		player.connect("show_damage_indicator", _on_show_damage_indicator)
 	for enemy in get_tree().get_nodes_in_group("Enemy"):
 		enemy.connect("hunter_shot_bullet", _on_hunter_bullet)
 	Globals.connect("male_deer_death", reset_scene)

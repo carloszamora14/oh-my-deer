@@ -2,23 +2,33 @@ extends Node2D
 class_name MainLevel
 
 const WINDOW_HEIGHT: int = 288
+var over: bool = false
+
 var candy_scene: PackedScene = preload('res://scenes/projectiles/candy.tscn')
 var bullet_scene: PackedScene = preload('res://scenes/projectiles/bullet.tscn')
 var particle_scene: PackedScene = preload('res://scenes/weapons/trail_particle.tscn')
-
-var over: bool = false
+var damage_indicator_scene: PackedScene = preload('res://scenes/interface/damage_indicator.tscn')
 
 
 func _ready():
 	Globals.male_deer_vulnerable = true
 	Globals.male_deer_falling = false	
 	Globals.reducing_life_instantaneously = true
+	for player in get_tree().get_nodes_in_group("Player"):
+		player.connect("show_damage_indicator", _on_show_damage_indicator)
 	for enemy in get_tree().get_nodes_in_group("Enemy"):
 		enemy.connect("hunter_shot_bullet", _on_hunter_bullet)
 	if Globals.game_loaded:
 		load_game()
 	else:
 		$Deer.position = Vector2(34, 200)
+
+
+func _on_show_damage_indicator(pos, damage):
+	var indicator = damage_indicator_scene.instantiate() as Node2D
+	indicator.text = "-" + str(damage)
+	indicator.global_position = pos
+	add_child(indicator)
 
 
 func _on_hunter_bullet(bullet_position, bullet_direction, damage):
@@ -47,7 +57,7 @@ func _on_deer_game_over():
 
 
 func _process(_delta):
-	if Input.is_action_just_pressed("esc") && !over:
+	if (Input.is_action_just_pressed("esc") || Input.is_action_just_pressed("pause")) && !over:
 		get_tree().paused = true
 		$CanvasLayer2.show()
 	if Globals.male_deer_vulnerable && Globals.male_deer_position.y > WINDOW_HEIGHT * 1.4 && !Globals.male_deer_falling:

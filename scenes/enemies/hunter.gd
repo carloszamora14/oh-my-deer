@@ -124,6 +124,7 @@ func _physics_process(delta):
 				$AnimationPlayer.play("run")
 			elif move_left:
 				velocity.x = -SPEED
+				$AnimationPlayer.play("run")
 			else:
 				velocity.x = move_toward(velocity.x, 0, SPEED)
 				$AnimationPlayer.play("RESET")

@@ -21,7 +21,6 @@ func spawn_flock(pos, dir):
 
 func change_scene():
 	$Deer.walk_right_nonstop()
-	
 
 
 func _on_transition_area_body_entered(_body):

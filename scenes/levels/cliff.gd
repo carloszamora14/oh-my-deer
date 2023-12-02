@@ -7,6 +7,8 @@ var cutscene_played: bool = false
 
 func _ready():
 	$Hunter.allow_to_aim = true
+	for player in get_tree().get_nodes_in_group("Player"):
+		player.connect("show_damage_indicator", _on_show_damage_indicator)
 	for enemy in get_tree().get_nodes_in_group("Enemy"):
 		enemy.connect("hunter_shot_bullet", _on_hunter_bullet)
 	polygon_2d.polygon = collision_polygon_2d.polygon

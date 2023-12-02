@@ -2,13 +2,14 @@ extends CharacterBody2D
 
 signal game_over()
 signal player_throw_candy(marker_pos, candy_direction)
+signal show_damage_indicator(pos, damage)
 
 const SPEED = 100.0
 const JUMP_VELOCITY = -240.0
 const FRICTION = 300;
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
-var respawn_coords = Vector2(40, 140)
+var respawn_coords = Vector2(20, 220)
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var player_lost: bool = false
 var eating: bool = false
@@ -34,10 +35,11 @@ func reset_shader():
 
 func hunger_damage():
 	if Globals.male_deer_vulnerable:
+		show_damage_indicator.emit(get_damage_indicator_pos(), min(10, Globals.male_deer_health))
 		Globals.update_male_deer_health(Globals.male_deer_health - 10, null)
 		Globals.male_deer_vulnerable = false
-		$Sprite2D.material.set_shader_parameter("color", Vector3(1, 0, 0))
-		$Sprite2D.material.set_shader_parameter("progress", 0.6)
+		$Sprite2D.material.set_shader_parameter("color", Vector3(0.996, 0.361, 0.325))
+		$Sprite2D.material.set_shader_parameter("progress", 1.0)
 		if (Globals.male_deer_health > 0):
 			get_tree().create_timer(0.2, false).timeout.connect(reset_shader)
 			var sound = AudioStreamPlayer.new()
@@ -49,7 +51,7 @@ func hunger_damage():
 			sound.queue_free()
 			Globals.male_deer_vulnerable = true
 		else:
-			get_tree().create_timer(0.6, false).timeout.connect(reset_shader)
+			get_tree().create_timer(0.4, false).timeout.connect(reset_shader)
 
 
 func increase_hunger():
@@ -92,7 +94,7 @@ func reset_aux():
 	$ProjectilesCollision/Collision.disabled = false
 
 func hit(damage, enemy):
-	if transparent || player_lost:
+	if transparent || player_lost || !Globals.male_deer_vulnerable || Globals.male_deer_health == 0:
 		return
 
 	if enemy != null && enemy.is_in_group("Bullet"):
@@ -103,7 +105,8 @@ func hit(damage, enemy):
 		await get_tree().create_timer(0.1, false).timeout
 		Globals.play_bullet_impact(bullet_position)
 		blood.emitting = true
-
+	
+	show_damage_indicator.emit(get_damage_indicator_pos(), min(damage, Globals.male_deer_health))
 	Globals.update_male_deer_health(Globals.male_deer_health - damage, enemy)
 	$Sprite2D.material.set_shader_parameter("progress", 0.6)
 	Globals.male_deer_vulnerable = false
@@ -112,13 +115,19 @@ func hit(damage, enemy):
 		sound.stream = load("res://sounds/deer-scream1.mp3")
 		add_child(sound)
 		sound.play()
-	await get_tree().create_timer(0.3, false).timeout
+	await get_tree().create_timer(0.6, false).timeout
 	Globals.male_deer_vulnerable = true
 	$Sprite2D.material.set_shader_parameter("progress", 0)
 
 
 func increment_score():
 	Globals.male_deer_score += 1
+
+
+func get_damage_indicator_pos():
+	var markers = $DamageMarkers.get_children()
+	var marker_pos = markers.pick_random().global_position
+	return marker_pos
 
 
 func respawn():
@@ -141,6 +150,10 @@ func respawn():
 	if Globals.male_deer_lives > 1 || (Globals.male_deer_lives == 1 && Globals.reducing_life_instantaneously):
 		if respawn_active:
 			global_position = respawn_coords
+			$DeerCollision.scale.x = 1
+			$ProjectilesCollision.scale.x = 1
+			$Sprite2D.scale.x = 1
+			$HeadArea.scale.x = 1
 			Globals.update_male_deer_health(100, null)
 			Globals.male_deer_hunger = 5
 	else:
