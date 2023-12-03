@@ -1,7 +1,7 @@
 extends State
 
 const JUMP_VELOCITY = -240.0
-const FRICTION = 300;
+const FRICTION = 100;
 
 func enter():
 	animation_player.play("idle")

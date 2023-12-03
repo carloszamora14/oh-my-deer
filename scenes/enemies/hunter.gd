@@ -25,6 +25,10 @@ var is_kicking: bool = false
 var dont_aim: bool = false
 var is_in_kicking_area: bool = false
 var target_body = null
+var is_in_waving_area: bool = false
+var is_waving: bool = false
+var should_wave: bool = false
+var can_do_kick_damage: bool = false
 
 var phrases = {
 	"coyotes gotta eat": ["res://sounds/hunter/coyotes-gotta-eat.mp3", ["Coyotes gotta eat"], [2.5]],
@@ -66,7 +70,7 @@ func _physics_process(delta):
 				move_right = true
 				move_left = false
 			
-		if (allow_to_aim && aiming) || (target != null && !should_follow):
+		if (allow_to_aim && aiming) || (target != null && !should_follow) && !is_waving:
 			var pos = get_global_mouse_position() if target == null else target.global_position
 			if abs(pos.x - global_position.x) >= 40:
 				if pos.x < global_position.x:
@@ -92,16 +96,18 @@ func _physics_process(delta):
 					angle = PI/8
 				$Sprites/LeftContainer.rotation = (PI - angle) if pos.x < global_position.x else angle
 				$Sprites/RightContainer.rotation = (PI - angle) if pos.x < global_position.x else angle
-			elif is_in_kicking_area:
+			elif is_in_kicking_area && !is_kicking && !is_waving:
 				kick()
+			elif should_wave && !is_waving && !is_kicking:
+				wave_animate()
 			
-			if looking_for_deer && (sees_deer || !should_follow) && can_shoot:
+			if looking_for_deer && (sees_deer || !should_follow) && can_shoot && !is_waving && !is_kicking:
 				shoot_rifle(0)
 				can_shoot = false
 				$Timer.start()
 
 
-		if !is_shooting:
+		if !is_shooting && !is_kicking && !is_waving:
 			if move_right:
 				velocity.x = SPEED
 				$AnimationPlayer.play("run")
@@ -155,11 +161,88 @@ func kick():
 	is_kicking = false
 	dont_aim = false
 	$AnimationPlayer.play("RESET")
+	can_shoot = false
+	$Timer.start()
+
+
+func wave_animate():
+	dont_aim = true
+	is_waving = true
+	$AnimationPlayer.play("wave")
+	await $AnimationPlayer.animation_finished
+	is_waving = false
+	$AnimationPlayer.play("RESET")
+	can_shoot = false
+	is_waving = false
+	can_shoot = false
+	should_wave = false
+	dont_aim = false
+	$Timer.start()
+	$WavingTimer.start()
+
+
+func wave():
+	$AnimationPlayer.play("RESET")
+	is_waving = true
+	var final_angle = PI/2
+	var initial_angle = PI/8
+	
+#	final_angle = (PI - final_angle) if $Sprites.scale.x < 0 else final_angle
+	initial_angle = (PI - initial_angle) if $Sprites.scale.x < 0 else initial_angle
+#	if abs(final_angle) >= PI: 
+#		final_angle += (-PI if final_angle > 0 else PI)
+	
+	var tween1 = get_tree().create_tween()
+	tween1.set_parallel(true)
+	tween1.tween_property($Sprites/LeftContainer, "rotation", initial_angle, 0.5)
+	tween1.tween_property($Sprites/RightContainer, "rotation", initial_angle, 0.5)
+#	
+	await get_tree().create_timer(0.5, false).timeout
+
+#	final_angle = -(6 * PI/12 - 0.01)
+	initial_angle = PI/8
+#	final_angle = (PI - final_angle) if $Sprites.scale.x < 0 else final_angle
+	initial_angle = (PI - initial_angle) if $Sprites.scale.x < 0 else initial_angle
+	
+#	if abs(final_angle) >= PI: 
+#		final_angle += (-PI if final_angle > 0 else PI)
+	
+	var tween2 = get_tree().create_tween()
+	tween2.set_parallel(true)
+	tween2.tween_property($Sprites/LeftContainer, "rotation", final_angle, 0.3)
+	tween2.tween_property($Sprites/RightContainer, "rotation", final_angle, 0.3)
+	wave_damage()
+	await get_tree().create_timer(0.3, false).timeout
+	
+#	final_angle = -(6 * PI/12 - 0.01)
+	initial_angle = PI/8
+#	final_angle = (PI - final_angle) if $Sprites.scale.x < 0 else final_angle
+	initial_angle = (PI - initial_angle) if $Sprites.scale.x < 0 else initial_angle
+	
+	if abs(final_angle) >= PI: 
+		final_angle += (-PI if final_angle > 0 else PI)
+	
+	var tween3 = get_tree().create_tween()
+	tween3.set_parallel(true)
+	tween3.tween_property($Sprites/LeftContainer, "rotation", initial_angle, 0.3)
+	tween3.tween_property($Sprites/RightContainer, "rotation", initial_angle, 0.3)
+	await get_tree().create_timer(0.3, false).timeout
+	
+	is_waving = false
+	can_shoot = false
+	should_wave = false
+	$Timer.start()
+	$WavingTimer.start()
 
 
 func kick_damage():
-	if target_body != null && "get_kick" in target_body && is_in_kicking_area:
+	if target_body != null && "get_kick" in target_body && can_do_kick_damage:
 		target_body.get_kick(self)
+
+
+func wave_damage():
+	if target_body != null && "get_waved" in target_body && is_in_waving_area:
+		target_body.get_waved($Sprites.scale.x >= 0)
 
 
 func emit_bullet():
@@ -281,5 +364,29 @@ func _on_kick_area_body_entered(body):
 
 
 func _on_kick_area_body_exited(_body):
-	target_body = null
 	is_in_kicking_area = false
+
+
+func _on_waving_area_body_entered(body):
+	target_body = body
+	is_in_waving_area = true
+	$WavingTimer.start()
+
+
+func _on_waving_area_body_exited(_body):
+	is_in_waving_area = false
+	should_wave = false
+	$WavingTimer.stop()
+
+
+func _on_waving_timer_timeout():
+	if is_in_waving_area:
+		should_wave = true
+
+
+func _on_kick_damage_area_body_entered(_body):
+	can_do_kick_damage = true
+
+
+func _on_kick_damage_area_body_exited(_body):
+	can_do_kick_damage = false

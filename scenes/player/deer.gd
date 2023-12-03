@@ -34,8 +34,16 @@ func get_kick(hunter):
 		velocity.x += 400
 	else:
 		velocity.x -= 400
-	velocity.y -= 100
 	hit(30, hunter)
+
+
+func get_waved(hunter_looking_at_right):
+	if hunter_looking_at_right:
+		velocity.x += -650
+	else:
+		velocity.x -= 650
+	velocity.y -= 100
+	hit(20, null)
 
 
 func reset_shader():

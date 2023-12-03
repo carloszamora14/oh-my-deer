@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://jrt5uqlggamv"]
+[gd_scene load_steps=21 format=3 uid="uid://jrt5uqlggamv"]
 
 [ext_resource type="Script" path="res://scenes/enemies/hunter.gd" id="1_6gv3s"]
 [ext_resource type="Texture2D" uid="uid://dkp3k2ufv1rrq" path="res://graphics/hunter/torso.png" id="3_3dfbd"]
@@ -595,12 +595,127 @@ tracks/6/keys = {
 }]
 }
 
+[sub_resource type="Animation" id="Animation_yw148"]
+resource_name = "wave"
+length = 1.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpriteRunning:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprites:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprites/BodyContainer/RightLeg:texture")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("8_6ja0r")]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprites/BodyContainer/RightLeg:hframes")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [5]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprites/BodyContainer/RightLeg:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Sprites/BodyContainer/RightLeg:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Sprites/LeftContainer:rotation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0.3, 0.6, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.785398, -1.39626, 0.698132]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Sprites/RightContainer:rotation")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0.3, 0.6, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.785398, -1.39626, 0.698132]
+}
+tracks/8/type = "method"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath(".")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"wave_damage"
+}]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_w6qde"]
 _data = {
 "RESET": SubResource("Animation_msxij"),
 "kick": SubResource("Animation_hwoua"),
 "run": SubResource("Animation_u2n4i"),
-"shoot": SubResource("Animation_e4lb1")
+"shoot": SubResource("Animation_e4lb1"),
+"wave": SubResource("Animation_yw148")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3fwwy"]
@@ -610,7 +725,13 @@ size = Vector2(9.6, 34.6667)
 radius = 108.671
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0bj4a"]
-size = Vector2(28, 16.9)
+size = Vector2(28, 19.2)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ug80h"]
+size = Vector2(28.8, 38.4)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3nduj"]
+size = Vector2(28.8, 27.2)
 
 [node name="Hunter" type="CharacterBody2D" groups=["DialogEmitter", "Enemy"]]
 scale = Vector2(1.25, 1.25)
@@ -640,7 +761,7 @@ position = Vector2(3.33, -1.66)
 
 [node name="LeftContainer" type="Node2D" parent="Sprites"]
 position = Vector2(-6, -9)
-rotation = 0.10472
+rotation = -0.669043
 
 [node name="LeftArm" type="Sprite2D" parent="Sprites/LeftContainer"]
 position = Vector2(6, 9)
@@ -667,6 +788,7 @@ hframes = 5
 
 [node name="RightContainer" type="Node2D" parent="Sprites"]
 position = Vector2(-6, -9)
+rotation = -0.669043
 
 [node name="Rifle" parent="Sprites/RightContainer" instance=ExtResource("9_x66tu")]
 position = Vector2(22, 1)
@@ -694,14 +816,39 @@ texture = ExtResource("9_7e2qw")
 hframes = 6
 
 [node name="KickArea" type="Area2D" parent="."]
+collision_layer = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KickArea"]
-position = Vector2(0.4, 12.35)
+position = Vector2(0.4, 11.2)
 scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_0bj4a")
+
+[node name="WavingArea" type="Area2D" parent="."]
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WavingArea"]
+position = Vector2(0, -19.2)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_ug80h")
+
+[node name="WavingTimer" type="Timer" parent="."]
+wait_time = 0.1
+
+[node name="KickDamageArea" type="Area2D" parent="."]
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KickDamageArea"]
+position = Vector2(7.62939e-07, 7.2)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_3nduj")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="body_entered" from="NoticeArea" to="." method="_on_notice_area_body_entered"]
 [connection signal="body_exited" from="NoticeArea" to="." method="_on_notice_area_body_exited"]
 [connection signal="body_entered" from="KickArea" to="." method="_on_kick_area_body_entered"]
 [connection signal="body_exited" from="KickArea" to="." method="_on_kick_area_body_exited"]
+[connection signal="body_entered" from="WavingArea" to="." method="_on_waving_area_body_entered"]
+[connection signal="body_exited" from="WavingArea" to="." method="_on_waving_area_body_exited"]
+[connection signal="timeout" from="WavingTimer" to="." method="_on_waving_timer_timeout"]
+[connection signal="body_entered" from="KickDamageArea" to="." method="_on_kick_damage_area_body_entered"]
+[connection signal="body_exited" from="KickDamageArea" to="." method="_on_kick_damage_area_body_exited"]
