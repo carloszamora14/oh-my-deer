@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://biht24t15i2fm"
+path="res://.godot/imported/come-back-here-we-are no-done.mp3-3511cce771d6b4ae68ff2c6eaba125e4.mp3str"
+
+[deps]
+
+source_file="res://sounds/hunter/come-back-here-we-are no-done.mp3"
+dest_files=["res://.godot/imported/come-back-here-we-are no-done.mp3-3511cce771d6b4ae68ff2c6eaba125e4.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

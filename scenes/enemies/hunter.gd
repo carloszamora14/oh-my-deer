@@ -30,6 +30,11 @@ var is_waving: bool = false
 var should_wave: bool = false
 var can_do_kick_damage: bool = false
 
+var deer_got_close: bool = false
+var text_come_back: bool = false
+var coward: bool = false
+var is_playing_sound: bool = false
+
 var phrases = {
 	"coyotes gotta eat": ["res://sounds/hunter/coyotes-gotta-eat.mp3", ["Coyotes gotta eat"], [2.5]],
 	"i smoked him": ["res://sounds/hunter/i-smoked-him.mp3", ["I smoked him!"], [2.1]],
@@ -45,6 +50,46 @@ var phrases = {
 		["Look what I found — a little deer alone,", "and at point-blank range."],
 		[1.9, 1.5]
 	],
+	"come back here": [
+		"res://sounds/hunter/come-back-here-we-are no-done.mp3",
+		["Come back here, we are not done yet."], [2.4]
+	],
+	"dont test me": [
+		"res://sounds/hunter/dont-test-me.mp3",
+		["Don't test me. This rifle isn't just for show."], [2.7]
+	],
+	"got it done": [
+		"res://sounds/hunter/got-it-done.mp3",
+		["Got it done."], [1.8]
+	],
+	"gotcha that serves you right": [
+		"res://sounds/hunter/gotcha-that-serves-you-right.mp3",
+		["Gotcha, that serves you right."], [2.1]
+	],
+	"idiot that wasnt the best": [
+		"res://sounds/hunter/idiot-that-wasnt-the-best.mp3",
+		["Idiot!, that wasn't the best idea."], [1.9]
+	],
+	"keep your distance": [
+		"res://sounds/hunter/keep-your-distance.mp3",
+		["Keep your distance, you repugnant animal."], [2.3]
+	],
+	"ok that was a first": [
+		"res://sounds/hunter/ok-that-was-a-first.mp3",
+		["Ok, that was a first."], [1.8]
+	],
+	"dont be a coward": [
+		"res://sounds/hunter/dont-be-a-coward.mp3",
+		["Don't be a coward!"], [1.8]
+	],
+	"deer season": [
+		"res://sounds/hunter/theres-no-season-like-deer-season.mp3",
+		["There's not season like deer season."], [2.7]
+	],
+	"not a game anymore": [
+		"res://sounds/hunter/this-is-not-a-game-anymore.mp3",
+		["This is not a game anymore."], [2.7]
+	]
 }
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -54,6 +99,7 @@ const sounds: Array[String] = [
 	"res://sounds/hunter/you-will-pay-for-this.mp3",
 	"res://sounds/hunter/you-deer-are-going-for-a-ride-in-my-truck.mp3"
 ]
+
 
 func _physics_process(delta):
 	if !inactive:
@@ -69,6 +115,14 @@ func _physics_process(delta):
 			else:
 				move_right = true
 				move_left = false
+			
+		if is_in_shooting_area && target != null && global_position.x + 300 <= target.global_position.x && !is_playing_sound:
+			if !text_come_back:
+				text_come_back = true
+				play_sound("come back here")
+			elif !coward && global_position.x + 800 <= target.global_position.x:
+				coward = true
+				play_sound('dont be a coward')
 			
 		if (allow_to_aim && aiming) || (target != null && !should_follow) && !is_waving:
 			var pos = get_global_mouse_position() if target == null else target.global_position
@@ -140,6 +194,17 @@ func shot_sound():
 	add_child(sound)
 	sound.play()
 	await sound.finished
+
+
+func handle_is_playing_sound(sound_name):
+	is_playing_sound = true
+	var times = phrases[sound_name][2]
+	var total_time = 0
+	for time in times:
+		total_time += time
+	
+	await get_tree().create_timer(total_time, false).timeout
+	is_playing_sound = false
 
 
 func shoot_rifle(damage):
@@ -272,9 +337,27 @@ func _on_notice_area_body_exited(_body):
 	aiming = false
 
 
+func deer_fall():
+	if get_tree().get_current_scene().get_name() == 'Lake' && !is_playing_sound:
+		var sound_name = "idiot that wasnt the best" if randf() > 0.5 else "gotcha that serves you right"
+		play_sound(sound_name)
+
+
+func deer_died():
+	if get_tree().get_current_scene().get_name() == 'Lake' && !is_playing_sound:
+		var sound_name = "deer season" if randf() > 0.5 else "got it done"
+		play_sound(sound_name)
+
+
 func _on_attack_area_body_entered(body):
 	if "hit" in body:
 		body.hit(50, self)
+
+
+func threaten():
+	if get_tree().get_current_scene().get_name() == 'Lake' && !is_playing_sound:
+		var sound_name = "not a game anymore"
+		play_sound(sound_name)
 
 
 func hit(damage):
@@ -302,6 +385,7 @@ func save():
 
 
 func play_sound(sound_name):
+	handle_is_playing_sound(sound_name)
 	var sound = AudioStreamPlayer2D.new()
 	sound.stream = load(phrases[sound_name][0])
 	sound.global_position = global_position
@@ -361,6 +445,10 @@ func start_chasing_deer(deer_marker):
 func _on_kick_area_body_entered(body):
 	target_body = body
 	is_in_kicking_area = true
+	if get_tree().get_current_scene().get_name() == 'Lake' && !deer_got_close && !is_playing_sound:
+		deer_got_close = true
+		var sound_name = "dont test me" if randf() > 0.5 else "keep your distance"
+		play_sound(sound_name)
 
 
 func _on_kick_area_body_exited(_body):
@@ -371,6 +459,10 @@ func _on_waving_area_body_entered(body):
 	target_body = body
 	is_in_waving_area = true
 	$WavingTimer.start()
+	if get_tree().get_current_scene().get_name() == 'Lake' && !deer_got_close && !is_playing_sound:
+		deer_got_close = true
+		var sound_name = "dont test me" if randf() > 0.5 else "keep your distance"
+		play_sound(sound_name)
 
 
 func _on_waving_area_body_exited(_body):

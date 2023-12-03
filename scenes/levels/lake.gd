@@ -29,9 +29,14 @@ func spawn_pigeon():
 
 
 func reset_scene():
+	if Globals.male_deer_falling:
+		$Hunter.deer_fall()
+	else:
+		$Hunter.deer_died()
 	$Hunter.inactive = true
 	
 	if !$Deer.player_lost:
+		await get_tree().create_timer(1.5, false).timeout
 		TransitionLayer.change_scene("res://scenes/levels/lake.tscn")
 		await get_tree().create_timer(1.35, false).timeout
 		Globals.update_male_deer_health(100, null)
@@ -48,8 +53,10 @@ func reset_bridges():
 
 
 func _on_exit_area_body_entered(body):
+	$Hunter.threaten()
 	$Deer.avoid_bullets()
 	$Hunter.inactive = true
+	await get_tree().create_timer(0.5, false).timeout
 	if "exit_scene" in body:
 		body.exit_scene("res://scenes/levels/before_cliff.tscn")
 
