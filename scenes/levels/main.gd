@@ -11,6 +11,7 @@ var damage_indicator_scene: PackedScene = preload('res://scenes/interface/damage
 
 
 func _ready():
+	$Deer.respawn_coords = Vector2(20, 220)
 	Globals.male_deer_vulnerable = true
 	Globals.male_deer_falling = false	
 	Globals.reducing_life_instantaneously = true

@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://cqmtwkdr7yoxf"]
+[gd_scene load_steps=28 format=3 uid="uid://cqmtwkdr7yoxf"]
 
 [ext_resource type="PackedScene" uid="uid://bqgrls7swt3um" path="res://scenes/levels/main.tscn" id="1_4ce6b"]
 [ext_resource type="Script" path="res://scenes/levels/lake.gd" id="2_a0agm"]
@@ -9,8 +9,12 @@
 [ext_resource type="PackedScene" uid="uid://drf4civkh2su6" path="res://scenes/objects/yellow_sign.tscn" id="4_guaij"]
 [ext_resource type="PackedScene" uid="uid://d1ojjop6dx3v2" path="res://scenes/objects/beam_bridge.tscn" id="5_fg6rv"]
 [ext_resource type="Texture2D" uid="uid://0y00jbel2s2" path="res://graphics/platforms/bridge.png" id="5_gpuqh"]
+[ext_resource type="PackedScene" uid="uid://ch4cvr47jxqdf" path="res://scenes/objects/flower_3.tscn" id="8_2aykt"]
+[ext_resource type="Texture2D" uid="uid://cu7btyv1tnj50" path="res://graphics/background/cliff-starting-area.png" id="9_78t61"]
+[ext_resource type="PackedScene" uid="uid://ccrhl6y74x0vs" path="res://scenes/objects/flower_1.tscn" id="9_a813q"]
 [ext_resource type="PackedScene" uid="uid://nxqv4xndi210" path="res://scenes/objects/cliff_lake.tscn" id="9_i3k5f"]
 [ext_resource type="PackedScene" uid="uid://jrt5uqlggamv" path="res://scenes/enemies/hunter.tscn" id="10_esay2"]
+[ext_resource type="PackedScene" uid="uid://d1my3sulgae6a" path="res://scenes/objects/flower_4.tscn" id="10_nj8d5"]
 [ext_resource type="AudioStream" uid="uid://dpvhsm3e84ky7" path="res://sounds/Epic Dark Battle Music - Escape [Powerful Fantasy Horror by Ebunny].mp3" id="11_rqagq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7trk0"]
@@ -148,6 +152,7 @@ size = Vector2(21, 62)
 
 [node name="Lake" instance=ExtResource("1_4ce6b")]
 script = ExtResource("2_a0agm")
+metadata/_edit_vertical_guides_ = [-50.0]
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="." index="0"]
 
@@ -195,23 +200,37 @@ scale = Vector2(0.6, 0.6)
 position = Vector2(1465, 251)
 scale = Vector2(0.6, 0.6)
 
-[node name="CliffLake" parent="." index="10" instance=ExtResource("9_i3k5f")]
+[node name="Flowers" type="Node2D" parent="." index="10"]
+
+[node name="Flower3" parent="Flowers" index="0" instance=ExtResource("8_2aykt")]
+modulate = Color(0.764706, 0.784314, 0.270588, 1)
+position = Vector2(1671, 235)
+
+[node name="Flower1" parent="Flowers" index="1" instance=ExtResource("9_a813q")]
+position = Vector2(1716, 232)
+
+[node name="Flower4" parent="Flowers" index="2" instance=ExtResource("10_nj8d5")]
+position = Vector2(1666, 234)
+rotation = -0.0872665
+
+[node name="CliffLake" parent="." index="11" instance=ExtResource("9_i3k5f")]
 position = Vector2(1617, 175)
 
-[node name="Deer" parent="." index="11"]
-position = Vector2(21, 219)
+[node name="Deer" parent="." index="12"]
+position = Vector2(28, 218)
 collision_mask = 566
 
 [node name="Camera2D" parent="Deer" index="12"]
 limit_right = 1742
 
-[node name="Hunter" parent="." index="12" instance=ExtResource("10_esay2")]
+[node name="Hunter" parent="." index="13" instance=ExtResource("10_esay2")]
 position = Vector2(-98, 209)
 
-[node name="Bridge" type="Node2D" parent="." index="13"]
+[node name="Bridge" type="Node2D" parent="." index="14"]
 position = Vector2(0, -16)
 
 [node name="FirstSegment" type="StaticBody2D" parent="Bridge" index="0" groups=["Bridge"]]
+z_index = 1
 collision_layer = 4
 collision_mask = 15
 
@@ -254,13 +273,18 @@ texture = ExtResource("3_3xood")
 position = Vector2(-297.5, 262)
 shape = SubResource("RectangleShape2D_3c7y3")
 
-[node name="Borders" type="Node2D" parent="." index="14"]
+[node name="Sprite2D" type="Sprite2D" parent="." index="15"]
+modulate = Color(0.631373, 0.713726, 1, 1)
+position = Vector2(46, 204)
+texture = ExtResource("9_78t61")
+
+[node name="Borders" type="Node2D" parent="." index="16"]
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Borders" index="0"]
 collision_layer = 512
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/StaticBody2D" index="0"]
-position = Vector2(-11, 177.5)
+position = Vector2(-11, 183)
 shape = SubResource("RectangleShape2D_i0o6i")
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="Borders" index="1"]
@@ -271,29 +295,29 @@ collision_mask = 79
 position = Vector2(1889.25, 278)
 shape = SubResource("RectangleShape2D_oai4c")
 
-[node name="ExitArea" type="Area2D" parent="." index="15"]
+[node name="ExitArea" type="Area2D" parent="." index="17"]
 collision_layer = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ExitArea" index="0"]
 position = Vector2(1727, 205)
 shape = SubResource("RectangleShape2D_0iin6")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="16"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="18"]
 libraries = {
 "": SubResource("AnimationLibrary_juhqq")
 }
 
-[node name="StartArea" type="Area2D" parent="." index="17"]
+[node name="StartArea" type="Area2D" parent="." index="19"]
 collision_layer = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StartArea" index="0"]
 position = Vector2(153, 206)
 shape = SubResource("RectangleShape2D_io5ic")
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." index="18"]
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." index="20"]
 volume_db = -15.0
 
-[node name="ShootingArea" type="Area2D" parent="." index="19"]
+[node name="ShootingArea" type="Area2D" parent="." index="21"]
 collision_layer = 1024
 collision_mask = 2
 

@@ -1,0 +1,50 @@
+[gd_scene load_steps=7 format=3 uid="uid://c4dm5mtldn73l"]
+
+[ext_resource type="Shader" path="res://scenes/objects/flower.gdshader" id="1_62b52"]
+[ext_resource type="Texture2D" uid="uid://bwgbn0awhtots" path="res://graphics/objects/flowers.png" id="2_4yxbh"]
+[ext_resource type="Texture2D" uid="uid://d1t7gtbhg7ms8" path="res://graphics/textures/light.png" id="3_munq0"]
+[ext_resource type="Texture2D" uid="uid://1fmxjtvnnt5q" path="res://graphics/textures/white.png" id="4_gkemd"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ujy8b"]
+shader = ExtResource("1_62b52")
+shader_parameter/speed = 1.0
+shader_parameter/minStrength = 0.05
+shader_parameter/maxStrength = 0.01
+shader_parameter/strengthScale = 10.0
+shader_parameter/interval = 3.5
+shader_parameter/detail = 1.0
+shader_parameter/heightOffset = null
+shader_parameter/offset = 0.0
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_hsgsx"]
+emission_shape = 1
+emission_sphere_radius = 5.0
+particle_flag_disable_z = true
+spread = 180.0
+gravity = Vector3(0, -1, 0)
+initial_velocity_min = 2.0
+initial_velocity_max = 5.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+scale_min = 0.02
+scale_max = 0.06
+color = Color(1, 1, 1, 0.470588)
+
+[node name="Flower13" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_ujy8b")
+texture = ExtResource("2_4yxbh")
+region_enabled = true
+region_rect = Rect2(459, 12, 7, 12)
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+energy = 0.5
+texture = ExtResource("3_munq0")
+texture_scale = 0.02
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+amount = 2
+process_material = SubResource("ParticleProcessMaterial_hsgsx")
+texture = ExtResource("4_gkemd")
+lifetime = 3.0

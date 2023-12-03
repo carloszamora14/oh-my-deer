@@ -6,6 +6,7 @@ extends MainLevel
 var cutscene_played: bool = false
 
 func _ready():
+	$Deer.respawn_coords = Vector2(20, 220)
 	$Hunter.allow_to_aim = true
 	for player in get_tree().get_nodes_in_group("Player"):
 		player.connect("show_damage_indicator", _on_show_damage_indicator)

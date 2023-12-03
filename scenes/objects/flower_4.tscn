@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://d1my3sulgae6a"]
+
+[ext_resource type="Shader" path="res://scenes/objects/flower.gdshader" id="1_b6jjr"]
+[ext_resource type="Texture2D" uid="uid://bwgbn0awhtots" path="res://graphics/objects/flowers.png" id="1_ra4uf"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_b7gqh"]
+shader = ExtResource("1_b6jjr")
+shader_parameter/speed = 3.0
+shader_parameter/minStrength = 0.05
+shader_parameter/maxStrength = 0.01
+shader_parameter/strengthScale = 10.0
+shader_parameter/interval = 3.5
+shader_parameter/detail = 1.0
+shader_parameter/heightOffset = null
+shader_parameter/offset = 0.0
+
+[node name="Flower4" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.752941, 0.411765, 0.619608, 1)
+material = SubResource("ShaderMaterial_b7gqh")
+texture = ExtResource("1_ra4uf")
+region_enabled = true
+region_rect = Rect2(78, 2, 2, 22)

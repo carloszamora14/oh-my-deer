@@ -1,8 +1,11 @@
 extends MainLevel
 
 var animation_started: bool = false
+var pigeon_scene: PackedScene = preload("res://scenes/enemies/pigeon.tscn")
+
 
 func _ready():
+	$Deer.respawn_coords = Vector2(20, 220)
 	Globals.male_deer_vulnerable = true
 	Globals.male_deer_falling = false	
 	Globals.reducing_life_instantaneously = false
@@ -12,6 +15,17 @@ func _ready():
 	for enemy in get_tree().get_nodes_in_group("Enemy"):
 		enemy.connect("hunter_shot_bullet", _on_hunter_bullet)
 	Globals.connect("male_deer_death", reset_scene)
+	
+	await get_tree().create_timer(8 * randf(), false).timeout
+	spawn_pigeon()
+
+
+func spawn_pigeon():
+	var pigeon = pigeon_scene.instantiate() as CharacterBody2D
+	pigeon.position = Vector2(randf_range(1743.0, 1800.0), randf_range(60.0, 140.0))
+	add_child(pigeon)
+	await get_tree().create_timer(5.0 + 8 * randf(), false).timeout
+	spawn_pigeon()
 
 
 func reset_scene():

@@ -1,6 +1,29 @@
-[gd_scene load_steps=2 format=3 uid="uid://bicy8yoqkod3l"]
+[gd_scene load_steps=5 format=3 uid="uid://bicy8yoqkod3l"]
 
 [ext_resource type="Texture2D" uid="uid://c26223h0y1pf4" path="res://graphics/background/lake-background.jpg" id="1_uoq1i"]
+[ext_resource type="Texture2D" uid="uid://1fmxjtvnnt5q" path="res://graphics/textures/white.png" id="2_csbqa"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_7kogb"]
+emission_shape = 1
+emission_sphere_radius = 40.0
+particle_flag_disable_z = true
+gravity = Vector3(0, 2, 0)
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+scale_min = 0.4
+scale_max = 1.2
+color = Color(1, 0.670588, 0.701961, 0.145098)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_3iw6y"]
+emission_shape = 2
+emission_sphere_radius = 30.0
+particle_flag_disable_z = true
+gravity = Vector3(0, 21.6, 0)
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+scale_min = 0.6
+scale_max = 1.2
+color = Color(0.913725, 0.556863, 0.439216, 0.0980392)
 
 [node name="Aqueduct" type="Node2D"]
 
@@ -8,3 +31,17 @@
 position = Vector2(309, 41)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("1_uoq1i")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+position = Vector2(310, 1)
+amount = 2
+process_material = SubResource("ParticleProcessMaterial_7kogb")
+texture = ExtResource("2_csbqa")
+lifetime = 8.0
+
+[node name="GPUParticles2D2" type="GPUParticles2D" parent="."]
+position = Vector2(309, 3)
+amount = 1
+process_material = SubResource("ParticleProcessMaterial_3iw6y")
+texture = ExtResource("2_csbqa")
+lifetime = 8.0

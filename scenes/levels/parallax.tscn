@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://cvj6tpwfd2s03"]
+[gd_scene load_steps=47 format=3 uid="uid://cvj6tpwfd2s03"]
 
 [ext_resource type="PackedScene" uid="uid://bqgrls7swt3um" path="res://scenes/levels/main.tscn" id="1_cwp0h"]
 [ext_resource type="TileSet" uid="uid://d2c0ults38s76" path="res://scenes/tilesets/grass.tres" id="2_j6wgb"]
@@ -26,7 +26,15 @@
 [ext_resource type="PackedScene" uid="uid://cviic60rdsu8l" path="res://scenes/interface/eat_controls_message.tscn" id="19_28545"]
 [ext_resource type="Texture2D" uid="uid://b4r1k42jmba31" path="res://graphics/platforms/Terrain_and_Props.png" id="21_u1hoh"]
 [ext_resource type="Texture2D" uid="uid://bwgbn0awhtots" path="res://graphics/objects/flowers.png" id="22_cs8gy"]
+[ext_resource type="Texture2D" uid="uid://dyglofvogndun" path="res://graphics/objects/beer.png" id="23_rfl8b"]
+[ext_resource type="PackedScene" uid="uid://ccrhl6y74x0vs" path="res://scenes/objects/flower_1.tscn" id="23_vyuti"]
+[ext_resource type="PackedScene" uid="uid://bney6awjogfko" path="res://scenes/objects/flower_2.tscn" id="24_d6y7w"]
+[ext_resource type="PackedScene" uid="uid://ch4cvr47jxqdf" path="res://scenes/objects/flower_3.tscn" id="25_e6ux5"]
+[ext_resource type="PackedScene" uid="uid://d1my3sulgae6a" path="res://scenes/objects/flower_4.tscn" id="25_f52wr"]
+[ext_resource type="PackedScene" uid="uid://de74flxx12qxv" path="res://scenes/objects/flower_5.tscn" id="26_7r0rc"]
 [ext_resource type="AudioStream" uid="uid://c828h8y6edlnu" path="res://sounds/magnum-gunshot.mp3" id="27_g263x"]
+[ext_resource type="PackedScene" uid="uid://v20s5t4o4pw0" path="res://scenes/objects/flower_6.tscn" id="27_lnnxl"]
+[ext_resource type="PackedScene" uid="uid://bfo1v0dcb42rw" path="res://scenes/objects/flower_7.tscn" id="28_pkw3p"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_303ai"]
 texture = ExtResource("3_yvqna")
@@ -674,18 +682,117 @@ texture = ExtResource("22_cs8gy")
 region_enabled = true
 region_rect = Rect2(818, 17, 8, 7)
 
-[node name="Deer" parent="." index="15"]
-position = Vector2(31, 235)
+[node name="Sprite2D" type="Sprite2D" parent="Objects" index="10"]
+modulate = Color(0.607843, 0.384314, 0.188235, 1)
+position = Vector2(712, 254.17)
+scale = Vector2(0.03, 0.03)
+texture = ExtResource("23_rfl8b")
+region_enabled = true
+region_rect = Rect2(0, 0, 99, 322)
+
+[node name="Sprite2D2" type="Sprite2D" parent="Objects" index="11"]
+modulate = Color(0.894118, 0.580392, 0.458824, 1)
+position = Vector2(718, 257.3)
+rotation = 1.5708
+scale = Vector2(0.03, 0.03)
+texture = ExtResource("23_rfl8b")
+region_enabled = true
+region_rect = Rect2(97, 3, 102, 322)
+
+[node name="Flowers" type="Node2D" parent="." index="15"]
+z_index = -1
+
+[node name="Flower1" parent="Flowers" index="0" instance=ExtResource("23_vyuti")]
+position = Vector2(330, 264)
+
+[node name="Flower2" parent="Flowers" index="1" instance=ExtResource("24_d6y7w")]
+position = Vector2(343, 264)
+
+[node name="Flower4" parent="Flowers" index="2" instance=ExtResource("25_f52wr")]
+position = Vector2(351, 261)
+
+[node name="Flower5" parent="Flowers" index="3" instance=ExtResource("25_f52wr")]
+position = Vector2(356, 262)
+rotation = 0.0401426
+
+[node name="Flower6" parent="Flowers" index="4" instance=ExtResource("25_f52wr")]
+modulate = Color(0.788235, 0.701961, 0.945098, 1)
+position = Vector2(354, 262)
+
+[node name="Flower7" parent="Flowers" index="5" instance=ExtResource("26_7r0rc")]
+position = Vector2(46, 249)
+
+[node name="Flower8" parent="Flowers" index="6" instance=ExtResource("26_7r0rc")]
+position = Vector2(7, 249)
+
+[node name="Flower9" parent="Flowers" index="7" instance=ExtResource("27_lnnxl")]
+position = Vector2(13, 249)
+
+[node name="Flower10" parent="Flowers" index="8" instance=ExtResource("28_pkw3p")]
+modulate = Color(0.917647, 0.839216, 0.611765, 1)
+position = Vector2(167, 265)
+
+[node name="Flower12" parent="Flowers" index="9" instance=ExtResource("28_pkw3p")]
+modulate = Color(0.87451, 0.623529, 0.639216, 1)
+position = Vector2(175, 265)
+
+[node name="Flower13" parent="Flowers" index="10" instance=ExtResource("28_pkw3p")]
+modulate = Color(0.87451, 0.623529, 0.639216, 1)
+position = Vector2(25, 252)
+
+[node name="Flower14" parent="Flowers" index="11" instance=ExtResource("28_pkw3p")]
+modulate = Color(0.898039, 0.345098, 0.203922, 1)
+position = Vector2(68, 251)
+
+[node name="Flower15" parent="Flowers" index="12" instance=ExtResource("27_lnnxl")]
+position = Vector2(183, 266)
+rotation = 0.0349066
+
+[node name="Flower16" parent="Flowers" index="13" instance=ExtResource("26_7r0rc")]
+position = Vector2(160, 265)
+
+[node name="Flower17" parent="Flowers" index="14" instance=ExtResource("26_7r0rc")]
+modulate = Color(0.733333, 0.639216, 0.180392, 1)
+position = Vector2(1180, 267)
+
+[node name="Flower18" parent="Flowers" index="15" instance=ExtResource("27_lnnxl")]
+modulate = Color(0.788235, 1, 0, 1)
+position = Vector2(1186, 266)
+
+[node name="Flower3" parent="Flowers" index="16" instance=ExtResource("23_vyuti")]
+position = Vector2(1341, 265)
+
+[node name="Flower19" parent="Flowers" index="17" instance=ExtResource("24_d6y7w")]
+modulate = Color(0.686275, 0.737255, 0.180392, 1)
+position = Vector2(1173, 265)
+
+[node name="Flower20" parent="Flowers" index="18" instance=ExtResource("25_e6ux5")]
+position = Vector2(1332, 266)
+
+[node name="Flower21" parent="Flowers" index="19" instance=ExtResource("25_f52wr")]
+position = Vector2(1335, 265)
+
+[node name="Flower22" parent="Flowers" index="20" instance=ExtResource("25_e6ux5")]
+position = Vector2(1043, 248)
+
+[node name="Flower23" parent="Flowers" index="21" instance=ExtResource("27_lnnxl")]
+position = Vector2(914, 265)
+
+[node name="Flower24" parent="Flowers" index="22" instance=ExtResource("28_pkw3p")]
+position = Vector2(920, 264)
+
+[node name="Deer" parent="." index="16"]
+position = Vector2(28, 236)
 
 [node name="Camera2D" parent="Deer" index="12"]
 limit_right = 1360
 
-[node name="Flock" parent="." index="16" instance=ExtResource("14_1rr85")]
+[node name="Flock" parent="." index="17" instance=ExtResource("14_1rr85")]
 position = Vector2(1062, -130)
 scale = Vector2(-1, 1)
 db_sound = -15.0
 
-[node name="ParallaxBackground4" type="ParallaxBackground" parent="." index="17"]
+[node name="ParallaxBackground4" type="ParallaxBackground" parent="." index="18"]
 layer = 0
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground4" index="0"]
@@ -708,12 +815,12 @@ modulate = Color(0.960784, 0.905882, 0.862745, 1)
 position = Vector2(387, 282)
 scale = Vector2(1.6, 1.6)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="18"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="19"]
 libraries = {
 "": SubResource("AnimationLibrary_22faj")
 }
 
-[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="." index="19"]
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="." index="20"]
 
 [connection signal="body_entered" from="TriggerAreas/JumpMsgArea" to="MessagesControls" method="_on_jump_msg_area_body_entered"]
 [connection signal="body_entered" from="TriggerAreas/EatMsgArea" to="MessagesControls" method="_on_eat_msg_area_body_entered"]
