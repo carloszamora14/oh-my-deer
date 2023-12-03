@@ -39,13 +39,13 @@ func _on_body_entered(body):
 		
 	if 'hit' in body && !body.is_in_group("Enemy"):
 		if damage <= 0:
-			damage = int(BASE_DAMAGE - min(35 * (traveled / (5 * max_distance)), 35))
+			damage = int(BASE_DAMAGE - min(35 * (traveled / (max_distance)), 35))
 		body.hit(damage, self)
 	queue_free()
 
 
 func _on_area_entered(area):
 	if damage <= 0:
-		damage = int(BASE_DAMAGE - min(35 * (traveled / (5 * max_distance)), 35))
+		damage = int(BASE_DAMAGE - min(35 * (traveled / (max_distance)), 35))
 	area.emit_shot(damage, self)
 	queue_free()

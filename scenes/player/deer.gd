@@ -29,6 +29,15 @@ func _ready():
 	Globals.connect("taking_hunger_damage", hunger_damage)
 
 
+func get_kick(hunter):
+	if hunter.global_position.x < global_position.x:
+		velocity.x += 400
+	else:
+		velocity.x -= 400
+	velocity.y -= 100
+	hit(30, hunter)
+
+
 func reset_shader():
 	$Sprite2D.material.set_shader_parameter("progress", 0)
 	$Sprite2D.material.set_shader_parameter("color", Vector3(1, 1, 1))

@@ -21,6 +21,10 @@ var inactive: bool = false
 var allow_to_aim: bool = false
 var chasing: bool = false
 var is_in_shooting_area: bool = false
+var is_kicking: bool = false
+var dont_aim: bool = false
+var is_in_kicking_area: bool = false
+var target_body = null
 
 var phrases = {
 	"coyotes gotta eat": ["res://sounds/hunter/coyotes-gotta-eat.mp3", ["Coyotes gotta eat"], [2.5]],
@@ -75,49 +79,28 @@ func _physics_process(delta):
 					$SpriteRunning.scale.x = abs($SpriteRunning.scale.x)
 					$ShoulderMark.scale.x = 1
 					$CollisionShape2D.position.x = 0
-			if target == null:
-				var mouse_position = get_global_mouse_position()
-				pos = mouse_position
-			#	var mouse_offset = get_local_mouse_position()
-				angle = ((mouse_position - $ShoulderMark.global_position).normalized()).angle()
-			else:
-				pos = target.global_position
-				angle = ((target.global_position - $ShoulderMark.global_position).normalized()).angle()
-				
-			if !target:
-				angle = PI/8
-			$Sprites/LeftContainer.rotation = (PI - angle) if pos.x < global_position.x else angle
-			$Sprites/RightContainer.rotation = (PI - angle) if pos.x < global_position.x else angle
+				if target == null:
+					var mouse_position = get_global_mouse_position()
+					pos = mouse_position
+				#	var mouse_offset = get_local_mouse_position()
+					angle = ((mouse_position - $ShoulderMark.global_position).normalized()).angle()
+				else:
+					pos = target.global_position
+					angle = ((target.global_position - $ShoulderMark.global_position).normalized()).angle()
+					
+				if !target || dont_aim:
+					angle = PI/8
+				$Sprites/LeftContainer.rotation = (PI - angle) if pos.x < global_position.x else angle
+				$Sprites/RightContainer.rotation = (PI - angle) if pos.x < global_position.x else angle
+			elif is_in_kicking_area:
+				kick()
 			
 			if looking_for_deer && (sees_deer || !should_follow) && can_shoot:
 				shoot_rifle(0)
 				can_shoot = false
 				$Timer.start()
-		
-		#	if sees_deer:
-		#		var angle = (Globals.male_deer_position - global_position).normalized().angle()
-		#		if angle < 0:
-		#			angle += 2 * PI
-		#		if angle >= PI / 4 && angle <= 3 * PI /2:
-		#			$Sprite2D.scale.x = -0.6
-		#			$AttackArea.scale.x = -1
-		#		else:
-		#			$Sprite2D.scale.x = 0.6
-		#			$AttackArea.scale.x = 1
-		#
-		#		if (can_shoot):
-		#			is_shooting = true
-		#			$AnimationPlayer.play("crouch shoot")
-		#			can_shoot = false
-		#			$Timer.start()
-		#			await $AnimationPlayer.animation_finished
-		#			if !sees_deer:
-		#				$AnimationPlayer.play("RESET")
-		#			is_shooting = false
-		##		if angle > PI/2 and angle 
-		#	look_at(Globals.male_deer_position)
-			# Add the gravity.
-		
+
+
 		if !is_shooting:
 			if move_right:
 				velocity.x = SPEED
@@ -130,16 +113,8 @@ func _physics_process(delta):
 				$AnimationPlayer.play("RESET")
 		else:
 			velocity.x = move_toward(velocity.x, 0, SPEED)
-			
-	#	if Input.is_action_just_pressed("interact"):
-	#		shoot_rifle(35)
 
-	#	var direction = Input.get_axis("left", "right")
-	#	if direction:
-	#		velocity.x = direction * SPEED
-	#	else:
-	#		velocity.x = move_toward(velocity.x, 0, SPEED)
-#
+
 	if not is_on_floor():
 		velocity.y += gravity * delta
 		
@@ -170,7 +145,23 @@ func shoot_rifle(damage):
 	is_shooting = false
 	bullet_damage = 0
 	$AnimationPlayer.play("RESET")
-	
+
+
+func kick():
+	dont_aim = true
+	is_kicking = true
+	$AnimationPlayer.play("kick")
+	await $AnimationPlayer.animation_finished
+	is_kicking = false
+	dont_aim = false
+	$AnimationPlayer.play("RESET")
+
+
+func kick_damage():
+	if target_body != null && "get_kick" in target_body && is_in_kicking_area:
+		target_body.get_kick(self)
+
+
 func emit_bullet():
 	var gun_nozzle_position = $Sprites/RightContainer/Rifle/GunNozzle.global_position
 	var bullet_direction
@@ -282,3 +273,13 @@ func start_chasing_deer(deer_marker):
 	allow_to_aim = true
 	chasing = true
 	
+
+
+func _on_kick_area_body_entered(body):
+	target_body = body
+	is_in_kicking_area = true
+
+
+func _on_kick_area_body_exited(_body):
+	target_body = null
+	is_in_kicking_area = false
