@@ -1,14 +1,10 @@
-[gd_scene load_steps=21 format=3 uid="uid://7e00atqabf7a"]
+[gd_scene load_steps=17 format=3 uid="uid://7e00atqabf7a"]
 
 [ext_resource type="Script" path="res://scenes/player/deer.gd" id="1_nyqxi"]
 [ext_resource type="Shader" path="res://scenes/player/deer.gdshader" id="2_bhanu"]
 [ext_resource type="Texture2D" uid="uid://di0a8deye6gb7" path="res://graphics/deer/deer_male.png" id="2_gd7v3"]
 [ext_resource type="Script" path="res://scenes/player/ProjectilesCollision.gd" id="4_k5pho"]
-[ext_resource type="Script" path="res://scenes/player/state_machine.gd" id="5_7sbfk"]
 [ext_resource type="AudioStream" uid="uid://dkmfg4tqeimfs" path="res://sounds/deer-scream4.mp3" id="5_bugqq"]
-[ext_resource type="Script" path="res://scenes/player/walking_state.gd" id="6_7aysy"]
-[ext_resource type="Script" path="res://scenes/player/eating_state.gd" id="7_ryffo"]
-[ext_resource type="Script" path="res://scenes/player/idle_state.gd" id="8_k30fw"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_pw61s"]
 resource_local_to_scene = true
@@ -194,29 +190,6 @@ position = Vector2(-3, 8)
 wait_time = 2.0
 autostart = true
 
-[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
-script = ExtResource("5_7sbfk")
-initial_state = NodePath("IdleState")
-
-[node name="WalkingState" type="Node" parent="StateMachine" node_paths=PackedStringArray("sprite", "collision_shape", "projectiles_collision", "head", "actor", "animation_player")]
-script = ExtResource("6_7aysy")
-sprite = NodePath("../../Sprite2D")
-collision_shape = NodePath("../../DeerCollision")
-projectiles_collision = NodePath("../../ProjectilesCollision")
-head = NodePath("../../HeadArea")
-actor = NodePath("../..")
-animation_player = NodePath("../../AnimationPlayer")
-
-[node name="EatingState" type="Node" parent="StateMachine" node_paths=PackedStringArray("actor", "animation_player")]
-script = ExtResource("7_ryffo")
-actor = NodePath("../..")
-animation_player = NodePath("../../AnimationPlayer")
-
-[node name="IdleState" type="Node" parent="StateMachine" node_paths=PackedStringArray("actor", "animation_player")]
-script = ExtResource("8_k30fw")
-actor = NodePath("../..")
-animation_player = NodePath("../../AnimationPlayer")
-
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.4
 
@@ -288,5 +261,7 @@ position = Vector2(-8, -9)
 
 [node name="Marker2D11" type="Marker2D" parent="DamageMarkers"]
 position = Vector2(-14, -6)
+
+[node name="ControllerContainer" type="Node" parent="."]
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -34,6 +34,7 @@ theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
 [node name="Label" type="Label" parent="ColorRect/MarginContainer"]
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme = ExtResource("1_cq1qr")
 text = "The deer, driven by instinct, kept running through the forest until the last light of the sun faded away."

@@ -45,6 +45,10 @@ var bullet_impact_sounds = [
 	"res://sounds/bullet-impact3.mp3",
 ]
 
+func _ready():
+	var file = FileAccess.open('res://data/dialogues.json', FileAccess.READ)
+	var text_content = file.get_as_text()
+	print(JSON.parse_string(text_content))
 
 func update_male_deer_health(value, enemy):
 	if !male_deer_vulnerable && value < male_deer_health:

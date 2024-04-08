@@ -11,7 +11,7 @@ var damage_indicator_scene: PackedScene = preload('res://scenes/interface/damage
 
 
 func _ready():
-	$Deer.respawn_coords = Vector2(20, 220)
+	#$Deer.respawn_coords = Vector2(20, 220)
 	Globals.male_deer_vulnerable = true
 	Globals.male_deer_falling = false	
 	Globals.reducing_life_instantaneously = true
@@ -21,8 +21,8 @@ func _ready():
 		enemy.connect("hunter_shot_bullet", _on_hunter_bullet)
 	if Globals.game_loaded:
 		load_game()
-	else:
-		$Deer.position = Vector2(34, 200)
+	#else:
+		#$Deer.position = Vector2(34, 200)
 
 
 func _on_show_damage_indicator(pos, damage):

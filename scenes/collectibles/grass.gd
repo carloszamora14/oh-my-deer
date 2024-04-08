@@ -10,6 +10,7 @@ var was_eaten: bool = false
 var audio_playing: bool = false
 var audio: AudioStreamPlayer2D
 
+
 func _ready():
 	var stages = $Sprites.get_children()
 	for stage in stages:
