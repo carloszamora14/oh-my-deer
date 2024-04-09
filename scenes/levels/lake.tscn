@@ -220,7 +220,7 @@ position = Vector2(1617, 175)
 position = Vector2(28, 218)
 collision_mask = 566
 
-[node name="Camera2D" parent="Deer" index="12"]
+[node name="Camera2D" parent="Deer" index="11"]
 limit_right = 1742
 
 [node name="Hunter" parent="." index="13" instance=ExtResource("10_esay2")]

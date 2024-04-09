@@ -4,7 +4,6 @@ class_name MainLevel
 const WINDOW_HEIGHT: int = 288
 var over: bool = false
 
-var candy_scene: PackedScene = preload('res://scenes/projectiles/candy.tscn')
 var bullet_scene: PackedScene = preload('res://scenes/projectiles/bullet.tscn')
 var particle_scene: PackedScene = preload('res://scenes/weapons/trail_particle.tscn')
 var damage_indicator_scene: PackedScene = preload('res://scenes/interface/damage_indicator.tscn')
@@ -67,14 +66,6 @@ func _process(_delta):
 		$Deer.respawn()
 
 
-func _on_deer_player_throw_candy(pos, direction):
-	var candy = candy_scene.instantiate() as Area2D
-	candy.position = pos
-	candy.rotate(direction.angle())
-	candy.direction = direction
-	$Projectiles.add_child(candy)
-
-
 func _on_pause_menu_exit_game():
 	save_game_data()
 	get_tree().paused = false
@@ -94,6 +85,7 @@ func save_game_data():
 			# Store the save dictionary as a new line in the save file.
 			save_game.store_line(json_string)
 
+
 func save_node(node):
 	if node.scene_file_path.is_empty():
 		print("persistent node '%s' is not an instanced scene, skipped" % node.name)
@@ -111,6 +103,7 @@ func save_node(node):
 	var json_string = JSON.stringify(node_data)
 	
 	return json_string
+
 
 func _on_pause_menu_continue_game():
 	get_tree().paused = false

@@ -36,7 +36,6 @@ func take_damage(damage: int) -> void:
 	pass
 	
 #signal game_over()
-#signal player_throw_candy(marker_pos, candy_direction)
 #signal show_damage_indicator(pos, damage)
 #
 #const SPEED = 100.0
@@ -48,7 +47,6 @@ func take_damage(damage: int) -> void:
 #var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 #var player_lost: bool = false
 #var eating: bool = false
-#var can_throw_candy: bool = true
 #var transparent: bool = false
 #var can_control_character: bool = true
 #var cutscene_speed: int = 0
@@ -223,9 +221,6 @@ func take_damage(damage: int) -> void:
 		#eating = false
 #
 #
-#func _on_timer_timeout():
-	#can_throw_candy = true
-	#
 #func save():
 	#var save_dict = {
 		#"player": true,
