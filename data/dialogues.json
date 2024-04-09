@@ -1,0 +1,82 @@
+{
+	"coyotes gotta eat": {
+		"filepath": "res://sounds/hunter/coyotes-gotta-eat.mp3",
+		"lines": ["Coyotes gotta eat"],
+		"timings": [2.5]
+	},
+	"i smoked him": {
+		"filepath": "res://sounds/hunter/i-smoked-him.mp3",
+		"lines": ["I smoked him!"],
+		"timings": [2.1]
+	},
+	"come here deer": {
+		"filepath": "res://sounds/hunter/come-here-deer.mp3",
+		"lines": ["Come here deer!"],
+		"timings": [2.2]
+	},
+	"dont run": {
+		"filepath": "res://sounds/hunter/dont-run-you-stupid-deer.mp3",
+		"lines": ["Don't run you stupid deer!"],
+		"timings": [2.3]
+	},
+	"if i dont kill you": {
+		"filepath": "res://sounds/hunter/even-if-i-dont-kill-you-budy-somebody-else-will.mp3",
+		"lines": ["Even if I don't kill you, buddy,", "then somebody else will."],
+		"timings": [1.4, 2]
+	},
+	"look what i found": {
+		"filepath": "res://sounds/hunter/Look what I found.mp3",
+		"lines": ["Look what I found — a little deer alone,", "and at point-blank range."],
+		"timings": [1.9, 1.5]
+	},
+	"come back here": {
+		"filepath": "res://sounds/hunter/come-back-here-we-are no-done.mp3",
+		"lines": ["Come back here, we are not done yet."],
+		"timings": [2.4]
+	},
+	"dont test me": {
+		"filepath": "res://sounds/hunter/dont-test-me.mp3",
+		"lines": ["Don't test me. This rifle isn't just for show."],
+		"timings": [2.7]
+	},
+	"got it done": {
+		"filepath": "res://sounds/hunter/got-it-done.mp3",
+		"lines": ["Got it done."],
+		"timings": [1.8]
+	},
+	"gotcha that serves you right": {
+		"filepath": "res://sounds/hunter/gotcha-that-serves-you-right.mp3",
+		"lines": ["Gotcha, that serves you right."],
+		"timings": [2.1]
+	},
+	"idiot that wasnt the best": {
+		"filepath": "res://sounds/hunter/idiot-that-wasnt-the-best.mp3",
+		"lines": ["Idiot!, that wasn't the best idea."],
+		"timings": [1.9]
+	},
+	"keep your distance": {
+		"filepath": "res://sounds/hunter/keep-your-distance.mp3",
+		"lines": ["Keep your distance, you repugnant animal."],
+		"timings": [2.3]
+	},
+	"ok that was a first": {
+		"filepath": "res://sounds/hunter/ok-that-was-a-first.mp3",
+		"lines": ["Ok, that was a first."],
+		"timings": [1.8]
+	},
+	"dont be a coward": {
+		"filepath": "res://sounds/hunter/dont-be-a-coward.mp3",
+		"lines": ["Don't be a coward!"],
+		"timings": [1.8]
+	},
+	"deer season": {
+		"filepath": "res://sounds/hunter/theres-no-season-like-deer-season.mp3",
+		"lines": ["There's not season like deer season."],
+		"timings": [2.7]
+	},
+	"not a game anymore": {
+		"filepath": "res://sounds/hunter/this-is-not-a-game-anymore.mp3",
+		"lines": ["This is not a game anymore."],
+		"timings": [2.7]
+	}
+}
