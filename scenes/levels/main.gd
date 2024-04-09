@@ -63,7 +63,7 @@ func _process(_delta):
 		$CanvasLayer2.show()
 	if Globals.male_deer_vulnerable && Globals.male_deer_position.y > WINDOW_HEIGHT * 1.4 && !Globals.male_deer_falling:
 		Globals.male_deer_falling = true
-		$Deer.hit(1000, null)
+		$Deer.hit(1000)
 		$Deer.respawn()
 
 

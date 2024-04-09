@@ -25,6 +25,16 @@ func jump():
 	if is_on_floor() and can_jump:
 		can_jump = false
 		velocity.y = JUMP_VELOCITY
+
+
+func get_damage_indicator() -> Marker2D:
+	var markers = $DamageMarkers.get_children()
+	return markers.pick_random()
+
+
+func take_damage(damage: int) -> void:
+	pass
+	
 #signal game_over()
 #signal player_throw_candy(marker_pos, candy_direction)
 #signal show_damage_indicator(pos, damage)

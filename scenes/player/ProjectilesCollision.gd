@@ -1,4 +1,4 @@
 extends Area2D
 
-func emit_shot(damage, enemy):
-	get_parent().hit(damage, enemy)
+func emit_shot(damage: int) -> void:
+	get_parent().take_damage(damage)

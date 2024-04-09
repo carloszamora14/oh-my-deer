@@ -5,11 +5,12 @@ var pigeon_scene: PackedScene = preload("res://scenes/enemies/pigeon.tscn")
 
 
 func _ready():
-	$Deer.respawn_coords = Vector2(20, 220)
+	$Hunter.set_controller(ChasingController.new($Hunter))
+	#$Deer.respawn_coords = Vector2(20, 220)
 	Globals.male_deer_vulnerable = true
 	Globals.male_deer_falling = false	
 	Globals.reducing_life_instantaneously = false
-	$Deer.respawn_active = false
+	#$Deer.respawn_active = false
 	for player in get_tree().get_nodes_in_group("Player"):
 		player.connect("show_damage_indicator", _on_show_damage_indicator)
 	for enemy in get_tree().get_nodes_in_group("Enemy"):
@@ -68,14 +69,16 @@ func _on_start_area_body_entered(_body):
 
 
 func begin_level_deer():
-	$Deer.can_control_character = false
+	#$Deer.can_control_character = false
 	await get_tree().create_timer(4, false).timeout
-	$Deer.can_control_character = true
+	#$Deer.can_control_character = true
 
 
 func begin_level_hunter():
 	var target = $Deer/ProjectilesCollision/Collision/Markers.get_children().pick_random()
-	$Hunter.start_chasing_deer(target)
+	#$Hunter.start_chasing_deer(target)
+	$Hunter.set_prey($Deer)
+	$Hunter.set_controller(ChasingController.new($Hunter))
 
 
 func offset_camera():

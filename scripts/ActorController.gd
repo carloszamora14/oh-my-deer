@@ -5,7 +5,6 @@ extends Node
 var actor: Actor
 
 var movement_command := MovementCommand.new()
-var attack_command := AttackCommand.new()
 var jump_command := JumpCommand.new()
 
 
