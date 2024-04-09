@@ -150,84 +150,11 @@ func _physics_process(delta):
 	#$Timer.start()
 #
 #
-#func wave_animate():
-	#dont_aim = true
-	#is_waving = true
-	#$AnimationPlayer.play("wave")
-	#await $AnimationPlayer.animation_finished
-	#is_waving = false
-	#$AnimationPlayer.play("RESET")
-	#can_shoot = false
-	#is_waving = false
-	#can_shoot = false
-	#should_wave = false
-	#dont_aim = false
-	#$Timer.start()
-	#$WavingTimer.start()
-#
-#
-#func wave():
-	#$AnimationPlayer.play("RESET")
-	#is_waving = true
-	#var final_angle = PI/2
-	#var initial_angle = PI/8
-	#
-##	final_angle = (PI - final_angle) if $Sprites.scale.x < 0 else final_angle
-	#initial_angle = (PI - initial_angle) if $Sprites.scale.x < 0 else initial_angle
-##	if abs(final_angle) >= PI: 
-##		final_angle += (-PI if final_angle > 0 else PI)
-	#
-	#var tween1 = get_tree().create_tween()
-	#tween1.set_parallel(true)
-	#tween1.tween_property($Sprites/LeftContainer, "rotation", initial_angle, 0.5)
-	#tween1.tween_property($Sprites/RightContainer, "rotation", initial_angle, 0.5)
-##	
-	#await get_tree().create_timer(0.5, false).timeout
-#
-##	final_angle = -(6 * PI/12 - 0.01)
-	#initial_angle = PI/8
-##	final_angle = (PI - final_angle) if $Sprites.scale.x < 0 else final_angle
-	#initial_angle = (PI - initial_angle) if $Sprites.scale.x < 0 else initial_angle
-	#
-##	if abs(final_angle) >= PI: 
-##		final_angle += (-PI if final_angle > 0 else PI)
-	#
-	#var tween2 = get_tree().create_tween()
-	#tween2.set_parallel(true)
-	#tween2.tween_property($Sprites/LeftContainer, "rotation", final_angle, 0.3)
-	#tween2.tween_property($Sprites/RightContainer, "rotation", final_angle, 0.3)
-	#wave_damage()
-	#await get_tree().create_timer(0.3, false).timeout
-	#
-##	final_angle = -(6 * PI/12 - 0.01)
-	#initial_angle = PI/8
-##	final_angle = (PI - final_angle) if $Sprites.scale.x < 0 else final_angle
-	#initial_angle = (PI - initial_angle) if $Sprites.scale.x < 0 else initial_angle
-	#
-	#if abs(final_angle) >= PI: 
-		#final_angle += (-PI if final_angle > 0 else PI)
-	#
-	#var tween3 = get_tree().create_tween()
-	#tween3.set_parallel(true)
-	#tween3.tween_property($Sprites/LeftContainer, "rotation", initial_angle, 0.3)
-	#tween3.tween_property($Sprites/RightContainer, "rotation", initial_angle, 0.3)
-	#await get_tree().create_timer(0.3, false).timeout
-	#
-	#is_waving = false
-	#can_shoot = false
-	#should_wave = false
-	#$Timer.start()
-	#$WavingTimer.start()
 #
 #
 #func kick_damage():
 	#if target_body != null && "get_kick" in target_body && can_do_kick_damage:
 		#target_body.get_kick(self)
-#
-#
-#func wave_damage():
-	#if target_body != null && "get_waved" in target_body && is_in_waving_area:
-		#target_body.get_waved($Sprites.scale.x >= 0)
 #
 #
 #func emit_bullet():
@@ -278,20 +205,6 @@ func _physics_process(delta):
 	#if get_tree().get_current_scene().get_name() == 'Lake' && !is_playing_sound:
 		#var sound_name = "not a game anymore"
 		#play_sound(sound_name)
-#
-#
-#func hit(damage):
-	#health_points -= damage
-	#if (health_points <= 0):
-		#can_shoot = false
-		#$Timer.stop()
-		#queue_free()
-	#elif randf() >= 0.75:
-		#var sound = AudioStreamPlayer.new()
-		#sound.stream = load(sounds.pick_random())
-		#add_child(sound)
-		#sound.play()
-		#await sound.finished
 #
 #
 #func play_sound(sound_name):
@@ -364,15 +277,6 @@ func _physics_process(delta):
 #func _on_kick_area_body_exited(_body):
 	#is_in_kicking_area = false
 #
-#
-#func _on_waving_area_body_entered(body):
-	#target_body = body
-	#is_in_waving_area = true
-	#$WavingTimer.start()
-	#if get_tree().get_current_scene().get_name() == 'Lake' && !deer_got_close && !is_playing_sound:
-		#deer_got_close = true
-		#var sound_name = "dont test me" if randf() > 0.5 else "keep your distance"
-		#play_sound(sound_name)
 #
 #
 #func _on_waving_area_body_exited(_body):

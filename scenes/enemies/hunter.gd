@@ -374,15 +374,6 @@ extends Hunter
 		#sound.play()
 		#await sound.finished
 #
-#func save():
-	#var save_dict = {
-		#"filename" : get_scene_file_path(),
-		#"parent" : get_parent().get_path(),
-		#"pos_x" : position.x, # Vector2 is not supported by JSON
-		#"pos_y" : position.y,
-		#"current_health" : health_points
-	#}
-	#return save_dict
 #
 #
 #func play_sound(sound_name):

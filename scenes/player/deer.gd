@@ -221,18 +221,6 @@ func take_damage(damage: int) -> void:
 		#eating = false
 #
 #
-#func save():
-	#var save_dict = {
-		#"player": true,
-		#"filename" : get_scene_file_path(),
-		#"parent" : get_parent().get_path(),
-		#"pos_x" : position.x, # Vector2 is not supported by JSON
-		#"pos_y" : position.y,
-		#"current_health" : Globals.male_deer_health,
-		#"lives": Globals.male_deer_lives,
-		#"score": Globals.male_deer_score
-	#}
-	#return save_dict
 #
 #func cutscene_started():
 	#can_control_character = false
