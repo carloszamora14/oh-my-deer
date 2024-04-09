@@ -9,10 +9,16 @@ func _physics_process(delta):
 			int(actor.global_position.x > actor.prey.global_position.x)
 		)
 		
-		if actor.prey_in_kick_area and actor.can_kick and not actor.is_shooting:
-			kick_command.execute(actor)
-		elif actor.prey_in_notice_area and actor.can_shoot and not actor.is_kicking:
-			shoot_command.execute(actor)
+		if actor.prey_in_notice_area:
+			movement_input = 0
+			
+			if actor.prey_in_kick_area and actor.can_kick and not actor.is_shooting:
+				kick_command.execute(actor)
+			elif actor.can_shoot and not actor.is_kicking:
+				shoot_command.execute(actor)
+		
+		if actor.is_on_wall() and actor.can_jump and not actor.is_shooting and not actor.is_kicking:
+				jump_command.execute(actor)
 		
 		movement_command.execute(actor, MovementCommand.Params.new(movement_input))
 	

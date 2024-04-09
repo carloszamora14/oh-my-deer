@@ -747,8 +747,9 @@ libraries = {
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_3fwwy")
 
-[node name="Timer" type="Timer" parent="."]
+[node name="ShotCooldownTimer" type="Timer" parent="."]
 wait_time = 2.0
+one_shot = true
 
 [node name="NoticeArea" type="Area2D" parent="."]
 collision_layer = 16
@@ -841,7 +842,11 @@ shape = SubResource("RectangleShape2D_3nduj")
 
 [node name="ControllerContainer" type="Node" parent="."]
 
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[node name="KickCooldownTimer" type="Timer" parent="."]
+wait_time = 1.5
+one_shot = true
+
+[connection signal="timeout" from="ShotCooldownTimer" to="." method="_on_shot_cooldown_timer_timeout"]
 [connection signal="body_entered" from="NoticeArea" to="." method="_on_notice_area_body_entered"]
 [connection signal="body_exited" from="NoticeArea" to="." method="_on_notice_area_body_exited"]
 [connection signal="body_entered" from="KickArea" to="." method="_on_kick_area_body_entered"]
@@ -851,3 +856,4 @@ shape = SubResource("RectangleShape2D_3nduj")
 [connection signal="timeout" from="WavingTimer" to="." method="_on_waving_timer_timeout"]
 [connection signal="body_entered" from="KickDamageArea" to="." method="_on_kick_damage_area_body_entered"]
 [connection signal="body_exited" from="KickDamageArea" to="." method="_on_kick_damage_area_body_exited"]
+[connection signal="timeout" from="KickCooldownTimer" to="." method="_on_kick_cooldown_timer_timeout"]

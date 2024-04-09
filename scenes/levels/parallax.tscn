@@ -784,7 +784,7 @@ position = Vector2(920, 264)
 [node name="Deer" parent="." index="16"]
 position = Vector2(28, 236)
 
-[node name="Camera2D" parent="Deer" index="12"]
+[node name="Camera2D" parent="Deer" index="11"]
 limit_right = 1360
 
 [node name="Flock" parent="." index="17" instance=ExtResource("14_1rr85")]

@@ -14,7 +14,7 @@ var marker: Marker2D
 
 var can_jump := true
 var can_shoot := true
-var can_kick := false
+var can_kick := true
 
 var is_shooting := false
 var is_kicking := false
@@ -49,6 +49,9 @@ func set_prey(in_prey: Actor) -> void:
 
 
 func handle_scale(prey_pos: Vector2) -> void:
+	if abs(global_position.x - prey_pos.x) < 40:
+		return
+#
 	var dx =  prey_pos.x - global_position.x
 	var sign = dx / abs(dx) if dx != 0 else 1
 
@@ -59,6 +62,9 @@ func handle_scale(prey_pos: Vector2) -> void:
 
 
 func handle_aiming(prey_pos: Vector2) -> void:
+	if abs(global_position.x - prey_pos.x) < 20:
+		return
+	
 	if not is_kicking:
 		var angle = ((prey_pos - $ShoulderMark.global_position).normalized()).angle()
 
@@ -80,15 +86,17 @@ func handle_emit_bullet():
 func move(direction: int) -> void:
 	if not is_shooting and not is_kicking:
 		velocity.x = move_toward(velocity.x, direction * SPEED, SPEED)
-		#$AnimationPlayer.play("RESET")
+		if direction != 0:
+			$AnimationPlayer.play("run")
+		else:
+			$AnimationPlayer.play("RESET")
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 
 
 func shoot() -> void:
 	is_shooting = true
-	can_shoot = false
-	$Timer.start()
+	shot_cooldown()
 
 	$AnimationPlayer.play("shoot")
 	await $AnimationPlayer.animation_finished
@@ -100,6 +108,27 @@ func jump() -> void:
 	if is_on_floor() and can_jump:
 		can_jump = false
 		velocity.y = JUMP_VELOCITY
+
+
+func kick():
+	is_kicking = true
+	kick_cooldown()
+
+	$AnimationPlayer.play("kick")
+	await $AnimationPlayer.animation_finished
+	shot_cooldown()
+	is_kicking = false
+	$AnimationPlayer.play("RESET")
+
+
+func shot_cooldown() -> void:
+	can_shoot = false
+	$ShotCooldownTimer.start()
+
+
+func kick_cooldown() -> void:
+	can_kick = false
+	$KickCooldownTimer.start()
 
 
 func _on_notice_area_body_entered(body):
@@ -132,5 +161,9 @@ func _on_kick_damage_area_body_exited(body):
 		prey_in_kick_damage_area = false
 
 
-func _on_timer_timeout():
+func _on_shot_cooldown_timer_timeout():
 	can_shoot = true
+
+
+func _on_kick_cooldown_timer_timeout():
+	can_kick = true
