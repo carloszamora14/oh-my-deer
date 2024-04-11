@@ -1,27 +1,28 @@
 extends MainLevel
 
-var animation_started: bool = false
+
+@onready var hunter: CharacterBody2D = $Hunter
+@onready var deer: CharacterBody2D = $Deer
+
+var animation_started := false
 var pigeon_scene: PackedScene = preload("res://scenes/enemies/pigeon.tscn")
 
 
-func _ready():
-	$Hunter.set_controller(ChasingController.new($Hunter))
-	#$Deer.respawn_coords = Vector2(20, 220)
-	Globals.male_deer_vulnerable = true
-	Globals.male_deer_falling = false	
-	Globals.reducing_life_instantaneously = false
-	#$Deer.respawn_active = false
+func _ready() -> void:
+	hunter.set_controller(ChasingController.new(hunter))
+	#deer.respawn_coords = Vector2(20, 220)
+	#deer.respawn_active = false
 	for player in get_tree().get_nodes_in_group("Player"):
 		player.connect("show_damage_indicator", _on_show_damage_indicator)
 	for enemy in get_tree().get_nodes_in_group("Enemy"):
 		enemy.connect("hunter_shot_bullet", _on_hunter_bullet)
-	Globals.connect("death", reset_scene)
+	Globals.death.connect(reset_scene)
 	
 	await get_tree().create_timer(8 * randf(), false).timeout
 	spawn_pigeon()
 
 
-func spawn_pigeon():
+func spawn_pigeon() -> void:
 	var pigeon = pigeon_scene.instantiate() as CharacterBody2D
 	pigeon.position = Vector2(randf_range(1743.0, 1800.0), randf_range(60.0, 140.0))
 	add_child(pigeon)
@@ -29,14 +30,13 @@ func spawn_pigeon():
 	spawn_pigeon()
 
 
-func reset_scene():
+func reset_scene() -> void:
 	if Globals.male_deer_falling:
-		$Hunter.deer_fall()
+		hunter.deer_fall()
 	else:
-		$Hunter.deer_died()
-	$Hunter.inactive = true
+		hunter.deer_died()
 	
-	if !$Deer.player_lost:
+	if !deer.player_lost:
 		await get_tree().create_timer(1.5, false).timeout
 		TransitionLayer.change_scene("res://scenes/levels/lake.tscn")
 		await get_tree().create_timer(1.35, false).timeout
@@ -47,53 +47,40 @@ func reset_scene():
 		Globals.male_deer_lives -= 1
 
 
-func reset_bridges():
-	await get_tree().create_timer(4.0, false).timeout
-	for bridge in $BeamBridges.get_children():
-		bridge.reset()
-
-
-func _on_exit_area_body_entered(body):
-	$Hunter.threaten()
-	$Deer.avoid_bullets()
-	$Hunter.inactive = true
+func _on_exit_area_body_entered(body: Node) -> void:
+	hunter.threaten()
+	deer.avoid_bullets()
+	hunter.inactive = true
 	await get_tree().create_timer(0.5, false).timeout
 	if "exit_scene" in body:
 		body.exit_scene("res://scenes/levels/before_cliff.tscn")
 
 
-func _on_start_area_body_entered(_body):
-	if !animation_started:
+func _on_start_area_body_entered(body: Node) -> void:
+	if not animation_started and body is Player:
 		animation_started = true
+		deer.set_controller(LakeStartCutsceneController.new(deer))
 		$AnimationPlayer.play("begin_level")
 
 
-func begin_level_deer():
-	#$Deer.can_control_character = false
-	await get_tree().create_timer(4, false).timeout
-	#$Deer.can_control_character = true
-
-
 func begin_level_hunter():
-	var target = $Deer/ProjectilesCollision/Collision/Markers.get_children().pick_random()
-	#$Hunter.start_chasing_deer(target)
-	$Hunter.set_prey($Deer)
-	$Hunter.set_controller(ChasingController.new($Hunter))
+	hunter.set_prey(deer)
+	hunter.set_controller(ChasingController.new(hunter))
 
 
 func offset_camera():
 	var tween = get_tree().create_tween()
-	var offset_x = -Globals.male_deer_position.x + 110.0
+	var offset_x = -Globals.player_position.x + 110.0
 	tween.tween_property($Deer/Camera2D, "offset:x", offset_x, 0.5)
 	tween.set_ease(Tween.EASE_IN_OUT)
 	$Deer/Camera2D.limit_right -= offset_x
 
 
-func _on_shooting_area_body_entered(body):
-	if "is_in_shooting_area" in body:
-		body.is_in_shooting_area = true
+func _on_shooting_area_body_entered(body: Node) -> void:
+	if body is Hunter:
+		body.set_controller(ShootingAreaController.new(body))
 
 
-func _on_shooting_area_body_exited(body):
-	if "is_in_shooting_area" in body:
-		body.is_in_shooting_area = false
+func _on_shooting_area_body_exited(body: Node) -> void:
+	if body is Hunter:
+		body.set_controller(ChasingController.new(body))

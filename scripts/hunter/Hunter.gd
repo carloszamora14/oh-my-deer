@@ -30,7 +30,7 @@ func _ready() -> void:
 	set_controller(HunterController.new(self))
 
 
-func _physics_process(delta) -> void:
+func _physics_process(delta: float) -> void:
 	if prey != null:
 		var prey_pos = marker.global_position
 		
@@ -55,12 +55,12 @@ func handle_scale(prey_pos: Vector2) -> void:
 		return
 #
 	var dx =  prey_pos.x - global_position.x
-	var sign = dx / abs(dx) if dx != 0 else 1
+	var dir_sign = dx / abs(dx) if dx != 0 else 1
 
-	$Sprites.scale.x = sign * abs($Sprites.scale.x)
-	$SpriteRunning.scale.x = sign * abs($SpriteRunning.scale.x)
-	$ShoulderMark.scale.x = sign
-	$CollisionShape2D.position.x = 7.2 if sign < 0  else 0
+	$Sprites.scale.x = dir_sign * abs($Sprites.scale.x)
+	$SpriteRunning.scale.x = dir_sign * abs($SpriteRunning.scale.x)
+	$ShoulderMark.scale.x = dir_sign
+	$CollisionShape2D.position.x = 7.2 if dir_sign < 0 else 0.0
 
 
 func handle_aiming(prey_pos: Vector2) -> void:

@@ -20,10 +20,13 @@ var is_eating = false
 var is_invulnerable = false
 
 func _ready() -> void:
+	Globals.player_position = global_position
 	set_controller(HumanController.new(self))
 
 
 func _physics_process(delta: float) -> void:
+	Globals.player_position = global_position
+
 	if not is_on_floor():
 		velocity.y += gravity * delta
 	else:
@@ -36,12 +39,12 @@ func handle_scale(direction: int) -> void:
 	if direction == 0:
 		return
 	
-	var sign = 1 if direction > 0 else -1
+	var dir_sign = 1 if direction > 0 else -1
 	
-	$Sprite2D.scale.x = sign
-	$DeerCollision.position.x = -3 * sign
-	$ProjectilesCollision.scale.x = sign
-	$HeadArea.scale.x = sign
+	$Sprite2D.scale.x = dir_sign
+	$DeerCollision.position.x = -3 * dir_sign
+	$ProjectilesCollision.scale.x = dir_sign
+	$HeadArea.scale.x = dir_sign
 
 
 func move(direction: int) -> void:
@@ -90,11 +93,11 @@ func take_damage(damage: int) -> void:
 		return
 
 	handle_invulnerability()
-	show_damage_indicator.emit(get_damage_indicator().position, min(damage, Globals.male_deer_health))
-	Globals.update_male_deer_health(Globals.male_deer_health - damage)
+	show_damage_indicator.emit(get_damage_indicator().position, min(damage, Globals.player_health))
+	Globals.player_health -= damage
 	$Sprite2D.material.set_shader_parameter("progress", 0.6)
 
-	if (Globals.male_deer_health > 0):
+	if (Globals.player_health > 0):
 		play_sound("res://sounds/deer-scream1.mp3")
 
 	await get_tree().create_timer(0.6, false).timeout

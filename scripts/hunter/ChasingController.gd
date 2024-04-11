@@ -2,7 +2,7 @@ class_name ChasingController
 extends HunterController
 
 
-func _physics_process(delta):
+func _physics_process(_delta: float) -> void:
 	if actor.prey != null:
 		var movement_input = (
 			int(actor.global_position.x < actor.prey.global_position.x) -
