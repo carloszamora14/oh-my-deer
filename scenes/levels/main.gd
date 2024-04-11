@@ -4,9 +4,9 @@ class_name MainLevel
 const WINDOW_HEIGHT: int = 288
 var over: bool = false
 
-var bullet_scene: PackedScene = preload('res://scenes/projectiles/bullet.tscn')
-var particle_scene: PackedScene = preload('res://scenes/weapons/trail_particle.tscn')
-var damage_indicator_scene: PackedScene = preload('res://scenes/interface/damage_indicator.tscn')
+var bullet_scene: PackedScene = preload("res://scenes/projectiles/bullet.tscn")
+var particle_scene: PackedScene = preload("res://scenes/weapons/trail_particle.tscn")
+var damage_indicator_scene: PackedScene = preload("res://scenes/interface/damage_indicator.tscn")
 
 
 func _ready():
@@ -50,7 +50,7 @@ func _on_bullet_emit_particle(pos, dir, vel, p_scale):
 
 func _on_deer_game_over():
 	over = true
-	print('Game over')
+	print("Game over")
 	$CanvasLayer.show()
 
 

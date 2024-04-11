@@ -123,7 +123,7 @@ extends Hunter
 				#play_sound("come back here")
 			#elif !coward && global_position.x + 800 <= target.global_position.x:
 				#coward = true
-				#play_sound('dont be a coward')
+				#play_sound("dont be a coward")
 			#
 		#if (allow_to_aim && aiming) || (target != null && !should_follow) && !is_waving:
 			#var pos = get_global_mouse_position() if target == null else target.global_position
@@ -339,13 +339,13 @@ extends Hunter
 #
 #
 #func deer_fall():
-	#if get_tree().get_current_scene().get_name() == 'Lake' && !is_playing_sound:
+	#if get_tree().get_current_scene().get_name() == "Lake" && !is_playing_sound:
 		#var sound_name = "idiot that wasnt the best" if randf() > 0.5 else "gotcha that serves you right"
 		#play_sound(sound_name)
 #
 #
 #func deer_died():
-	#if get_tree().get_current_scene().get_name() == 'Lake' && !is_playing_sound:
+	#if get_tree().get_current_scene().get_name() == "Lake" && !is_playing_sound:
 		#var sound_name = "deer season" if randf() > 0.5 else "got it done"
 		#play_sound(sound_name)
 #
@@ -356,7 +356,7 @@ extends Hunter
 #
 #
 #func threaten():
-	#if get_tree().get_current_scene().get_name() == 'Lake' && !is_playing_sound:
+	#if get_tree().get_current_scene().get_name() == "Lake" && !is_playing_sound:
 		#var sound_name = "not a game anymore"
 		#play_sound(sound_name)
 #
@@ -437,7 +437,7 @@ extends Hunter
 #func _on_kick_area_body_entered(body):
 	#target_body = body
 	#is_in_kicking_area = true
-	#if get_tree().get_current_scene().get_name() == 'Lake' && !deer_got_close && !is_playing_sound:
+	#if get_tree().get_current_scene().get_name() == "Lake" && !deer_got_close && !is_playing_sound:
 		#deer_got_close = true
 		#var sound_name = "dont test me" if randf() > 0.5 else "keep your distance"
 		#play_sound(sound_name)
@@ -451,7 +451,7 @@ extends Hunter
 	#target_body = body
 	#is_in_waving_area = true
 	#$WavingTimer.start()
-	#if get_tree().get_current_scene().get_name() == 'Lake' && !deer_got_close && !is_playing_sound:
+	#if get_tree().get_current_scene().get_name() == "Lake" && !deer_got_close && !is_playing_sound:
 		#deer_got_close = true
 		#var sound_name = "dont test me" if randf() > 0.5 else "keep your distance"
 		#play_sound(sound_name)

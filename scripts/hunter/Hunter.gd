@@ -5,6 +5,8 @@ extends Actor
 signal hunter_shot_bullet(position, direction, damage)
 signal display_dialog(lines, timings)
 
+@onready var animation_player = $AnimationPlayer
+
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 const SPEED = 100.0
 const JUMP_VELOCITY = -200.0
@@ -72,7 +74,7 @@ func handle_aiming(prey_pos: Vector2) -> void:
 		$Sprites/RightContainer.rotation = (PI - angle) if prey_pos.x < global_position.x else angle
 
 
-func handle_emit_bullet():
+func handle_emit_bullet() -> void:
 	var gun_nozzle_position = $Sprites/RightContainer/Rifle/GunNozzle.global_position
 	var bullet_direction
 	if prey == null:
@@ -87,9 +89,9 @@ func move(direction: int) -> void:
 	if not is_shooting and not is_kicking:
 		velocity.x = move_toward(velocity.x, direction * SPEED, SPEED)
 		if direction != 0:
-			$AnimationPlayer.play("run")
+			animation_player.play("run")
 		else:
-			$AnimationPlayer.play("RESET")
+			animation_player.play("RESET")
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 
@@ -98,10 +100,10 @@ func shoot() -> void:
 	is_shooting = true
 	shot_cooldown()
 
-	$AnimationPlayer.play("shoot")
-	await $AnimationPlayer.animation_finished
+	animation_player.play("shoot")
+	await animation_player.animation_finished
 	is_shooting = false
-	$AnimationPlayer.play("RESET")
+	animation_player.play("RESET")
 
 
 func jump() -> void:
@@ -110,15 +112,15 @@ func jump() -> void:
 		velocity.y = JUMP_VELOCITY
 
 
-func kick():
+func kick() -> void:
 	is_kicking = true
 	kick_cooldown()
 
-	$AnimationPlayer.play("kick")
-	await $AnimationPlayer.animation_finished
+	animation_player.play("kick")
+	await animation_player.animation_finished
 	shot_cooldown()
 	is_kicking = false
-	$AnimationPlayer.play("RESET")
+	animation_player.play("RESET")
 
 
 func shot_cooldown() -> void:
@@ -131,39 +133,39 @@ func kick_cooldown() -> void:
 	$KickCooldownTimer.start()
 
 
-func _on_notice_area_body_entered(body):
+func _on_notice_area_body_entered(body) -> void:
 	if body == prey:
 		prey_in_notice_area = true
 
 
-func _on_notice_area_body_exited(body):
+func _on_notice_area_body_exited(body) -> void:
 	if body == prey:
 		prey_in_notice_area = false
 
 
-func _on_kick_area_body_entered(body):
+func _on_kick_area_body_entered(body) -> void:
 	if body == prey:
 		prey_in_kick_area = true
 
 
-func _on_kick_area_body_exited(body):
+func _on_kick_area_body_exited(body) -> void:
 	if body == prey:
 		prey_in_kick_area = false
 
 
-func _on_kick_damage_area_body_entered(body):
+func _on_kick_damage_area_body_entered(body) -> void:
 	if body == prey:
 		prey_in_kick_damage_area = true
 
 
-func _on_kick_damage_area_body_exited(body):
+func _on_kick_damage_area_body_exited(body) -> void:
 	if body == prey:
 		prey_in_kick_damage_area = false
 
 
-func _on_shot_cooldown_timer_timeout():
+func _on_shot_cooldown_timer_timeout() -> void:
 	can_shoot = true
 
 
-func _on_kick_cooldown_timer_timeout():
+func _on_kick_cooldown_timer_timeout() -> void:
 	can_kick = true

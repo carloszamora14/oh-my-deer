@@ -37,7 +37,7 @@ func _on_body_entered(body):
 	if through_objects && body.is_in_group("Object"):
 		return
 		
-	if 'take_damage' in body && !body.is_in_group("Enemy"):
+	if "take_damage" in body && !body.is_in_group("Enemy"):
 		if damage <= 0:
 			damage = int(BASE_DAMAGE - min(35 * (traveled / (max_distance)), 35))
 		body.take_damage(damage)

@@ -35,7 +35,7 @@ var bullet_impact_sounds = [
 ]
 
 func _ready():
-	var file = FileAccess.open('res://data/dialogues.json', FileAccess.READ)
+	var file = FileAccess.open("res://data/dialogues.json", FileAccess.READ)
 	var text_content = file.get_as_text()
 	#print(JSON.parse_string(text_content))
 

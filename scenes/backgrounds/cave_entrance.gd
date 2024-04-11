@@ -1,7 +1,7 @@
 extends Node2D
 
 var player_near: bool = false
-var cave_scene: PackedScene = preload('res://scenes/levels/cave.tscn')
+var cave_scene: PackedScene = preload("res://scenes/levels/cave.tscn")
 
 func _process(_delta):
 	if player_near and Input.is_action_pressed("interact"):
