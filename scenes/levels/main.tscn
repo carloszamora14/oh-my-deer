@@ -41,7 +41,7 @@ limit_right = 512
 limit_bottom = 288
 position_smoothing_enabled = true
 
+[node name="Particles" type="Node2D" parent="."]
+
 [connection signal="continue_game" from="CanvasLayer2/PauseMenu" to="." method="_on_pause_menu_continue_game"]
 [connection signal="exit_game" from="CanvasLayer2/PauseMenu" to="." method="_on_pause_menu_exit_game"]
-[connection signal="game_over" from="Deer" to="." method="_on_deer_game_over"]
-[connection signal="player_throw_candy" from="Deer" to="." method="_on_deer_player_throw_candy"]

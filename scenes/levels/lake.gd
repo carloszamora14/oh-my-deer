@@ -9,13 +9,14 @@ var pigeon_scene: PackedScene = preload("res://scenes/enemies/pigeon.tscn")
 
 
 func _ready() -> void:
+	super()
 	hunter.set_controller(ChasingController.new(hunter))
 	#deer.respawn_coords = Vector2(20, 220)
 	#deer.respawn_active = false
-	for player in get_tree().get_nodes_in_group("Player"):
-		player.connect("show_damage_indicator", _on_show_damage_indicator)
-	for enemy in get_tree().get_nodes_in_group("Enemy"):
-		enemy.connect("hunter_shot_bullet", _on_hunter_bullet)
+	#for player in get_tree().get_nodes_in_group("Player"):
+		#player.connect("show_damage_indicator", _on_show_damage_indicator)
+	#for enemy in get_tree().get_nodes_in_group("Enemy"):
+		#enemy.connect("hunter_shot_bullet", _on_hunter_bullet)
 	Globals.death.connect(reset_scene)
 	
 	await get_tree().create_timer(8 * randf(), false).timeout

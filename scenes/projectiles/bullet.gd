@@ -1,24 +1,33 @@
 extends Area2D
 
 signal emit_particle(position, direction, velocity, scale)
+signal emit_blood_particles(position)
 
-@export var speed: int = 120
-@export var trail_lifetime: float = 3.4
-var direction: Vector2 = Vector2.UP
+@export var speed := 120
+@export var trail_lifetime := 3.4
+
+var direction: Vector2
 var initial_pos: Vector2
 var max_distance: float = (speed * trail_lifetime)**2
 const BASE_DAMAGE: float = 40
 var traveled: float
 var damage: float
 var through_objects: bool
+var target_group: String
 
 
-func _ready():
+func init(pos: Vector2, dir := Vector2.UP, group := "Player") -> void:
+	position = pos
+	direction = dir
+	target_group = group
 	through_objects = randf() > 0.5
+
+
+func _ready() -> void:
 	initial_pos = position
 
 
-func _physics_process(delta):
+func _physics_process(delta: float) -> void:
 	traveled = (position.x - initial_pos.x)**2 + (position.y - initial_pos.y)**2
 	
 	if (traveled >= 10 * max_distance):
@@ -33,19 +42,24 @@ func _physics_process(delta):
 	position += direction * speed * delta
 
 
-func _on_body_entered(body):
-	if through_objects && body.is_in_group("Object"):
+func _on_body_entered(body: Node) -> void:
+	if through_objects and body.is_in_group("Object"):
 		return
 		
-	if "take_damage" in body && !body.is_in_group("Enemy"):
-		if damage <= 0:
+	if "take_damage" in body and body.is_in_group(target_group):
+		emit_blood_particles.emit(global_position)
+		if damage == null:
 			damage = int(BASE_DAMAGE - min(35 * (traveled / (max_distance)), 35))
 		body.take_damage(damage)
 	queue_free()
 
 
-func _on_area_entered(area):
-	if damage <= 0:
+func _on_area_entered(area: Node) -> void:
+	if "parent_group" not in area or area.parent_group != target_group:
+		return
+	
+	emit_blood_particles.emit(global_position)
+	if damage == null:
 		damage = int(BASE_DAMAGE - min(35 * (traveled / (max_distance)), 35))
 	area.emit_shot(damage)
 	queue_free()

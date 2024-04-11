@@ -15,7 +15,7 @@ func _physics_process(_delta: float) -> void:
 			if actor.prey_in_kick_area and actor.can_kick and not actor.is_shooting:
 				kick_command.execute(actor)
 			elif actor.can_shoot and not actor.is_kicking:
-				shoot_command.execute(actor)
+				shoot_command.execute(actor, shoot_command.Params.new("Player"))
 		
 		if actor.is_on_wall() and actor.can_jump and not actor.is_shooting and not actor.is_kicking:
 				jump_command.execute(actor)

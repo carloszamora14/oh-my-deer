@@ -6,6 +6,7 @@ var over := false
 
 var bullet_scene: PackedScene = preload("res://scenes/projectiles/bullet.tscn")
 var particle_scene: PackedScene = preload("res://scenes/weapons/trail_particle.tscn")
+var blood_particles: PackedScene = preload("res://scenes/player/blood_particles.tscn")
 var damage_indicator_scene: PackedScene = preload("res://scenes/interface/damage_indicator.tscn")
 
 
@@ -16,8 +17,26 @@ func _ready() -> void:
 		player.show_damage_indicator.connect(_on_show_damage_indicator)
 	for enemy in get_tree().get_nodes_in_group("Enemy"):
 		enemy.hunter_shot_bullet.connect(_on_hunter_bullet)
+	
+	get_tree().node_added.connect(handle_new_node)
 	#else:
 		#$Deer.position = Vector2(34, 200)
+
+
+func handle_new_node(node: Node) -> void:
+	if node.is_in_group("Bullet"):
+		node.emit_blood_particles.connect(handle_blood_particles)
+
+
+func handle_blood_particles(pos: Vector2) -> void:
+	var blood = blood_particles.instantiate() as GPUParticles2D
+	var particles_container = get_tree().get_current_scene().get_node("Particles")
+	
+	particles_container.add_child(blood)
+	blood.global_position = pos
+	await get_tree().create_timer(0.1, false).timeout
+	Globals.play_bullet_impact(pos)
+	blood.emitting = true
 
 
 func _on_show_damage_indicator(pos: Vector2, damage: int) -> void:
@@ -27,11 +46,10 @@ func _on_show_damage_indicator(pos: Vector2, damage: int) -> void:
 	add_child(indicator)
 
 
-func _on_hunter_bullet(bullet_position: Vector2, bullet_direction: Vector2, damage: int) -> void:
+func _on_hunter_bullet(bullet_position: Vector2, bullet_direction: Vector2, damage: int, group: String) -> void:
 	var bullet = bullet_scene.instantiate() as Area2D
-	bullet.global_position = bullet_position
+	bullet.init(bullet_position, bullet_direction, group)
 	bullet.rotate(bullet_direction.angle())
-	bullet.direction = bullet_direction
 	bullet.damage = damage
 	$Projectiles.add_child(bullet)
 	bullet.emit_particle.connect(_on_bullet_emit_particle)
@@ -39,10 +57,7 @@ func _on_hunter_bullet(bullet_position: Vector2, bullet_direction: Vector2, dama
 
 func _on_bullet_emit_particle(pos, dir, vel, p_scale) -> void:
 	var particle = particle_scene.instantiate() as Area2D
-	particle.position = pos
-	particle.direction = dir
-	particle.speed = vel
-	particle.scale = p_scale
+	particle.init(pos, dir, vel, p_scale)
 	$TrailParticles.add_child(particle)
 
 

@@ -8,7 +8,7 @@ var player_can_move := true
 func _ready() -> void:
 	await get_tree().create_timer(0.4, false).timeout
 	player_can_move = false
-	await get_tree().create_timer(4.0, false).timeout
+	await get_tree().create_timer(3.2, false).timeout
 	actor.set_controller(HumanController.new(actor))
 
 

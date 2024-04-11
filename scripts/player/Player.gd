@@ -7,7 +7,6 @@ signal show_damage_indicator(pos, damage)
 @onready var animation_player = $AnimationPlayer
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-var blood_particles: PackedScene = preload("res://scenes/player/blood_particles.tscn")
 
 const SPEED = 100.0
 const JUMP_VELOCITY = -240.0
@@ -70,17 +69,6 @@ func eat() -> void:
 func get_damage_indicator() -> Marker2D:
 	var markers = $DamageMarkers.get_children()
 	return markers.pick_random()
-
-
-func handle_blood_particles(bullet: Node) -> void:
-	var bullet_position = bullet.global_position
-	var blood = blood_particles.instantiate() as GPUParticles2D
-
-	$Particles.add_child(blood)
-	blood.global_position = bullet_position
-	await get_tree().create_timer(0.1, false).timeout
-	Globals.play_bullet_impact(bullet_position)
-	blood.emitting = true
 
 
 func handle_invulnerability() -> void:

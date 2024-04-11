@@ -8,12 +8,10 @@
 size = Vector2(2, 1)
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_syi3v"]
+particle_flag_disable_z = true
 emission_shape = 1
 emission_sphere_radius = 1.0
-particle_flag_disable_z = true
 gravity = Vector3(0, 0, 0)
-orbit_velocity_min = 0.0
-orbit_velocity_max = 0.0
 scale_min = 0.05
 scale_max = 0.05
 

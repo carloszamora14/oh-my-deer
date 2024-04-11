@@ -2,7 +2,7 @@ class_name Hunter
 extends Actor
 
 
-signal hunter_shot_bullet(position, direction, damage)
+signal hunter_shot_bullet(position, direction, damage, target_group)
 signal display_dialog(lines, timings)
 
 @onready var animation_player = $AnimationPlayer
@@ -12,7 +12,7 @@ const SPEED = 100.0
 const JUMP_VELOCITY = -200.0
 
 var prey: Actor
-var marker: Marker2D
+var target_group: String
 
 var can_jump := true
 var can_shoot := true
@@ -32,7 +32,7 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	if prey != null:
-		var prey_pos = marker.global_position
+		var prey_pos = prey.global_position
 		
 		handle_aiming(prey_pos)
 		handle_scale(prey_pos)
@@ -47,7 +47,6 @@ func _physics_process(delta: float) -> void:
 
 func set_prey(in_prey: Actor) -> void:
 	prey = in_prey
-	marker = prey.get_damage_indicator()
 
 
 func handle_scale(prey_pos: Vector2) -> void:
@@ -81,8 +80,8 @@ func handle_emit_bullet() -> void:
 		var mouse_position = get_global_mouse_position()
 		bullet_direction = (mouse_position - $ShoulderMark.global_position).normalized()
 	else:
-		bullet_direction = (marker.global_position - $ShoulderMark.global_position).normalized()
-	hunter_shot_bullet.emit(gun_nozzle_position, bullet_direction, 30)
+		bullet_direction = (prey.global_position - $ShoulderMark.global_position).normalized()
+	hunter_shot_bullet.emit(gun_nozzle_position, bullet_direction, 30, target_group)
 
 
 func move(direction: int) -> void:
@@ -96,7 +95,8 @@ func move(direction: int) -> void:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 
 
-func shoot() -> void:
+func shoot(_group: String) -> void:
+	target_group = _group
 	is_shooting = true
 	shot_cooldown()
 

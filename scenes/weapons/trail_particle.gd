@@ -1,10 +1,19 @@
 extends Area2D
 
-var speed: float = 1.0
-var direction = Vector2.ZERO
 @export var lifetime: float = 2.1
 
-func _ready():
+var speed: float = 1.0
+var direction = Vector2.ZERO
+
+
+func init(pos: Vector2, dir := Vector2.ZERO, _speed := 1.0, _scale := Vector2.ONE) -> void:
+	position = pos
+	direction = dir
+	speed = _speed
+	scale = _scale
+
+
+func _ready() -> void:
 	await get_tree().create_timer(lifetime, false).timeout
 	var tween = get_tree().create_tween()
 	var duration = randf_range(0.2, 1.0)
@@ -14,5 +23,5 @@ func _ready():
 	await tween.finished
 	queue_free()
 #
-func _physics_process(delta):
+func _physics_process(delta: float) -> void:
 	position += direction * speed * delta
