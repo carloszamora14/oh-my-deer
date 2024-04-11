@@ -58,7 +58,7 @@ func take_damage(damage: int) -> void:
 #
 #func _ready():
 	#Globals.male_deer_position = global_position
-	#Globals.connect("male_deer_death", respawn)
+	#Globals.connect("death", respawn)
 	#Globals.connect("taking_hunger_damage", hunger_damage)
 #
 #

@@ -7,7 +7,7 @@ func _on_start_button_pressed():
 
 
 func reset_globals():
-	Globals.male_deer_health = 100
-	Globals.male_deer_lives = 3
-	Globals.male_deer_hunger = 5
-	Globals.male_deer_position = Vector2(32, 240)
+	Globals.player_health = 100
+	Globals.player_lives = 3
+	Globals.player_hunger = 5
+	Globals.player_position = Vector2(32, 240)

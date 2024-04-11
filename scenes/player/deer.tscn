@@ -186,9 +186,9 @@ position = Vector2(-19, 9)
 [node name="Chest" type="Marker2D" parent="ProjectilesCollision/Collision/Markers"]
 position = Vector2(-3, 8)
 
-[node name="IdleTimer" type="Timer" parent="."]
-wait_time = 2.0
-autostart = true
+[node name="InvulnerabilityTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
 
 [node name="Particles" type="Node2D" parent="."]
 
@@ -260,3 +260,5 @@ position = Vector2(-8, -9)
 position = Vector2(-14, -6)
 
 [node name="ControllerContainer" type="Node" parent="."]
+
+[connection signal="timeout" from="InvulnerabilityTimer" to="." method="_on_invulnerability_timer_timeout"]

@@ -17,7 +17,7 @@ var can_jump = true
 var can_eat = false
 
 var is_eating = false
-
+var is_invulnerable = false
 
 func _ready() -> void:
 	set_controller(HumanController.new(self))
@@ -69,9 +69,52 @@ func get_damage_indicator() -> Marker2D:
 	return markers.pick_random()
 
 
-func take_damage(damage: int) -> void:
-	pass
+func handle_blood_particles(bullet: Node) -> void:
+	var bullet_position = bullet.global_position
+	var blood = blood_particles.instantiate() as GPUParticles2D
 
+	$Particles.add_child(blood)
+	blood.global_position = bullet_position
+	await get_tree().create_timer(0.1, false).timeout
+	Globals.play_bullet_impact(bullet_position)
+	blood.emitting = true
+
+
+func handle_invulnerability() -> void:
+	is_invulnerable = true
+	$InvulnerabilityTimer.start()
+
+
+func take_damage(damage: int) -> void:
+	if is_invulnerable:
+		return
+
+	handle_invulnerability()
+	show_damage_indicator.emit(get_damage_indicator().position, min(damage, Globals.male_deer_health))
+	Globals.update_male_deer_health(Globals.male_deer_health - damage)
+	$Sprite2D.material.set_shader_parameter("progress", 0.6)
+
+	if (Globals.male_deer_health > 0):
+		play_sound("res://sounds/deer-scream1.mp3")
+
+	await get_tree().create_timer(0.6, false).timeout
+	$Sprite2D.material.set_shader_parameter("progress", 0)
+
+
+func reset_shader() -> void:
+	$Sprite2D.material.set_shader_parameter("progress", 0)
+	$Sprite2D.material.set_shader_parameter("color", Vector3(1, 1, 1))
+
+
+func play_sound(audio_name: String) -> void:
+	var sound = AudioStreamPlayer.new()
+	sound.stream = load(audio_name)
+	add_child(sound)
+	sound.play()
+
+
+func _on_invulnerability_timer_timeout() -> void:
+	is_invulnerable = false
 
 #var respawn_coords = Vector2(20, 220)
 #var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -88,7 +131,7 @@ func take_damage(damage: int) -> void:
 #
 #func _ready():
 	#Globals.male_deer_position = global_position
-	#Globals.connect("male_deer_death", respawn)
+	#Globals.connect("death", respawn)
 	#Globals.connect("taking_hunger_damage", hunger_damage)
 #
 #
@@ -311,4 +354,3 @@ func take_damage(damage: int) -> void:
 	#await get_tree().create_timer(2.0, false).timeout
 	#TransitionLayer.change_scene(scene_name)
 	#cutscene_speed = 0
-

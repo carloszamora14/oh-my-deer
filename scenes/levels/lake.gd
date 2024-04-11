@@ -15,7 +15,7 @@ func _ready():
 		player.connect("show_damage_indicator", _on_show_damage_indicator)
 	for enemy in get_tree().get_nodes_in_group("Enemy"):
 		enemy.connect("hunter_shot_bullet", _on_hunter_bullet)
-	Globals.connect("male_deer_death", reset_scene)
+	Globals.connect("death", reset_scene)
 	
 	await get_tree().create_timer(8 * randf(), false).timeout
 	spawn_pigeon()
@@ -40,7 +40,7 @@ func reset_scene():
 		await get_tree().create_timer(1.5, false).timeout
 		TransitionLayer.change_scene("res://scenes/levels/lake.tscn")
 		await get_tree().create_timer(1.35, false).timeout
-		Globals.update_male_deer_health(100, null)
+		Globals.update_male_deer_health(100)
 		Globals.male_deer_hunger = 5
 		Globals.male_deer_lives -= 1
 	else:

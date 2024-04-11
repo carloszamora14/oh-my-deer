@@ -2,17 +2,19 @@ extends HBoxContainer
 
 @onready var health_bar: TextureProgressBar = $TextureProgressBar
 
-func _ready():
-	Globals.connect("stats_change", update_stats)
+func _ready() -> void:
+	Globals.stats_change.connect(update_stats)
 	update_stats()
 
 
-func update_stats():
-	health_bar.value = Globals.male_deer_health
-	$HBoxContainer/NinePatchRect/Label.text = str(Globals.male_deer_health) + "/100"
-	if (Globals.male_deer_lives > 1):
-		$HBoxContainer/LivesContainer/LivesLabel.text = str(Globals.male_deer_lives) + " Lives"
-	elif (Globals.male_deer_lives > 0):
-		$HBoxContainer/LivesContainer/LivesLabel.text = str(Globals.male_deer_lives) + " Life"
-	else:
-		$HBoxContainer/LivesContainer/LivesLabel.text = "Dead"
+func update_stats() -> void:
+	health_bar.value = Globals.player_health
+	$HBoxContainer/NinePatchRect/Label.text = str(Globals.player_health) + "/100"
+	
+	var lives_label_text = str(Globals.player_lives) + " Lives"
+	if (Globals.player_lives == 1):
+		lives_label_text = str(Globals.player_lives) + " Life"
+	elif (Globals.player_lives == 0):
+		lives_label_text = "Dead"
+
+	$HBoxContainer/LivesContainer/LivesLabel.text = lives_label_text
