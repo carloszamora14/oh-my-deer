@@ -12,14 +12,16 @@ const SPEED = 100.0
 const JUMP_VELOCITY = -240.0
 const FRICTION = 300;
 
-var can_jump = true
-var can_eat = false
+var can_jump := true
+var can_eat := false
+var can_take_hunger_damage := false
 
-var is_eating = false
-var is_invulnerable = false
+var is_eating := false
+var is_invulnerable := false
 
 func _ready() -> void:
 	Globals.player_position = global_position
+	Globals.taking_hunger_damage.connect(take_hunger_damage)
 	set_controller(HumanController.new(self))
 
 
@@ -51,6 +53,9 @@ func move(direction: int) -> void:
 	if direction != 0:
 		animation_player.play("walk")
 		handle_scale(direction)
+		
+		if randf() >= 0.999 and can_take_hunger_damage:
+			handle_hunger()
 	else:
 		animation_player.play("idle")
 
@@ -76,20 +81,47 @@ func handle_invulnerability() -> void:
 	$InvulnerabilityTimer.start()
 
 
+func handle_hunger() -> void:
+	Globals.player_hunger -= 1
+	can_take_hunger_damage = false
+	$HungerTimer.start()
+
+
+func handle_damage_indicator(damage: int) -> void:
+	var dmg = min(damage, Globals.player_health)
+	show_damage_indicator.emit(get_damage_indicator().global_position, dmg)
+	Globals.player_health -= dmg
+
+
 func take_damage(damage: int) -> void:
 	if is_invulnerable:
 		return
 
 	handle_invulnerability()
-	show_damage_indicator.emit(get_damage_indicator().position, min(damage, Globals.player_health))
-	Globals.player_health -= damage
+	handle_damage_indicator(damage)
 	$Sprite2D.material.set_shader_parameter("progress", 0.6)
 
 	if (Globals.player_health > 0):
 		play_sound("res://sounds/deer-scream1.mp3")
 
 	await get_tree().create_timer(0.6, false).timeout
-	$Sprite2D.material.set_shader_parameter("progress", 0)
+	reset_shader()
+
+
+func take_hunger_damage() -> void:
+	if is_invulnerable:
+		return
+
+	handle_invulnerability()
+	handle_damage_indicator(10)
+	$Sprite2D.material.set_shader_parameter("color", Vector3(0.996, 0.361, 0.325))
+	$Sprite2D.material.set_shader_parameter("progress", 1.0)
+
+	if (Globals.player_health > 0):
+		get_tree().create_timer(0.2, false).timeout.connect(reset_shader)
+		play_sound("res://sounds/hungry-stomach.mp3", -10)
+	else:
+		get_tree().create_timer(0.4, false).timeout.connect(reset_shader)
 
 
 func reset_shader() -> void:
@@ -97,15 +129,22 @@ func reset_shader() -> void:
 	$Sprite2D.material.set_shader_parameter("color", Vector3(1, 1, 1))
 
 
-func play_sound(audio_name: String) -> void:
+func play_sound(audio_name: String, volume := 0) -> void:
 	var sound = AudioStreamPlayer.new()
 	sound.stream = load(audio_name)
+	sound.volume_db = volume
 	add_child(sound)
 	sound.play()
+	await sound.finished
+	sound.queue_free()
 
 
 func _on_invulnerability_timer_timeout() -> void:
 	is_invulnerable = false
+
+
+func _on_hunger_timer_timeout() -> void:
+	can_take_hunger_damage = true
 
 #var respawn_coords = Vector2(20, 220)
 #var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")

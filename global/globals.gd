@@ -4,13 +4,8 @@ signal stats_change
 signal hunger_change
 signal taking_hunger_damage
 signal death
-signal falling
 
-var is_player_falling := false:
-	set(value):
-		is_player_falling = value
-		if value:
-			falling.emit()
+var is_player_falling := false
 
 var player_health := 100:
 	set(value):

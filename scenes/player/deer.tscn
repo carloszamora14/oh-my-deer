@@ -261,4 +261,9 @@ position = Vector2(-14, -6)
 
 [node name="ControllerContainer" type="Node" parent="."]
 
+[node name="HungerTimer" type="Timer" parent="."]
+wait_time = 10.0
+autostart = true
+
 [connection signal="timeout" from="InvulnerabilityTimer" to="." method="_on_invulnerability_timer_timeout"]
+[connection signal="timeout" from="HungerTimer" to="." method="_on_hunger_timer_timeout"]
