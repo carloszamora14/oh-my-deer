@@ -3,38 +3,34 @@ extends MainLevel
 @onready var collision_polygon_2d: CollisionPolygon2D = $StaticBody2D/CollisionPolygon2D
 @onready var polygon_2d: Polygon2D = $StaticBody2D/CollisionPolygon2D/Polygon2D
 
-var cutscene_played: bool = false
+var cutscene_played := false
 
-func _ready():
+func _ready() -> void:
 	$Deer.respawn_coords = Vector2(20, 220)
 	$Hunter.allow_to_aim = true
-	for player in get_tree().get_nodes_in_group("Player"):
-		player.connect("show_damage_indicator", _on_show_damage_indicator)
-	for enemy in get_tree().get_nodes_in_group("Enemy"):
-		enemy.connect("hunter_shot_bullet", _on_hunter_bullet)
+	super()
 	polygon_2d.polygon = collision_polygon_2d.polygon
-	Vector2(40, 140)
 
 
-func _on_firefly_sound_timeout():
+func _on_firefly_sound_timeout() -> void:
 	if randf() > 0.75:
 		$AudioStreamPlayer.play()
 		await $AudioStreamPlayer.finished
 	$FireflySound.start()
 
 
-func _on_cutscene_area_body_entered(_body):
-	if !cutscene_played:
+func _on_cutscene_area_body_entered(_body: Node) -> void:
+	if not cutscene_played:
 		$AnimationPlayer.play("cutscene")
 		cutscene_played = true
 
 
-func kill_wolf():
+func kill_wolf() -> void:
 	$Hunter.target = $Wolf/Headshot
 	$Hunter.shoot_rifle(null)
 
 
-func shoot_deer():
+func shoot_deer() -> void:
 	$Hunter.target = $Deer/ProjectilesCollision/Collision/Markers.get_children().pick_random()
 	$Hunter.shoot_rifle(Globals.male_deer_health - 1)
 	await get_tree().create_timer(2, false).timeout

@@ -13,9 +13,9 @@ func _on_exit_area_body_entered(_body: Node) -> void:
 
 func spawn_flock(pos: Vector2, dir: Vector2) -> void:
 	var flock = flock_scene.instantiate() as Node2D
-	flock.position = pos
+	flock.global_position = pos
 	flock.direction = dir.normalized()
-	add_child(flock)
+	call_deferred("add_child", flock)
 
 
 func _on_transition_area_body_entered(_body: Node) -> void:

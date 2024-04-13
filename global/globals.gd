@@ -4,6 +4,8 @@ signal stats_change
 signal hunger_change
 signal taking_hunger_damage
 signal death
+signal stopped_eating
+signal grass_eaten
 
 var is_player_falling := false
 

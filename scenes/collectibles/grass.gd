@@ -3,15 +3,15 @@ extends Node2D
 @export var shift_hue: float = 0
 @export var sprite_scale: float = 1.0
 
-var is_deer_close: bool = false
-var being_eaten: bool = false
-var was_eaten: bool = false
+var is_deer_close := false
+var being_eaten := false
+var was_eaten : = false
 
-var audio_playing: bool = false
+var audio_playing := false
 var audio: AudioStreamPlayer2D
 
 
-func _ready():
+func _ready() -> void:
 	var stages = $Sprites.get_children()
 	for stage in stages:
 		stage.scale *= sprite_scale
@@ -19,21 +19,24 @@ func _ready():
 	$AnimationPlayer.animation_finished.connect(deer_ate_grass)
 	$AnimationPlayer2.play("RESET")
 
-func _process(_delta):
+func _process(_delta: float) -> void:
 	if was_eaten:
 		return
-		
-	if being_eaten && Input.is_action_just_released("interact"):
+	
+	if not is_deer_close:
+		$AnimationPlayer2.play("RESET")
+	if being_eaten and (Input.is_action_just_released("interact") or not is_deer_close):
 		being_eaten = false
 		audio.stop()
 		audio_playing = false
 		$AnimationPlayer2.play("button")
 		$AnimationPlayer.play_backwards("being_eaten")
-	if is_deer_close && Input.is_action_just_pressed("interact"):
+		Globals.stopped_eating.emit()
+	if is_deer_close and Input.is_action_just_pressed("interact"):
 		$AnimationPlayer.play("being_eaten")
 		$AnimationPlayer2.play("RESET")
 		
-		if !audio_playing: 
+		if not audio_playing: 
 			audio_playing = true
 			being_eaten = true
 			audio = AudioStreamPlayer2D.new()
@@ -45,19 +48,24 @@ func _process(_delta):
 			audio.queue_free()
 
 
-func deer_ate_grass(_name):
+func deer_ate_grass(_name) -> void:
 	if being_eaten:
 		was_eaten = true
-		Globals.male_deer_hunger += 1
+		Globals.player_hunger += 1
+		Globals.grass_eaten.emit()
 
 
-func _on_active_area_area_entered(_area):
-	if !was_eaten:
+func _on_active_area_area_entered(area: Node) -> void:
+	if not was_eaten:
 		is_deer_close = true
+		if area.has_method("handle_can_eat"):
+			area.handle_can_eat(true)
 		$AnimationPlayer2.play("button")
 
 
-func _on_active_area_area_exited(_area):
-	if !was_eaten:
+func _on_active_area_area_exited(area: Node) -> void:
+	if area.has_method("handle_can_eat"):
+		area.handle_can_eat(false)
+	if not was_eaten:
 		is_deer_close = false
 		$AnimationPlayer2.play("RESET")

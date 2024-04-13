@@ -17,11 +17,14 @@ var can_eat := false
 var can_take_hunger_damage := false
 
 var is_eating := false
+var is_standing := false
 var is_invulnerable := false
 
 func _ready() -> void:
 	Globals.player_position = global_position
 	Globals.taking_hunger_damage.connect(take_hunger_damage)
+	Globals.stopped_eating.connect(handle_stopped_eating)
+	Globals.grass_eaten.connect(handle_grass_eaten)
 	set_controller(HumanController.new(self))
 
 
@@ -49,14 +52,18 @@ func handle_scale(direction: int) -> void:
 
 
 func move(direction: int) -> void:
+	if is_eating or is_standing:
+		direction = 0
+
 	velocity.x = move_toward(velocity.x, direction * SPEED, FRICTION)
 	if direction != 0:
-		animation_player.play("walk")
+		if not is_eating and not is_standing:
+			animation_player.play("walk")
 		handle_scale(direction)
 		
 		if randf() >= 0.999 and can_take_hunger_damage:
 			handle_hunger()
-	else:
+	elif not is_eating and not is_standing:
 		animation_player.play("idle")
 
 
@@ -68,7 +75,7 @@ func jump() -> void:
 
 func eat() -> void:
 	is_eating = true
-	animation_player.play("crouch")
+	animation_player.play("crouch_down")
 
 
 func get_damage_indicator() -> Marker2D:
@@ -127,6 +134,23 @@ func take_hunger_damage() -> void:
 func reset_shader() -> void:
 	$Sprite2D.material.set_shader_parameter("progress", 0)
 	$Sprite2D.material.set_shader_parameter("color", Vector3(1, 1, 1))
+
+func handle_grass_eaten() -> void:
+	can_eat = false
+	is_eating = false
+	stand()
+
+
+func handle_stopped_eating() -> void:
+	is_eating = false
+	stand()
+
+
+func stand() -> void:
+	is_standing = true
+	animation_player.play("stand_up")
+	await animation_player.animation_finished
+	is_standing = false	
 
 
 func play_sound(audio_name: String, volume := 0) -> void:
